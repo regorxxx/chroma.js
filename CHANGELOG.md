@@ -3,6 +3,7 @@
 ### 2.5.0
 * forked from 2.4.2 (no documented on changelog).
 * Added [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility. color.android(alpha=false, round=true). By default alpha is scrapped (like color.num()).
+* Fix tests for docs when using both \n or \r\n line feeds.
 
 ### 2.0.3
 
