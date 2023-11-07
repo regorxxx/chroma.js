@@ -1,15 +1,23 @@
 ## Changelog
 
+### 2.5.0
+* forked from 2.4.2 (no documented on changelog).
+* Added [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility. color.android(alpha=false, round=true). By default alpha is scrapped (like color.num()).
+
 ### 2.0.3
+
 * hsl2rgb will, like other x2rgb conversions now set the default alpha to 1
 
 ### 2.0.2
+
 * use a more mangle-safe check for Color class constructor to fix issues with uglifyjs and terser
 
 ### 2.0.1
+
 * added `chroma.valid()` for checking if a color can be parsed by chroma.js
 
 ### 2.0.0
+
 * chroma.js has been ported from CoffeeScript to ES6! This means you can now import parts of chroma in your projects!
 * changed HCG input space from [0..360,0..100,0..100] to [0..360,0..1,0..1] (to be in line with HSL)
 * added new object unpacking (e.g. `hsl2rgb({h,s,l})`)
@@ -17,20 +25,24 @@
 * if colors can't be parsed correctly, chroma will now throw Errors instead of silently failing with console.errors
 
 ### 1.4.1
+
 * chroma.scale() now interprets `null` as NaN and returns the fallback color. Before it had interpreted `null` as `0`
 * added `scale.nodata()` to allow customizing the previously hard-coded fallback (aka "no data") color #cccccc
 
 
 ### 1.4.0
+
 * color.hex() now automatically sets the mode to 'rgba' if the colors alpha channel is < 1. so `chroma('rgba(255,0,0,.5)').hex()` will now return `"#ff000080"` instead of `"#ff0000"`. if this is not what you want, you must explicitly set the mode to `rgb` using `.hex("rgb")`.
 * bugfix in chroma.average in LRGB mode ([#187](https://github.com/gka/chroma.js/issues/187))
 * chroma.scale now also works with just one color ([#180](https://github.com/gka/chroma.js/issues/180))
 
 
 ### 1.3.5
+
 * added LRGB interpolation
 
 ### 1.3.4
+
 * passing *null* as mode in scale.colors will return chroma objects
 
 ### 1.3.3
