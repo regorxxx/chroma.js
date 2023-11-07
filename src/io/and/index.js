@@ -16,11 +16,12 @@ chroma.android = (...args) => new Color(...args, 'android');
 input.format.android = (and) => {
     if (type(and) == "number") {
         const a = and - 0xFF000000;
-        if (a >= 0 && a <= 0xFFFFFF) {
+        const alpha = a & 0xFF;
+        if (alpha >= 0 && alpha <= 255) {
             const r = a >> 16 & 0xFF;
             const g = (a >> 8) & 0xFF;
             const b = a & 0xFF;
-            return [r,g,b, (and >> 24) & 0xFF];
+            return [r,g,b,alpha];
         }
     }
     throw new Error("unknown android color: "+and);
@@ -31,12 +32,13 @@ input.autodetect.push({
     test: (...args) => {
         if (args.length === 1 && type(args[0]) === 'number') {
             const a = args[0] - 0xFF000000;
-            if (a >= 0 && a <= 0xFFFFFF) {
+            const alpha = a & 0xFF;
+            if (alpha >= 0 && alpha <= 255) {
                 const r = a >> 16 & 0xFF;
                 const g = (a >> 8) & 0xFF;
                 const b = a & 0xFF;
-                if ([r,g,b].every((val) => val >= 0 && val <= 0xFFFFFF)) {
-                    return 'num';
+                if ([r,g,b].every((val) => val >= 0 && val <= 255)) {
+                    return 'android';
                 }
             }
         }
