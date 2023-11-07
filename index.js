@@ -20,6 +20,7 @@ require('./src/io/rgb');
 require('./src/io/temp');
 require('./src/io/oklab');
 require('./src/io/oklch');
+require('./src/io/android');
 
 // operators --> modify existing Colors
 require('./src/ops/alpha');
