@@ -27,23 +27,29 @@ const bezier = function(colors) {
         // linear interpolation
         [lab0, lab1] = colors.map(c => c.lab());
         I = function(t) {
-            const lab = ([0, 1, 2].map((i) => lab0[i] + (t * (lab1[i] - lab0[i]))));
-            return new Color(lab, 'lab');
+            const linearInterpolation = (x0, x1) => x0 + (t * (x1 - x0));
+            const lab = ([0, 1, 2].map((i) => linearInterpolation(lab0[i], lab1[i])));
+            const alpha = linearInterpolation(colors[0].alpha(), colors[1].alpha());
+            return new Color(lab, 'lab').alpha(alpha);
         };
     } else if (colors.length === 3) {
         // quadratic bezier interpolation
         [lab0, lab1, lab2] = colors.map(c => c.lab());
         I = function(t) {
-            const lab = ([0, 1, 2].map((i) => ((1-t)*(1-t) * lab0[i]) + (2 * (1-t) * t * lab1[i]) + (t * t * lab2[i])));
-            return new Color(lab, 'lab');
+            const quadraticInterpolation = (x0, x1, x2) => ((1-t)*(1-t) * x0) + (2 * (1-t) * t * x1) + (t * t * x2)
+            const lab = ([0, 1, 2].map((i) => quadraticInterpolation(lab0[i], lab1[i], lab2[i])));
+            const alpha = quadraticInterpolation(colors[0].alpha(), colors[1].alpha(), colors[2].alpha());
+            return new Color(lab, 'lab').alpha( alpha );
         };
     } else if (colors.length === 4) {
         // cubic bezier interpolation
         let lab3;
         [lab0, lab1, lab2, lab3] = colors.map(c => c.lab());
         I = function(t) {
-            const lab = ([0, 1, 2].map((i) => ((1-t)*(1-t)*(1-t) * lab0[i]) + (3 * (1-t) * (1-t) * t * lab1[i]) + (3 * (1-t) * t * t * lab2[i]) + (t*t*t * lab3[i])));
-            return new Color(lab, 'lab');
+            const cubicInterpolation = (x0, x1, x2, x3) => ((1-t)*(1-t)*(1-t) * x0) + (3 * (1-t) * (1-t) * t * x1) + (3 * (1-t) * t * t * x2) + (t*t*t * x3);
+            const lab = ([0, 1, 2].map((i) => cubicInterpolation(lab0[i], lab1[i], lab2[i], lab3[i])));
+            const alpha = cubicInterpolation(colors[0].alpha(), colors[1].alpha(), colors[2].alpha(), colors[3].alpha());
+            return new Color(lab, 'lab').alpha(alpha);
         };
     } else if (colors.length >= 5) {
         // general case (degree n bezier)
@@ -53,8 +59,10 @@ const bezier = function(colors) {
         row = binom_row(n);
         I = function (t) {
             const u = 1 - t;
-            const lab = ([0, 1, 2].map((i) => labs.reduce((sum, el, j) => (sum + row[j] * u ** (n - j) * t ** j * el[i]), 0)))
-            return new Color(lab, 'lab');
+			const nInterpolation = (i, labs) => labs.reduce((sum, el, j) => (sum + row[j] * u ** (n - j) * t ** j * el[i]), 0);
+            const lab = ([0, 1, 2].map((i) => nInterpolation(i, labs)))
+			const alpha = nInterpolation(0, colors.map(c => [c.alpha()]));
+            return new Color(lab, 'lab').alpha(alpha);
         };
     } else {
         throw new RangeError("No point in running bezier with only one color.")
