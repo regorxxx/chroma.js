@@ -59,9 +59,9 @@ const bezier = function(colors) {
         row = binom_row(n);
         I = function (t) {
             const u = 1 - t;
-			const nInterpolation = (i, labs) => labs.reduce((sum, el, j) => (sum + row[j] * u ** (n - j) * t ** j * el[i]), 0);
+            const nInterpolation = (i, labs) => labs.reduce((sum, el, j) => (sum + row[j] * u ** (n - j) * t ** j * el[i]), 0);
             const lab = ([0, 1, 2].map((i) => nInterpolation(i, labs)))
-			const alpha = nInterpolation(0, colors.map(c => [c.alpha()]));
+            const alpha = nInterpolation(0, colors.map(c => [c.alpha()]));
             return new Color(lab, 'lab').alpha(alpha);
         };
     } else {
