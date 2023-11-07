@@ -2994,23 +2994,29 @@
             // linear interpolation
             (assign = colors.map(function (c) { return c.lab(); }), lab0 = assign[0], lab1 = assign[1]);
             I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return lab0[i] + (t * (lab1[i] - lab0[i])); }));
-                return new Color$5(lab, 'lab');
+                var linearInterpolation = function (x0, x1) { return x0 + (t * (x1 - x0)); };
+                var lab = ([0, 1, 2].map(function (i) { return linearInterpolation(lab0[i], lab1[i]); }));
+                var alpha = linearInterpolation(colors[0].alpha(), colors[1].alpha());
+                return new Color$5(lab, 'lab').alpha(alpha);
             };
         } else if (colors.length === 3) {
             // quadratic bezier interpolation
             (assign$1 = colors.map(function (c) { return c.lab(); }), lab0 = assign$1[0], lab1 = assign$1[1], lab2 = assign$1[2]);
             I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return ((1-t)*(1-t) * lab0[i]) + (2 * (1-t) * t * lab1[i]) + (t * t * lab2[i]); }));
-                return new Color$5(lab, 'lab');
+                var quadraticInterpolation = function (x0, x1, x2) { return ((1-t)*(1-t) * x0) + (2 * (1-t) * t * x1) + (t * t * x2); };
+                var lab = ([0, 1, 2].map(function (i) { return quadraticInterpolation(lab0[i], lab1[i], lab2[i]); }));
+                var alpha = quadraticInterpolation(colors[0].alpha(), colors[1].alpha(), colors[2].alpha());
+                return new Color$5(lab, 'lab').alpha( alpha );
             };
         } else if (colors.length === 4) {
             // cubic bezier interpolation
             var lab3;
             (assign$2 = colors.map(function (c) { return c.lab(); }), lab0 = assign$2[0], lab1 = assign$2[1], lab2 = assign$2[2], lab3 = assign$2[3]);
             I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return ((1-t)*(1-t)*(1-t) * lab0[i]) + (3 * (1-t) * (1-t) * t * lab1[i]) + (3 * (1-t) * t * t * lab2[i]) + (t*t*t * lab3[i]); }));
-                return new Color$5(lab, 'lab');
+                var cubicInterpolation = function (x0, x1, x2, x3) { return ((1-t)*(1-t)*(1-t) * x0) + (3 * (1-t) * (1-t) * t * x1) + (3 * (1-t) * t * t * x2) + (t*t*t * x3); };
+                var lab = ([0, 1, 2].map(function (i) { return cubicInterpolation(lab0[i], lab1[i], lab2[i], lab3[i]); }));
+                var alpha = cubicInterpolation(colors[0].alpha(), colors[1].alpha(), colors[2].alpha(), colors[3].alpha());
+                return new Color$5(lab, 'lab').alpha(alpha);
             };
         } else if (colors.length >= 5) {
             // general case (degree n bezier)
@@ -3020,8 +3026,10 @@
             row = binom_row(n);
             I = function (t) {
                 var u = 1 - t;
-                var lab = ([0, 1, 2].map(function (i) { return labs.reduce(function (sum, el, j) { return (sum + row[j] * Math.pow( u, (n - j) ) * Math.pow( t, j ) * el[i]); }, 0); }));
-                return new Color$5(lab, 'lab');
+    			var nInterpolation = function (i, labs) { return labs.reduce(function (sum, el, j) { return (sum + row[j] * Math.pow( u, (n - j) ) * Math.pow( t, j ) * el[i]); }, 0); };
+                var lab = ([0, 1, 2].map(function (i) { return nInterpolation(i, labs); }));
+    			var alpha = nInterpolation(0, colors.map(function (c) { return [c.alpha()]; }));
+                return new Color$5(lab, 'lab').alpha(alpha);
             };
         } else {
             throw new RangeError("No point in running bezier with only one color.")
@@ -3037,7 +3045,8 @@
 
     /*
      * interpolates between a set of colors uzing a bezier spline
-     * blend mode formulas taken from http://www.venture-ware.com/kevin/coding/lets-learn-math-photoshop-blend-modes/
+     * blend mode formulas taken from
+     * https://web.archive.org/web/20180110014946/http://www.venture-ware.com/kevin/coding/lets-learn-math-photoshop-blend-modes/
      */
 
     var chroma$3 = chroma_1;
