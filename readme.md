@@ -2,7 +2,7 @@
 
 [Chroma.js](https://regorxxx.github.io/chroma.js/) is a ~~tiny~~ [small-ish](https://bundlephobia.com/result?p=chroma-js) zero-dependency JavaScript library ([13.5kB](https://bundlephobia.com/result?p=chroma-js)) for all kinds of color conversions and color scales. **Revived with new features and maintained.**
 
-[![Build Status](https://api.travis-ci.com/regorxxx/chroma.js.svg?branch=master)](https://travis-ci.com/regorxxx/chroma.js)
+[![Build Status](https://api.travis-ci.com/gka/chroma.js.svg?branch=master)](https://travis-ci.com/gka/chroma.js)
 
 ### Usage
 
