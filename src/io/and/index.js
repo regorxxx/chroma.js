@@ -4,36 +4,23 @@ const input = require('../input');
 const {unpack, type} = require('../../utils');
 const {round} = Math;
 
-Color.prototype.android = function(alpha=false, rnd=true) {
-    const [r, g, b, a] = this._rgb.slice(0,alpha ? 4: 3).map((v,i) => {
-        return i<3 ? (rnd === false ? v : round(v)) : v;
-    });
-    return alpha ? ((a << 24) | (r << 16) | (g << 8) | (b)) : (0xff000000 | (r << 16) | (g << 8) | (b));
+const rgb2and = require('./rgb2and');
+
+Color.prototype.android = function(mode = 'rgb') {
+    return rgb2and(this._rgb, mode);
 };
 
 chroma.android = (...args) => new Color(...args, 'android');
 
-input.format.android = (and) => {
-    if (type(and) == "number") {
-        const a = and - 0xFF000000;
-        const alpha = a & 0xFF;
-        if (alpha >= 0 && alpha <= 255) {
-            const r = a >> 16 & 0xFF;
-            const g = (a >> 8) & 0xFF;
-            const b = a & 0xFF;
-            return [r,g,b,alpha];
-        }
-    }
-    throw new Error("unknown android color: "+and);
-};
+input.format.android = require('./and2rgb');
 
 input.autodetect.push({
     p: 5,
     test: (...args) => {
         if (args.length === 1 && type(args[0]) === 'number') {
-            const a = args[0] - 0xFF000000;
-            const alpha = a & 0xFF;
-            if (alpha >= 0 && alpha <= 255) {
+            const alpha = (args[0] >> 24 & 0xFF) / 255;
+            if (alpha >= 0 && alpha <= 1) {
+                const a = args[0] - 0xFF000000;
                 const r = a >> 16 & 0xFF;
                 const g = (a >> 8) & 0xFF;
                 const b = a & 0xFF;
