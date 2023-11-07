@@ -1,10 +1,15 @@
 ## Changelog
 
+### 2.6.0
+* updated dependencies
+* added alpha functionality to bezier interpolation (n-degree compatibility)
+* added tests for alpha bezier interpolation
+
 ### 2.5.0
-* forked from 2.4.2 (no documented on changelog).
-* Added full [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility. color.android(mode='rgb'). By default alpha is scrapped (like color.num()), set mode to 'rgba' to use alpha.
-* Added tests for [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility.
-* Fix tests for docs when using both \n or \r\n line feeds.
+* forked from 2.4.2 (no documented on changelog)
+* added full [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility. color.android(mode='rgb'). By default alpha is scrapped (like color.num()), set mode to 'rgba' to use alpha
+* added tests for [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility
+* fix tests for docs when using both \n or \r\n line feeds
 
 ### 2.0.3
 
