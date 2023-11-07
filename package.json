@@ -50,7 +50,7 @@
     "markdown-to-html": "0.0.13",
     "minimatch": "^3.0.4",
     "rollup": "^2.66.1",
-    "rollup-plugin-license": "^2.6.1",
+    "rollup-plugin-license": "^3.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "vows": "^0.8.2"
   },
