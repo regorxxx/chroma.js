@@ -7,8 +7,7 @@ const chroma = require('../chroma.min');
 
 const DOCS = require('fs').readFileSync(__dirname+'/../docs/src/index.md', 'utf-8');
 
-const snippets = DOCS.match(/^```js$\n(^[^`].+$\n)+/gm)
-    .map(s => { return s.split('\n').slice(1).join('\n'); });
+const snippets = (DOCS.match(/^```js$\r?\n(^[^`].+$\r?\n)+/gm)).map(s => { return s.split('\n').slice(1).join('\n'); });
 
 var data = [2.0,3.5,3.6,3.8,3.8,4.1,4.3,4.4,
             4.6,4.9,5.2,5.3,5.4,5.7,5.8,5.9,
@@ -33,4 +32,3 @@ snippets.forEach((code, i) => {
 vows.describe('Tests all snippets in the documentation')
     .addBatch(tests)
     .export(module);
-
