@@ -616,7 +616,7 @@ chroma('#ff0000').num();
 
 ### color.android
 
-Returns the numeric [Android colors](https://developer.android.com/reference/android/graphics/Color) representation of the hexadecimal RGBA color. Also works with alpha channel; if a RGBA color is passed, RGB mode must be set explicitly to discard it. In case of RGB colors, if there is no alpha channel, it RGB mode is enforced.
+Returns the numeric [Android colors](https://developer.android.com/reference/android/graphics/Color) representation of the hexadecimal RGBA color. Also works with alpha channel; if a RGBA color is passed, RGB mode must be set explicitly to discard it. In case of RGB colors, if there is no alpha channel, RGB mode is enforced.
 
 ```js
 chroma('#000000').android();
