@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.6.1
+* updated dependencies to fix all known vulnerabilities. Docs have been patched to use updated dependencies
+
 ### 2.6.0
 * added alpha functionality to bezier interpolation (n-degree compatibility)
 * added tests for alpha bezier interpolation
