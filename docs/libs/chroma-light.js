@@ -138,7 +138,7 @@
     	RAD2DEG: 180 / PI
     };
 
-    var input$6 = {
+    var input$7 = {
     	format: {},
     	autodetect: []
     };
@@ -146,7 +146,7 @@
     var last$3 = utils.last;
     var clip_rgb = utils.clip_rgb;
     var type$9 = utils.type;
-    var _input = input$6;
+    var _input = input$7;
 
     var Color$f = function Color() {
         var args = [], len = arguments.length;
@@ -205,7 +205,7 @@
     };
 
     chroma$7.Color = Color_1;
-    chroma$7.version = '2.5.0';
+    chroma$7.version = '2.6.1';
 
     var chroma_1 = chroma$7;
 
@@ -372,6 +372,7 @@
     var hsl2rgb_1 = hsl2rgb$1;
 
     var hsl2rgb = hsl2rgb_1;
+    var input$6 = input$7;
 
     var RE_RGB = /^rgb\(\s*(-?\d+),\s*(-?\d+)\s*,\s*(-?\d+)\s*\)$/;
     var RE_RGBA = /^rgba\(\s*(-?\d+),\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*([01]|[01]?\.\d+)\)$/;
@@ -385,6 +386,14 @@
     var css2rgb$1 = function (css) {
         css = css.toLowerCase().trim();
         var m;
+
+        if (input$6.format.named) {
+            try {
+                return input$6.format.named(css);
+            } catch (e) {
+                // eslint-disable-next-line
+            }
+        }
 
         // rgb(250,20,0)
         if ((m = css.match(RE_RGB))) {
@@ -459,7 +468,7 @@
 
     var chroma$6 = chroma_1;
     var Color$e = Color_1;
-    var input$5 = input$6;
+    var input$5 = input$7;
     var type$8 = utils.type;
 
     var rgb2css = rgb2css_1;
@@ -577,7 +586,7 @@
     var chroma$5 = chroma_1;
     var Color$d = Color_1;
     var type$7 = utils.type;
-    var input$4 = input$6;
+    var input$4 = input$7;
 
     var rgb2hex = rgb2hex_1;
 
@@ -609,7 +618,7 @@
     var type$6 = utils.type;
     var chroma$4 = chroma_1;
     var Color$c = Color_1;
-    var input$3 = input$6;
+    var input$3 = input$7;
 
     var rgb2hsl = rgb2hsl_1;
 
@@ -744,7 +753,7 @@
     var type$5 = utils.type;
     var chroma$3 = chroma_1;
     var Color$b = Color_1;
-    var input$2 = input$6;
+    var input$2 = input$7;
 
     var rgb2lab = rgb2lab_1;
 
@@ -858,7 +867,7 @@
     var type$4 = utils.type;
     var chroma$2 = chroma_1;
     var Color$a = Color_1;
-    var input$1 = input$6;
+    var input$1 = input$7;
 
     var rgb2oklab = rgb2oklab_1;
 
@@ -890,7 +899,7 @@
 
     var chroma$1 = chroma_1;
     var Color$9 = Color_1;
-    var input = input$6;
+    var input = input$7;
     var unpack = utils.unpack;
     var type$3 = utils.type;
     var round = Math.round;
