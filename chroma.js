@@ -1998,11 +1998,11 @@
         while ( len-- ) args[ len ] = arguments[ len ];
 
         var rgba = unpack(args, 'rgba');
-        var mode = last(args) || 'rgb';
+        var mode = (rgba[3] !== 1 ? last(args) : 'rgb') || 'rgb';
         rgba[0] = round(rgba[0]);
         rgba[1] = round(rgba[1]);
         rgba[2] = round(rgba[2]);
-        if (mode === 'rgba' || (rgba.length > 3 && rgba[3]<1)) {
+        if (mode === 'rgba' || (rgba.length > 3 && rgba[3] < 1 && last(args) !== 'rgb')) {
             rgba[3] = rgba.length > 3 ? rgba[3] : 1;
             mode = 'rgba';
         }
@@ -2039,8 +2039,6 @@
     var rgb2and = rgb2and_1;
 
     Color$n.prototype.android = function(mode) {
-        if ( mode === void 0 ) mode = 'rgb';
-
         return rgb2and(this._rgb, mode);
     };
 
@@ -3026,9 +3024,9 @@
             row = binom_row(n);
             I = function (t) {
                 var u = 1 - t;
-    			var nInterpolation = function (i, labs) { return labs.reduce(function (sum, el, j) { return (sum + row[j] * Math.pow( u, (n - j) ) * Math.pow( t, j ) * el[i]); }, 0); };
+                var nInterpolation = function (i, labs) { return labs.reduce(function (sum, el, j) { return (sum + row[j] * Math.pow( u, (n - j) ) * Math.pow( t, j ) * el[i]); }, 0); };
                 var lab = ([0, 1, 2].map(function (i) { return nInterpolation(i, labs); }));
-    			var alpha = nInterpolation(0, colors.map(function (c) { return [c.alpha()]; }));
+                var alpha = nInterpolation(0, colors.map(function (c) { return [c.alpha()]; }));
                 return new Color$5(lab, 'lab').alpha(alpha);
             };
         } else {
