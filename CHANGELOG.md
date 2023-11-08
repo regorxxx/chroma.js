@@ -1,9 +1,11 @@
 ## Changelog
 
 ### 2.6.0
-* updated dependencies
 * added alpha functionality to bezier interpolation (n-degree compatibility)
 * added tests for alpha bezier interpolation
+* updated dependencies
+* updated docs with [Android colors](https://developer.android.com/reference/android/graphics/Color)
+* updated docs linking to new github page
 
 ### 2.5.0
 * forked from 2.4.2 (no documented on changelog)
