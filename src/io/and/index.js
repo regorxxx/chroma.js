@@ -6,7 +6,7 @@ const {round} = Math;
 
 const rgb2and = require('./rgb2and');
 
-Color.prototype.android = function(mode = 'rgb') {
+Color.prototype.android = function(mode) {
     return rgb2and(this._rgb, mode);
 };
 
