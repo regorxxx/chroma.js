@@ -622,6 +622,7 @@ Returns the numeric [Android colors](https://developer.android.com/reference/and
 chroma('#000000').android();
 chroma('#000000').android('rgb');
 chroma('#000000').android('rgba');
+chroma('#ff0000').android();
 chroma('#ff00005e').android();
 chroma('#ff00005e').android('rgb');
 chroma('#ff00005e').android('rgba');
