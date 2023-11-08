@@ -9,13 +9,13 @@
 
 For Node.js: Install the `chroma-js` npm module, `npm install chroma-js`. Then import the module into your JavaScript: `import chroma from "chroma-js"`.
 
-And for browsers, download [`chroma.min.js`](https://raw.github.com/gka/chroma.js/master/chroma.min.js) or use the [hosted version on cdnjs.com](https://cdnjs.com/libraries/chroma-js). Then, initiate and manipulate colors:
+And for browsers, download [`chroma.min.js`](https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js) or use the [hosted version on cdnjs.com](https://cdnjs.com/libraries/chroma-js). Then, initiate and manipulate colors:
 
 ```js
 chroma('#D4F880').darken().hex();  // #9BC04B
 ```
 
-The [interactive documentation](http://gka.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/gka/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
+The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
 
 ## Quick-start
 
@@ -267,7 +267,7 @@ chroma.blend('4CBBFC', 'EEEE22', 'lighten');
 ### chroma.random
 #### ()
 
-Creates a random color by generating a [random hexadecimal string](https://github.com/gka/chroma.js/blob/master/src/generator/random.coffee#L3-L7).
+Creates a random color by generating a [random hexadecimal string](https://github.com/regorxxx/chroma.js/blob/master/src/generator/random.coffee#L3-L7).
 
 ```js
 chroma.random();
@@ -614,6 +614,19 @@ chroma('#00ff00').num();
 chroma('#ff0000').num();
 ```
 
+### color.android
+
+Returns the numeric [Android colors](https://developer.android.com/reference/android/graphics/Color) representation of the hexadecimal RGBA color. Also works with alpha channel; if a RGBA color is passed, RGB mode must be set explicitly to discard it. In case of RGB colors, if there is no alpha channel, it RGB mode is enforced.
+
+```js
+chroma('#000000').android();
+chroma('#000000').android('rgb');
+chroma('#000000').android('rgba');
+chroma('#ff00005e').android();
+chroma('#ff00005e').android('rgb');
+chroma('#ff00005e').android('rgba');
+```
+
 ### color.temperature
 
 Estimate the temperature in Kelvin of any given color, though this makes the only sense for colors from the [temperature gradient](#chroma-temperature) above.
@@ -844,13 +857,15 @@ chroma.brewer.OrRd
 ### chroma.bezier
 #### (colors)
 
-`chroma.bezier` returns a function that [bezier-interpolates between colors](https://www.vis4.net/blog/posts/mastering-multi-hued-color-scales/) in `Lab` space. The input range of the function is `[0..1]`.
+`chroma.bezier` returns a function that [bezier-interpolates between colors](https://www.vis4.net/blog/posts/mastering-multi-hued-color-scales/) in `Lab` space. Also works with alpha channels. The input range of the function is `[0..1]`.
 
 ```js
 // linear interpolation
 chroma.scale(['yellow', 'red', 'black']);
 // bezier interpolation
 chroma.bezier(['yellow', 'red', 'black']);
+// bezier interpolation with alpha
+chroma.bezier(['#ffff0082', '#ff0000a3', '#00000075']);
 ```
 
 You can convert an bezier interpolator into a chroma.scale instance

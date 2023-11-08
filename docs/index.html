@@ -11,10 +11,10 @@
 <p><a href="https://travis-ci.com/gka/chroma.js"><img src="https://api.travis-ci.com/gka/chroma.js.svg?branch=master" alt="Build Status"></a></p>
 <h2 id="installation">Installation</h2>
 <p>For Node.js: Install the <code>chroma-js</code> npm module, <code>npm install chroma-js</code>. Then import the module into your JavaScript: <code>import chroma from &quot;chroma-js&quot;</code>.</p>
-<p>And for browsers, download <a href="https://raw.github.com/gka/chroma.js/master/chroma.min.js"><code>chroma.min.js</code></a> or use the <a href="https://cdnjs.com/libraries/chroma-js">hosted version on cdnjs.com</a>. Then, initiate and manipulate colors:</p>
+<p>And for browsers, download <a href="https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js"><code>chroma.min.js</code></a> or use the <a href="https://cdnjs.com/libraries/chroma-js">hosted version on cdnjs.com</a>. Then, initiate and manipulate colors:</p>
 <pre><code class="lang-js">chroma(&#39;#D4F880&#39;).darken().hex();  // #9BC04B
 </code></pre>
-<p>The <a href="http://gka.github.io/chroma.js/">interactive documentation</a> continues below (and there&#39;s a <a href="https://github.com/gka/chroma.js/blob/master/docs/src/index.md">static version</a>, too) for usage examples. Or use it from SASS using <a href="https://github.com/bugsnag/chromatic-sass">chromatic-sass</a>!</p>
+<p>The <a href="http://regorxxx.github.io/chroma.js/">interactive documentation</a> continues below (and there&#39;s a <a href="https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md">static version</a>, too) for usage examples. Or use it from SASS using <a href="https://github.com/bugsnag/chromatic-sass">chromatic-sass</a>!</p>
 <h2 id="quick-start">Quick-start</h2>
 <p>Here are a couple of things chroma.js can do for you:</p>
 <ul>
@@ -168,7 +168,7 @@ chroma.blend(&#39;4CBBFC&#39;, &#39;EEEE22&#39;, &#39;lighten&#39;);
 </code></pre>
 <h3 id="chroma-random">chroma.random</h3>
 <h4 id="-">()</h4>
-<p>Creates a random color by generating a <a href="https://github.com/gka/chroma.js/blob/master/src/generator/random.coffee#L3-L7">random hexadecimal string</a>.</p>
+<p>Creates a random color by generating a <a href="https://github.com/regorxxx/chroma.js/blob/master/src/generator/random.coffee#L3-L7">random hexadecimal string</a>.</p>
 <pre><code class="lang-js">chroma.random();
 chroma.random();
 chroma.random();
@@ -377,6 +377,15 @@ chroma(&#39;#0000ff&#39;).num();
 chroma(&#39;#00ff00&#39;).num();
 chroma(&#39;#ff0000&#39;).num();
 </code></pre>
+<h3 id="color-android">color.android</h3>
+<p>Returns the numeric <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a> representation of the hexadecimal RGBA color. Also works with alpha channel; if a RGBA color is passed, RGB mode must be set explicitly to discard it. In case of RGB colors, if there is no alpha channel, it RGB mode is enforced.</p>
+<pre><code class="lang-js">chroma(&#39;#000000&#39;).android();
+chroma(&#39;#000000&#39;).android(&#39;rgb&#39;);
+chroma(&#39;#000000&#39;).android(&#39;rgba&#39;);
+chroma(&#39;#ff00005e&#39;).android();
+chroma(&#39;#ff00005e&#39;).android(&#39;rgb&#39;);
+chroma(&#39;#ff00005e&#39;).android(&#39;rgba&#39;);
+</code></pre>
 <h3 id="color-temperature">color.temperature</h3>
 <p>Estimate the temperature in Kelvin of any given color, though this makes the only sense for colors from the <a href="#chroma-temperature">temperature gradient</a> above.</p>
 <pre><code class="lang-js">chroma(&#39;#ff3300&#39;).temperature();
@@ -514,11 +523,13 @@ chroma.scale(&#39;Spectral&#39;);
 </code></pre>
 <h3 id="chroma-bezier">chroma.bezier</h3>
 <h4 id="-colors-">(colors)</h4>
-<p><code>chroma.bezier</code> returns a function that <a href="https://www.vis4.net/blog/posts/mastering-multi-hued-color-scales/">bezier-interpolates between colors</a> in <code>Lab</code> space. The input range of the function is <code>[0..1]</code>.</p>
+<p><code>chroma.bezier</code> returns a function that <a href="https://www.vis4.net/blog/posts/mastering-multi-hued-color-scales/">bezier-interpolates between colors</a> in <code>Lab</code> space. Also works with alpha channels. The input range of the function is <code>[0..1]</code>.</p>
 <pre><code class="lang-js">// linear interpolation
 chroma.scale([&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;]);
 // bezier interpolation
 chroma.bezier([&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;]);
+// bezier interpolation with alpha
+chroma.bezier([&#39;#ffff0082&#39;, &#39;#ff0000a3&#39;, &#39;#00000075&#39;]);
 </code></pre>
 <p>You can convert an bezier interpolator into a chroma.scale instance</p>
 <pre><code class="lang-js">chroma.bezier([&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;])
@@ -583,6 +594,21 @@ chroma.cubehelix().lightness([0.3,0.7]);
     .colors(5);
 </code></pre>
 <h2 id="changelog">Changelog</h2>
+<h3 id="2-6-0">2.6.0</h3>
+<ul>
+<li>added alpha functionality to bezier interpolation (n-degree compatibility)</li>
+<li>added tests for alpha bezier interpolation</li>
+<li>updated dependencies</li>
+<li>updated docs with <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a></li>
+<li>updated docs linking to new github page</li>
+</ul>
+<h3 id="2-5-0">2.5.0</h3>
+<ul>
+<li>forked from 2.4.2 (no documented on changelog)</li>
+<li>added full <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a> compatibility. color.android(mode=&#39;rgb&#39;). By default alpha is scrapped (like color.num()), set mode to &#39;rgba&#39; to use alpha</li>
+<li>added tests for <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a> compatibility</li>
+<li>fix tests for docs when using both \n or \r\n line feeds</li>
+</ul>
 <h3 id="2-0-3">2.0.3</h3>
 <ul>
 <li>hsl2rgb will, like other x2rgb conversions now set the default alpha to 1</li>
@@ -882,7 +908,7 @@ chroma.cubehelix().lightness([0.3,0.7]);
         });
     })(jQuery);
 </script>
-<a href="https://github.com/gka/chroma.js" class="github-corner"
+<a href="https://github.com/regorxxx/chroma.js" class="github-corner"
     ><svg
         width="80"
         height="80"
