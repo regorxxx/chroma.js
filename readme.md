@@ -1,6 +1,6 @@
 # Chroma.js
 
-[Chroma.js](https://vis4.net/chromajs/) is a ~~tiny~~ [small-ish](https://bundlephobia.com/result?p=chroma-js) zero-dependency JavaScript library ([13.5kB](https://bundlephobia.com/result?p=chroma-js)) for all kinds of color conversions and color scales. **Revived with new features and maintained.**
+[Chroma.js](https://regorxxx.github.io/chroma.js/) is a ~~tiny~~ [small-ish](https://bundlephobia.com/result?p=chroma-js) zero-dependency JavaScript library ([13.5kB](https://bundlephobia.com/result?p=chroma-js)) for all kinds of color conversions and color scales. **Revived with new features and maintained.**
 
 [![Build Status](https://api.travis-ci.com/gka/chroma.js.svg?branch=master)](https://travis-ci.com/gka/chroma.js)
 
@@ -51,7 +51,7 @@ chroma.scale(['lightyellow', 'navy']).domain([1, 100000], 7, 'log');
 
 ### Like it?
 
-Why not dive into the [interactive documentation](http://gka.github.io/chroma.js/) (there's a [static version](https://github.com/gka/chroma.js/blob/master/docs/src/index.md), too). You can download [chroma.min.js](https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js).
+Why not dive into the [interactive documentation](https://regorxxx.github.io/chroma.js/) (there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too). You can download [chroma.min.js](https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js).
 
 You can use it in node.js, too!
 
