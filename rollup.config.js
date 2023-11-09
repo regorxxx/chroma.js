@@ -10,8 +10,9 @@ const minify = !process.env.ROLLUP_WATCH && !process.env.DEV;
 /** globals process, __dirname **/
 
 module.exports = [
-  bundle("index.js", "chroma"),
-  bundle("index-light.js", "chroma-light"),
+  bundle("index.js", "chroma"), // Full
+  bundle("index-light.js", "chroma-light"), // Minimum color manipulation
+  bundle("index-ultra-light.js", "chroma-ultra-light"), // For color conversion
 ];
 
 function bundle(input, target) {
