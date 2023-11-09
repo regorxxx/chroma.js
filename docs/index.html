@@ -15,6 +15,14 @@
 <pre><code class="language-js">chroma(&#39;#D4F880&#39;).darken().hex();  // #9BC04B
 </code></pre>
 <p>The <a href="http://regorxxx.github.io/chroma.js/">interactive documentation</a> continues below (and there&#39;s a <a href="https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md">static version</a>, too) for usage examples. Or use it from SASS using <a href="https://github.com/bugsnag/chromatic-sass">chromatic-sass</a>!</p>
+<h2 id="flavours">Flavours</h2>
+<p><strong>chroma.js</strong> is available in 3 versions, each one with a different set of features and filesize.</p>
+<ul>
+<li><strong>Standard</strong>: full features.</li>
+<li><strong>Light</strong>: minimum color manipulation for simple usage. </li>
+<li><strong>Ultra-ligth</strong>: only color conversion. (since <a href="#261">2.6.1</a>)</li>
+</ul>
+<p>For a detailed list of features per version, check the &#39;index[-...].js&#39; files (for ex. &#39;index-ultra-light.js&#39;). Modify them to build a version according to your needs.</p>
 <h2 id="quick-start">Quick-start</h2>
 <p>Here are a couple of things chroma.js can do for you:</p>
 <ul>
@@ -52,7 +60,7 @@ chroma([255, 51, 153]);
 <p>You can construct colors from different color spaces by passing the name of color space as the last argument. Here we define the same color in HSL by passing the h*ue angle (0-360) and percentages for <em>s</em>aturation and <em>l</em>ightness:</p>
 <pre><code class="language-js">chroma(330, 1, 0.6, &#39;hsl&#39;)
 </code></pre>
-<p><strong>New (since 2.0):</strong> you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
+<p><strong>New (since <a href="#200">2.0.0</a>):</strong> you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
 <pre><code class="language-js">chroma({ h:120, s:1, l:0.75});
 chroma({ l:80, c:25, h:200 });
 chroma({ c:1, m:0.5, y:0, k:0.2});
@@ -594,24 +602,32 @@ chroma.cubehelix().lightness([0.3,0.7]);
     .colors(5);
 </code></pre>
 <h2 id="changelog">Changelog</h2>
+<h3 id="262">2.6.2</h3>
+<ul>
+<li>added Android colors support to &#39;light&#39; build version, missing by error at <a href="#250">2.5.0</a></li>
+<li>added &#39;ultra-light&#39; build version, to be used only for color conversion (no other features included)</li>
+<li>updated documentation with sticky index to left, independtly scrollable</li>
+<li>updated documentation with &#39;Flavours&#39; section</li>
+<li>general cleanup and styling of documentation</li>
+</ul>
 <h3 id="261">2.6.1</h3>
 <ul>
-<li>updated dependencies to fix all known vulnerabilities. Docs have been patched to use updated dependencies</li>
+<li>updated dependencies to fix all known vulnerabilities. Documentation has been patched to use updated dependencies</li>
 </ul>
 <h3 id="260">2.6.0</h3>
 <ul>
 <li>added alpha functionality to bezier interpolation (n-degree compatibility)</li>
 <li>added tests for alpha bezier interpolation</li>
 <li>updated dependencies</li>
-<li>updated docs with <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a></li>
-<li>updated docs linking to new github page</li>
+<li>updated documentation with <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a></li>
+<li>updated documentation linking to new github page</li>
 </ul>
 <h3 id="250">2.5.0</h3>
 <ul>
 <li>forked from 2.4.2 (no documented on changelog)</li>
 <li>added full <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a> compatibility. color.android(mode=&#39;rgb&#39;). By default alpha is scrapped (like color.num()), set mode to &#39;rgba&#39; to use alpha</li>
 <li>added tests for <a href="https://developer.android.com/reference/android/graphics/Color">Android colors</a> compatibility</li>
-<li>fix tests for docs when using both \n or \r\n line feeds</li>
+<li>fix tests for documentation when using both \n or \r\n line feeds</li>
 </ul>
 <h3 id="203">2.0.3</h3>
 <ul>

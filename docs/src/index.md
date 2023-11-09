@@ -17,6 +17,15 @@ chroma('#D4F880').darken().hex();  // #9BC04B
 
 The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
 
+## Flavours
+
+**chroma.js** is available in 3 versions, each one with a different set of features and filesize.
+* **Standard**: full features.
+* **Light**: minimum color manipulation for simple usage. 
+* **Ultra-ligth**: only color conversion. (since [2.6.1](#261))
+
+For a detailed list of features per version, check the 'index[-...].js' files (for ex. 'index-ultra-light.js'). Modify them to build a version according to your needs.
+
 ## Quick-start
 
 Here are a couple of things chroma.js can do for you:
@@ -79,7 +88,7 @@ You can construct colors from different color spaces by passing the name of colo
 chroma(330, 1, 0.6, 'hsl')
 ```
 
-**New (since 2.0):** you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:
+**New (since [2.0.0](#200)):** you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:
 
 ```js
 chroma({ h:120, s:1, l:0.75});
