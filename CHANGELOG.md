@@ -1,20 +1,27 @@
 ## Changelog
 
+### 2.6.2
+* added Android colors support to 'light' build version, missing by error at [2.5.0](#250)
+* added 'ultra-light' build version, to be used only for color conversion (no other features included)
+* updated documentation with sticky index to left, independtly scrollable
+* updated documentation with 'Flavours' section
+* general cleanup and styling of documentation
+
 ### 2.6.1
-* updated dependencies to fix all known vulnerabilities. Docs have been patched to use updated dependencies
+* updated dependencies to fix all known vulnerabilities. Documentation has been patched to use updated dependencies
 
 ### 2.6.0
 * added alpha functionality to bezier interpolation (n-degree compatibility)
 * added tests for alpha bezier interpolation
 * updated dependencies
-* updated docs with [Android colors](https://developer.android.com/reference/android/graphics/Color)
-* updated docs linking to new github page
+* updated documentation with [Android colors](https://developer.android.com/reference/android/graphics/Color)
+* updated documentation linking to new github page
 
 ### 2.5.0
 * forked from 2.4.2 (no documented on changelog)
 * added full [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility. color.android(mode='rgb'). By default alpha is scrapped (like color.num()), set mode to 'rgba' to use alpha
 * added tests for [Android colors](https://developer.android.com/reference/android/graphics/Color) compatibility
-* fix tests for docs when using both \n or \r\n line feeds
+* fix tests for documentation when using both \n or \r\n line feeds
 
 ### 2.0.3
 
