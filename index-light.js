@@ -10,6 +10,7 @@ require('./src/io/hsl');
 require('./src/io/lab');
 require('./src/io/oklab');
 require('./src/io/rgb');
+require('./src/io/and');
 
 // operators --> modify existing Colors
 require('./src/ops/alpha');
