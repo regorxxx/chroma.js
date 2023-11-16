@@ -9,13 +9,14 @@
 
 For Node.js: Install the `chroma-js` npm module, `npm install chroma-js`. Then import the module into your JavaScript: `import chroma from "chroma-js"`.
 
-And for browsers, download [`chroma.min.js`](https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js) or use the [hosted version on cdnjs.com](https://cdnjs.com/libraries/chroma-js). Then, initiate and manipulate colors:
+And for browsers, download [`chroma.min.js`](https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js) or use the [hosted version on cdnjs.com](https://cdnjs.com/libraries/chroma-js) (only versions <2.5.0). Then, initiate and manipulate colors:
 
 ```js
-chroma('#D4F880').darken().hex();  // #9BC04B
+chroma('#D4F880').darken().hex();  // #a1c550
 ```
 
-The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
+The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Change the code inside the code boxes
+to test the output on real time. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
 
 ## Flavours
 
@@ -88,7 +89,7 @@ You can construct colors from different color spaces by passing the name of colo
 chroma(330, 1, 0.6, 'hsl')
 ```
 
-**New (since [2.0.0](#200)):** you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:
+**New (since [2.0.0](#200)):** you can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:
 
 ```js
 chroma({ h:120, s:1, l:0.75});

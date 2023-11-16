@@ -11,10 +11,10 @@
 <p><a href="https://travis-ci.com/gka/chroma.js"><img src="https://api.travis-ci.com/gka/chroma.js.svg?branch=master" alt="Build Status"></a></p>
 <h2 id="installation">Installation</h2>
 <p>For Node.js: Install the <code>chroma-js</code> npm module, <code>npm install chroma-js</code>. Then import the module into your JavaScript: <code>import chroma from &quot;chroma-js&quot;</code>.</p>
-<p>And for browsers, download <a href="https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js"><code>chroma.min.js</code></a> or use the <a href="https://cdnjs.com/libraries/chroma-js">hosted version on cdnjs.com</a>. Then, initiate and manipulate colors:</p>
-<pre><code class="language-js">chroma(&#39;#D4F880&#39;).darken().hex();  // #9BC04B
+<p>And for browsers, download <a href="https://raw.github.com/regorxxx/chroma.js/master/chroma.min.js"><code>chroma.min.js</code></a> or use the <a href="https://cdnjs.com/libraries/chroma-js">hosted version on cdnjs.com</a> (only versions &lt;2.5.0). Then, initiate and manipulate colors:</p>
+<pre><code class="language-js">chroma(&#39;#D4F880&#39;).darken().hex();  // #a1c550
 </code></pre>
-<p>The <a href="http://regorxxx.github.io/chroma.js/">interactive documentation</a> continues below (and there&#39;s a <a href="https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md">static version</a>, too) for usage examples. Or use it from SASS using <a href="https://github.com/bugsnag/chromatic-sass">chromatic-sass</a>!</p>
+<p>The <a href="http://regorxxx.github.io/chroma.js/">interactive documentation</a> continues below (and there&#39;s a <a href="https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md">static version</a>, too) for usage examples. Change the code inside the code boxes<br>to test the output on real time. Or use it from SASS using <a href="https://github.com/bugsnag/chromatic-sass">chromatic-sass</a>!</p>
 <h2 id="flavours">Flavours</h2>
 <p><strong>chroma.js</strong> is available in 3 versions, each one with a different set of features and filesize.</p>
 <ul>
@@ -60,7 +60,7 @@ chroma([255, 51, 153]);
 <p>You can construct colors from different color spaces by passing the name of color space as the last argument. Here we define the same color in HSL by passing the h*ue angle (0-360) and percentages for <em>s</em>aturation and <em>l</em>ightness:</p>
 <pre><code class="language-js">chroma(330, 1, 0.6, &#39;hsl&#39;)
 </code></pre>
-<p><strong>New (since <a href="#200">2.0.0</a>):</strong> you can also construct colors by passing an plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
+<p><strong>New (since <a href="#200">2.0.0</a>):</strong> you can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
 <pre><code class="language-js">chroma({ h:120, s:1, l:0.75});
 chroma({ l:80, c:25, h:200 });
 chroma({ c:1, m:0.5, y:0, k:0.2});
@@ -602,6 +602,10 @@ chroma.cubehelix().lightness([0.3,0.7]);
     .colors(5);
 </code></pre>
 <h2 id="changelog">Changelog</h2>
+<h3 id="unreleased">unreleased</h3>
+<ul>
+<li>minor improvements to documentation</li>
+</ul>
 <h3 id="262">2.6.2</h3>
 <ul>
 <li>added Android colors support to &#39;light&#39; build version, missing by error at <a href="#250">2.5.0</a></li>

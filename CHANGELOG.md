@@ -1,5 +1,8 @@
 ## Changelog
 
+### unreleased
+* minor improvements to documentation
+
 ### 2.6.2
 * added Android colors support to 'light' build version, missing by error at [2.5.0](#250)
 * added 'ultra-light' build version, to be used only for color conversion (no other features included)
