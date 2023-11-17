@@ -15,8 +15,7 @@ And for browsers, download [`chroma.min.js`](https://raw.github.com/regorxxx/chr
 chroma('#D4F880').darken().hex();  // #a1c550
 ```
 
-The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Change the code inside the code boxes
-to test the output on real time. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
+The [interactive documentation](http://regorxxx.github.io/chroma.js/) continues below (and there's a [static version](https://github.com/regorxxx/chroma.js/blob/master/docs/src/index.md), too) for usage examples. Change the code inside the code boxes to test the output on real time. Or use it from SASS using [chromatic-sass](https://github.com/bugsnag/chromatic-sass)!
 
 ## Flavours
 
