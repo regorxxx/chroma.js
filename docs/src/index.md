@@ -851,6 +851,13 @@ chroma.js includes the definitions from [ColorBrewer2.org](http://colorbrewer2.o
 chroma.scale('YlGnBu');
 chroma.scale('Spectral');
 ```
+A random scale can be retrieved from an specific palette (which is just a set of scales of same type):
+
+```js
+chroma.scale('Sequential');
+chroma.scale('Sequential');
+chroma.scale('Sequential');
+```
 
 To reverse the colors you could simply reverse the domain:
 
@@ -858,10 +865,22 @@ To reverse the colors you could simply reverse the domain:
 chroma.scale('Spectral').domain([1,0]);
 ```
 
-You can access the colors directly using `chroma.brewer`.
+You can access the colors directly using `chroma.brewer`. These properties are read-only.
 
 ```js
 chroma.brewer.OrRd
+```
+
+The available palettes can be found with:
+
+```js
+chroma.brewer.palettes
+```
+
+And the available scales within a palette:
+
+```js
+chroma.brewer.getPalette('Qualitative').slice(0, 2)
 ```
 
 ### chroma.bezier

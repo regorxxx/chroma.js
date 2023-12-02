@@ -523,11 +523,22 @@ chroma.scale(&#39;OrRd&#39;).nodata(&#39;#eee&#39;)(null);
 <pre><code class="language-js">chroma.scale(&#39;YlGnBu&#39;);
 chroma.scale(&#39;Spectral&#39;);
 </code></pre>
+<p>A random scale can be retrieved from an specific palette (which is just a set of scales of same type):</p>
+<pre><code class="language-js">chroma.scale(&#39;Sequential&#39;);
+chroma.scale(&#39;Sequential&#39;);
+chroma.scale(&#39;Sequential&#39;);
+</code></pre>
 <p>To reverse the colors you could simply reverse the domain:</p>
 <pre><code class="language-js">chroma.scale(&#39;Spectral&#39;).domain([1,0]);
 </code></pre>
-<p>You can access the colors directly using <code>chroma.brewer</code>.</p>
+<p>You can access the colors directly using <code>chroma.brewer</code>. These properties are read-only.</p>
 <pre><code class="language-js">chroma.brewer.OrRd
+</code></pre>
+<p>The available palettes can be found with:</p>
+<pre><code class="language-js">chroma.brewer.palettes
+</code></pre>
+<p>And the available scales within a palette:</p>
+<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2)
 </code></pre>
 <h3 id="chromabezier">chroma.bezier</h3>
 <h4 id="colors">(colors)</h4>
@@ -604,6 +615,9 @@ chroma.cubehelix().lightness([0.3,0.7]);
 <h2 id="changelog">Changelog</h2>
 <h3 id="unreleased">unreleased</h3>
 <ul>
+<li>added chroma.brewer.getPalettes() to retrieve all available palettes (keys). <a href="http://colorbrewer2.org/">ColorBrewer</a> schemes (scales) are divided into palettes according to their type. </li>
+<li>added chroma.brewer.getPalette(/* palette */) to retrieve all schemes from an specific palette (for ex. &#39;Qualitative&#39;).</li>
+<li>added &#39;Diverging&#39;,&#39;Qualitative&#39;, and &#39;Sequential&#39; scales to chroma.brewer and chroma.scale(/* colors */);, which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale(&#39;Sequential&#39;) -&gt; chroma.scale(&#39;OrRd&#39;) </li>
 <li>minor improvements to documentation</li>
 </ul>
 <h3 id="262">2.6.2</h3>
@@ -818,7 +832,13 @@ chroma.cubehelix().lightness([0.3,0.7]);
                     }
 
                     function resShort(d) {
-                        if (typeof d == 'string') {
+						if (typeof d == 'string' && chroma.brewer.hasOwnProperty(d)) {
+                            return (
+                                '<span class="cm-string cm-small">' +
+								d +
+								'<span>\''
+                            );
+                        } else if (typeof d == 'string') {
                             // string color, e.g. hex value
                             return (
                                 '<span class="cm-string cm-color cm-small" data-color="' +

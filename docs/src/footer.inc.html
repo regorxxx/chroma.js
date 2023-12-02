@@ -97,7 +97,13 @@
                     }
 
                     function resShort(d) {
-                        if (typeof d == 'string') {
+						if (typeof d == 'string' && chroma.brewer.hasOwnProperty(d)) {
+                            return (
+                                '<span class="cm-string cm-small">' +
+								d +
+								'<span>\''
+                            );
+                        } else if (typeof d == 'string') {
                             // string color, e.g. hex value
                             return (
                                 '<span class="cm-string cm-color cm-small" data-color="' +
