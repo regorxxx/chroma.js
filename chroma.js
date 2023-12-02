@@ -2626,7 +2626,7 @@
         var setColors = function(colors) {
             colors = colors || ['#fff', '#000'];
             if (colors && type$2(colors) === 'string' && chroma$4.brewer &&
-                chroma$4.brewer[colors.toLowerCase()]) {
+                chroma$4.brewer.hasOwnProperty(colors.toLowerCase()) && colors !== 'palettes') {
                 colors = chroma$4.brewer[colors.toLowerCase()];
             }
             if (type$2(colors) === 'array') {
@@ -3592,8 +3592,50 @@
     for (var i = 0, list = Object.keys(colorbrewer); i < list.length; i += 1) {
         var key = list[i];
 
+        Object.freeze(colorbrewer[key]);
         colorbrewer[key.toLowerCase()] = colorbrewer[key];
     }
+
+    // these are only available on camelCase and thus will never be matched by constructing a scale
+    Object.defineProperty(colorbrewer, 'palettes', {
+        configurable: false,
+        enumerable: true,
+        get: function get() {
+            return ['Sequential', 'Diverging', 'Qualitative'];
+        }
+    });
+
+    Object.defineProperty(colorbrewer, 'getPalette', {
+        configurable: false,
+        enumerable: true,
+        writable: false,
+        value: function(key) {
+            if (typeof key !== 'string') {throw new Error('key is not a string');}
+            switch ((key || '').toLowerCase()) {
+                case 'sequential':
+                    return ['OrRd', 'PuBu', 'Oranges', 'BuPu', 'BuGn', 'YlOrBr', 'YlGn', 'Reds', 'RdPu', 'Greens', 'YlGnBu', 'Purples', 'GnBu', 'Greys', 'YlOrRd', 'PuRd', 'Blues', 'PuBuGn', 'Viridis'];
+                case 'diverging':
+                    return ['Spectral', 'RdYlGn', 'Set1', 'RdBu', 'PiYG', 'PRGn', 'RdYlBu', 'BrBG', 'RdGy', 'PuOr'];
+                case 'qualitative':
+                    return ['Set2', 'Accent', 'Set1', 'Set3', 'Dark2', 'Paired', 'Pastel2', 'Pastel1'];
+                default:
+                    return null;
+            }
+        }
+    });
+
+    ['diverging', 'Diverging', 'qualitative', 'Qualitative', 'sequential' , 'Sequential'].forEach(function (key) {
+        Object.defineProperty(colorbrewer, key, {
+            configurable: false,
+            enumerable: true,
+            get: function get() {
+                var palette = this.getPalette(key);
+                return this[palette[Math.floor(Math.random() * palette.length)]];
+            }
+        });
+    });
+
+    Object.freeze(colorbrewer);
 
     var colorbrewer_1 = colorbrewer;
 
