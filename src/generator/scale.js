@@ -32,7 +32,7 @@ module.exports = function(colors) {
     const setColors = function(colors) {
         colors = colors || ['#fff', '#000'];
         if (colors && type(colors) === 'string' && chroma.brewer &&
-            chroma.brewer[colors.toLowerCase()]) {
+            chroma.brewer.hasOwnProperty(colors.toLowerCase()) && colors !== 'palettes') {
             colors = chroma.brewer[colors.toLowerCase()];
         }
         if (type(colors) === 'array') {

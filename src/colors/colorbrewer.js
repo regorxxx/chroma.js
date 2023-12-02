@@ -59,11 +59,53 @@ const colorbrewer = {
     Paired: ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'],
     Pastel2: ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'],
     Pastel1: ['#fbb4ae', '#b3cde3', '#ccebc5', '#decbe4', '#fed9a6', '#ffffcc', '#e5d8bd', '#fddaec', '#f2f2f2'],
-}
+};
 
 // add lowercase aliases for case-insensitive matches
 for (let key of Object.keys(colorbrewer)) {
+    Object.freeze(colorbrewer[key]);
     colorbrewer[key.toLowerCase()] = colorbrewer[key];
 }
+
+// these are only available on camelCase and thus will never be matched by constructing a scale
+Object.defineProperty(colorbrewer, 'palettes', {
+    configurable: false,
+    enumerable: true,
+    get() {
+        return ['Sequential', 'Diverging', 'Qualitative'];
+    }
+});
+
+Object.defineProperty(colorbrewer, 'getPalette', {
+    configurable: false,
+    enumerable: true,
+    writable: false,
+    value: function(key) {
+        if (typeof key !== 'string') {throw new Error('key is not a string');}
+        switch ((key || '').toLowerCase()) {
+            case 'sequential':
+                return ['OrRd', 'PuBu', 'Oranges', 'BuPu', 'BuGn', 'YlOrBr', 'YlGn', 'Reds', 'RdPu', 'Greens', 'YlGnBu', 'Purples', 'GnBu', 'Greys', 'YlOrRd', 'PuRd', 'Blues', 'PuBuGn', 'Viridis'];
+            case 'diverging':
+                return ['Spectral', 'RdYlGn', 'Set1', 'RdBu', 'PiYG', 'PRGn', 'RdYlBu', 'BrBG', 'RdGy', 'PuOr'];
+            case 'qualitative':
+                return ['Set2', 'Accent', 'Set1', 'Set3', 'Dark2', 'Paired', 'Pastel2', 'Pastel1'];
+            default:
+                return null;
+        }
+    }
+});
+
+['diverging', 'Diverging', 'qualitative', 'Qualitative', 'sequential' , 'Sequential'].forEach((key) => {
+    Object.defineProperty(colorbrewer, key, {
+        configurable: false,
+        enumerable: true,
+        get() {
+            const palette = this.getPalette(key);
+            return this[palette[Math.floor(Math.random() * palette.length)]];
+        }
+    })
+});
+
+Object.freeze(colorbrewer);
 
 module.exports = colorbrewer;
