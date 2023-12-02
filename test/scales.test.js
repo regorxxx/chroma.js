@@ -230,5 +230,50 @@ vows
             'center3'(topic) { assert.equal(topic.f(0.625).hex(), topic.f1(0.75).hex()) },
         },
 
+        'qualitative palette': {
+            topic: {
+                f: chroma.brewer.getPalette('Qualitative')
+            },
+            'should return the qualitative palette'(topic) { assert.deepEqual(topic.f , ['Set2', 'Accent', 'Set1', 'Set3', 'Dark2', 'Paired', 'Pastel2', 'Pastel1']) }
+        },
+
+        'random sequential scale': {
+            topic: {
+                f: scale('Sequential')
+            },
+            'should return a random sequential scale'(topic) { 
+                assert.equal(
+                    chroma.brewer.getPalette('Sequential')
+                        .some((palette) => JSON.stringify(chroma.brewer[palette]) === JSON.stringify(topic.f.colors()))
+                    , true
+                ) 
+            }
+        },
+		
+        'random sequential scale': {
+            topic: {
+                f: scale('Diverging')
+            },
+            'should return a random diverging scale'(topic) { 
+                assert.equal(
+                    chroma.brewer.getPalette('Diverging')
+                        .some((palette) => JSON.stringify(chroma.brewer[palette]) === JSON.stringify(topic.f.colors()))
+                    , true
+                ) 
+            }
+        },
+		
+        'random qualitative scale': {
+            topic: {
+                f: scale('Qualitative')
+            },
+            'should return a random qualitative scale'(topic) { 
+                assert.equal(
+                    chroma.brewer.getPalette('Qualitative')
+                        .some((palette) => JSON.stringify(chroma.brewer[palette]) === JSON.stringify(topic.f.colors()))
+                    , true
+                ) 
+            }
+        },
 
     }).export(module);
