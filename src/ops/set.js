@@ -5,7 +5,7 @@ Color.prototype.set = function (mc, value, mutate = false) {
     const [mode, channel] = mc.split('.');
     const src = this[mode]();
     if (channel) {
-        const i = mode.indexOf(channel) - (mode.substr(0, 2) === 'ok' ? 2 : 0);
+        const i = mode.indexOf(channel) - (mode.substring(0, 2) === 'ok' ? 2 : 0);
         if (i > -1) {
             if (type(value) == 'string') {
                 switch (value.charAt(0)) {
@@ -16,10 +16,10 @@ Color.prototype.set = function (mc, value, mutate = false) {
                         src[i] += +value;
                         break;
                     case '*':
-                        src[i] *= +value.substr(1);
+                        src[i] *= +value.substring(1);
                         break;
                     case '/':
-                        src[i] /= +value.substr(1);
+                        src[i] /= +value.substring(1);
                         break;
                     default:
                         src[i] = +value;

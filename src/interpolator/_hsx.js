@@ -24,7 +24,7 @@ module.exports = (col1, col2, f, m) => {
     }
 
     let hue0, hue1, sat0, sat1, lbv0, lbv1;
-    if (m.substr(0, 1) === 'h' || m === 'oklch') {
+    if (m.substring(0, 1) === 'h' || m === 'oklch') {
         [hue0, sat0, lbv0] = xyz0;
         [hue1, sat1, lbv1] = xyz1;
     }

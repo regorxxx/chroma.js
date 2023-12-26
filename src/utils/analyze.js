@@ -43,12 +43,12 @@ const limits = (data, mode='equal', num=7) => {
 
     const limits = [];
 
-    if (mode.substr(0,1) === 'c') { // continuous
+    if (mode.substring(0,1) === 'c') { // continuous
         limits.push(min);
         limits.push(max);
     }
 
-    if (mode.substr(0,1) === 'e') { // equal interval
+    if (mode.substring(0,1) === 'e') { // equal interval
         limits.push(min);
         for (let i=1; i<num; i++) {
             limits.push(min+((i/num)*(max-min)));
@@ -56,7 +56,7 @@ const limits = (data, mode='equal', num=7) => {
         limits.push(max);
     }
 
-    else if (mode.substr(0,1) === 'l') { // log scale
+    else if (mode.substring(0,1) === 'l') { // log scale
         if (min <= 0) {
             throw new Error('Logarithmic scales are only possible for values > 0');
         }
@@ -69,7 +69,7 @@ const limits = (data, mode='equal', num=7) => {
         limits.push(max);
     }
 
-    else if (mode.substr(0,1) === 'q') { // quantile scale
+    else if (mode.substring(0,1) === 'q') { // quantile scale
         limits.push(min);
         for (let i=1; i<num; i++) {
             const p = ((values.length-1) * i)/num;
@@ -85,7 +85,7 @@ const limits = (data, mode='equal', num=7) => {
 
     }
 
-    else if (mode.substr(0,1) === 'k') { // k-means clustering
+    else if (mode.substring(0,1) === 'k') { // k-means clustering
         /*
         implementation based on
         http://code.google.com/p/figue/source/browse/trunk/figue.js#336

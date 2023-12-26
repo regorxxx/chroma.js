@@ -5,7 +5,7 @@ const hex2rgb = (hex) => {
     if (hex.match(RE_HEX)) {
         // remove optional leading #
         if (hex.length === 4 || hex.length === 7) {
-            hex = hex.substr(1);
+            hex = hex.substring(1);
         }
         // expand short-notation to full six-digit
         if (hex.length === 3) {
@@ -23,7 +23,7 @@ const hex2rgb = (hex) => {
     if (hex.match(RE_HEXA)) {
         if (hex.length === 5 || hex.length === 9) {
             // remove optional leading #
-            hex = hex.substr(1);
+            hex = hex.substring(1);
         }
         // expand short-notation to full eight-digit
         if (hex.length === 4) {

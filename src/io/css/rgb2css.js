@@ -14,7 +14,7 @@ const {round} = Math;
 const rgb2css = (...args) => {
     const rgba = unpack(args, 'rgba');
     let mode = last(args) || 'rgb';
-    if (mode.substr(0,3) == 'hsl') {
+    if (mode.substring(0,3) == 'hsl') {
         return hsl2css(rgb2hsl(rgba), mode);
     }
     rgba[0] = round(rgba[0]);

@@ -13,9 +13,9 @@ const rgb2hex = (...args) => {
     b = round(b);
     const u = r << 16 | g << 8 | b;
     let str = "000000" + u.toString(16); //#.toUpperCase();
-    str = str.substr(str.length - 6);
+    str = str.substring(str.length - 6);
     let hxa = '0' + round(a * 255).toString(16);
-    hxa = hxa.substr(hxa.length - 2);
+    hxa = hxa.substring(hxa.length - 2);
     switch (mode.toLowerCase()) {
         case 'rgba': return `#${str}${hxa}`;
         case 'argb': return `#${hxa}${str}`;
