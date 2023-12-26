@@ -1,6 +1,34 @@
 /**
  * chroma.js - JavaScript library for color conversions
  * 
+ * Copyright (c) 2023, Regorxxx
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ * 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * 
+ * 3. The name Regorxxx may not be used to endorse or promote products
+ * derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL GREGOR AISCH OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * -------------------------------------------------------
  * Copyright (c) 2011-2019, Gregor Aisch
  * All rights reserved.
  * 
@@ -205,7 +233,7 @@
     };
 
     chroma$5.Color = Color_1;
-    chroma$5.version = '2.6.2';
+    chroma$5.version = '2.7.0';
 
     var chroma_1 = chroma$5;
 
@@ -309,7 +337,7 @@
 
         var rgba = unpack$4(args, 'rgba');
         var mode = last$2(args) || 'rgb';
-        if (mode.substr(0,3) == 'hsl') {
+        if (mode.substring(0,3) == 'hsl') {
             return hsl2css(rgb2hsl(rgba), mode);
         }
         rgba[0] = round$5(rgba[0]);
@@ -522,9 +550,9 @@
         b = round$2(b);
         var u = r << 16 | g << 8 | b;
         var str = "000000" + u.toString(16); //#.toUpperCase();
-        str = str.substr(str.length - 6);
+        str = str.substring(str.length - 6);
         var hxa = '0' + round$2(a * 255).toString(16);
-        hxa = hxa.substr(hxa.length - 2);
+        hxa = hxa.substring(hxa.length - 2);
         switch (mode.toLowerCase()) {
             case 'rgba': return ("#" + str + hxa);
             case 'argb': return ("#" + hxa + str);
@@ -541,7 +569,7 @@
         if (hex.match(RE_HEX)) {
             // remove optional leading #
             if (hex.length === 4 || hex.length === 7) {
-                hex = hex.substr(1);
+                hex = hex.substring(1);
             }
             // expand short-notation to full six-digit
             if (hex.length === 3) {
@@ -559,7 +587,7 @@
         if (hex.match(RE_HEXA)) {
             if (hex.length === 5 || hex.length === 9) {
                 // remove optional leading #
-                hex = hex.substr(1);
+                hex = hex.substring(1);
             }
             // expand short-notation to full eight-digit
             if (hex.length === 4) {
@@ -757,7 +785,7 @@
         var channel = ref[1];
         var src = this[mode]();
         if (channel) {
-            var i = mode.indexOf(channel) - (mode.substr(0, 2) === 'ok' ? 2 : 0);
+            var i = mode.indexOf(channel) - (mode.substring(0, 2) === 'ok' ? 2 : 0);
             if (i > -1) { return src[i]; }
             throw new Error(("unknown channel " + channel + " in mode " + mode));
         } else {
