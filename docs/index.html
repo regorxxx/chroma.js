@@ -209,8 +209,14 @@ chroma.deltaE(&#39;#e0e0ee&#39;, &#39;#e0eee0&#39;);
 chroma.deltaE(&#39;#000000&#39;, &#39;#ffffff&#39;);
 </code></pre>
 <h3 id="chromabrewer">chroma.brewer</h3>
-<p>chroma.brewer is an map of <a href="http://colorbrewer2.org/">ColorBrewer scales</a> that are included in chroma.js for convenience. chroma.scale uses the colors to construct.</p>
+<p>chroma.brewer is a map of <a href="http://colorbrewer2.org/">ColorBrewer scales</a> that are included in chroma.js for convenience. chroma.scale uses the colors to construct. These properties are read-only.</p>
 <pre><code class="language-js">chroma.brewer.OrRd
+</code></pre>
+<p>Scales are grouped within palettes, which can be found with:</p>
+<pre><code class="language-js">chroma.brewer.palettes
+</code></pre>
+<p>And the available scales within a palette:</p>
+<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2)
 </code></pre>
 <h3 id="chromalimits">chroma.limits</h3>
 <h4 id="data-mode-n">(data, mode, n)</h4>
@@ -614,17 +620,20 @@ chroma.cubehelix().lightness([0.3,0.7]);
 </code></pre>
 <h2 id="changelog">Changelog</h2>
 <h3 id="unreleased">unreleased</h3>
+<h3 id="270">2.7.0</h3>
 <ul>
-<li>added chroma.brewer.getPalettes() to retrieve all available palettes (keys). <a href="http://colorbrewer2.org/">ColorBrewer</a> schemes (scales) are divided into palettes according to their type. </li>
-<li>added chroma.brewer.getPalette(/* palette */) to retrieve all schemes from an specific palette (for ex. &#39;Qualitative&#39;).</li>
-<li>added &#39;Diverging&#39;,&#39;Qualitative&#39;, and &#39;Sequential&#39; scales to chroma.brewer and chroma.scale(/* colors */);, which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale(&#39;Sequential&#39;) -&gt; chroma.scale(&#39;OrRd&#39;) </li>
+<li>added chroma.brewer.getPalettes() to retrieve all available palettes (keys). <a href="http://colorbrewer2.org/">ColorBrewer</a> schemes (scales) are divided into palettes according to their type.</li>
+<li>added chroma.brewer.getPalette(palette) to retrieve all schemes from an specific palette (for ex. &#39;Qualitative&#39;)</li>
+<li>added &#39;Diverging&#39;,&#39;Qualitative&#39;, and &#39;Sequential&#39; scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale(&#39;Sequential&#39;) -&gt; chroma.scale(&#39;OrRd&#39;) </li>
+<li>chroma.brewer object can no longer be modified in any way (or its scales). Make a copy of it if required</li>
+<li>replace deprecated .substr usage.</li>
 <li>minor improvements to documentation</li>
 </ul>
 <h3 id="262">2.6.2</h3>
 <ul>
 <li>added Android colors support to &#39;light&#39; build version, missing by error at <a href="#250">2.5.0</a></li>
 <li>added &#39;ultra-light&#39; build version, to be used only for color conversion (no other features included)</li>
-<li>updated documentation with sticky index to left, independtly scrollable</li>
+<li>updated documentation with sticky index to left, independently scrollable</li>
 <li>updated documentation with &#39;Flavours&#39; section</li>
 <li>general cleanup and styling of documentation</li>
 </ul>

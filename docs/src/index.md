@@ -326,10 +326,22 @@ chroma.deltaE('#000000', '#ffffff');
 
 ### chroma.brewer
 
-chroma.brewer is an map of [ColorBrewer scales](http://colorbrewer2.org/) that are included in chroma.js for convenience. chroma.scale uses the colors to construct.
+chroma.brewer is a map of [ColorBrewer scales](http://colorbrewer2.org/) that are included in chroma.js for convenience. chroma.scale uses the colors to construct. These properties are read-only.
 
 ```js
 chroma.brewer.OrRd
+```
+
+Scales are grouped within palettes, which can be found with:
+
+```js
+chroma.brewer.palettes
+```
+
+And the available scales within a palette:
+
+```js
+chroma.brewer.getPalette('Qualitative').slice(0, 2)
 ```
 
 ### chroma.limits
