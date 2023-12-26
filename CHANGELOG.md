@@ -8,7 +8,9 @@
 * added 'Diverging','Qualitative', and 'Sequential' scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale('Sequential') -> chroma.scale('OrRd') 
 * chroma.brewer object can no longer be modified in any way (or its scales). Make a copy of it if required
 * replace deprecated .substr usage.
+* fixed 'npm run docs-preview' CMD command
 * minor improvements to documentation
+* added favicons to documentation
 
 ### 2.6.2
 * added Android colors support to 'light' build version, missing by error at [2.5.0](#250)
