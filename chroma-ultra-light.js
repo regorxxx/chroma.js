@@ -309,7 +309,7 @@
 
         var rgba = unpack$4(args, 'rgba');
         var mode = last$2(args) || 'rgb';
-        if (mode.substr(0,3) == 'hsl') {
+        if (mode.substring(0,3) == 'hsl') {
             return hsl2css(rgb2hsl(rgba), mode);
         }
         rgba[0] = round$5(rgba[0]);
@@ -522,9 +522,9 @@
         b = round$2(b);
         var u = r << 16 | g << 8 | b;
         var str = "000000" + u.toString(16); //#.toUpperCase();
-        str = str.substr(str.length - 6);
+        str = str.substring(str.length - 6);
         var hxa = '0' + round$2(a * 255).toString(16);
-        hxa = hxa.substr(hxa.length - 2);
+        hxa = hxa.substring(hxa.length - 2);
         switch (mode.toLowerCase()) {
             case 'rgba': return ("#" + str + hxa);
             case 'argb': return ("#" + hxa + str);
@@ -541,7 +541,7 @@
         if (hex.match(RE_HEX)) {
             // remove optional leading #
             if (hex.length === 4 || hex.length === 7) {
-                hex = hex.substr(1);
+                hex = hex.substring(1);
             }
             // expand short-notation to full six-digit
             if (hex.length === 3) {
@@ -559,7 +559,7 @@
         if (hex.match(RE_HEXA)) {
             if (hex.length === 5 || hex.length === 9) {
                 // remove optional leading #
-                hex = hex.substr(1);
+                hex = hex.substring(1);
             }
             // expand short-notation to full eight-digit
             if (hex.length === 4) {
@@ -757,7 +757,7 @@
         var channel = ref[1];
         var src = this[mode]();
         if (channel) {
-            var i = mode.indexOf(channel) - (mode.substr(0, 2) === 'ok' ? 2 : 0);
+            var i = mode.indexOf(channel) - (mode.substring(0, 2) === 'ok' ? 2 : 0);
             if (i > -1) { return src[i]; }
             throw new Error(("unknown channel " + channel + " in mode " + mode));
         } else {
