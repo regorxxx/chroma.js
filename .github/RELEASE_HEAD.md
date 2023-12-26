@@ -1,0 +1,1 @@
+See full [changelog here](https://github.com/regorxxx/chroma.js/blob/main/CHANGELOG.md).
