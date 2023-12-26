@@ -1,4 +1,4 @@
-# Chroma.js
+# ![chromaicon](docs/assets/favicon/web-icon.png) Chroma.js
 
 [Chroma.js](https://regorxxx.github.io/chroma.js/) is a ~~tiny~~ [small-ish](https://bundlephobia.com/result?p=chroma-js) zero-dependency JavaScript library ([13.5kB](https://bundlephobia.com/result?p=chroma-js)) for all kinds of color conversions and color scales. **Revived with new features and maintained.**
 
