@@ -10,7 +10,7 @@
 * replace deprecated .substr usage.
 * fixed 'npm run docs-preview' CMD command
 * minor improvements to documentation
-* added favicons to documentation
+* added favicons to documentation ![chromaicon](assets/favicon/favicon-16x16.png)
 
 ### 2.6.2
 * added Android colors support to 'light' build version, missing by error at [2.5.0](#250)
