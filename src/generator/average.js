@@ -22,7 +22,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
     for (let i=0; i<xyz.length; i++) {
         xyz[i] = (xyz[i] || 0) * weights[0];
         cnt.push(isNaN(xyz[i]) ? 0 : weights[0]);
-        if (mode.charAt(i) === 'h' && !isNaN(xyz[i])) {
+        if (mode.replace('ok', '').charAt(i) === 'h' && !isNaN(xyz[i])) {
             const A = xyz[i] / 180 * PI;
             dx += cos(A) * weights[0];
             dy += sin(A) * weights[0];
@@ -36,7 +36,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
         for (let i=0; i<xyz.length; i++) {
             if (!isNaN(xyz2[i])) {
                 cnt[i] += weights[ci+1];
-                if (mode.charAt(i) === 'h') {
+                if (mode.replace('ok', '').charAt(i) === 'h') {
                     const A = xyz2[i] / 180 * PI;
                     dx += cos(A) * weights[ci+1];
                     dy += sin(A) * weights[ci+1];
@@ -48,7 +48,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
     });
 
     for (let i=0; i<xyz.length; i++) {
-        if (mode.charAt(i) === 'h') {
+        if (mode.replace('ok', '').charAt(i) === 'h') {
             let A = atan2(dy / cnt[i], dx / cnt[i]) / PI * 180;
             while (A < 0) A += 360;
             while (A >= 360) A -= 360;
