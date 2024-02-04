@@ -4,7 +4,7 @@ const {pow, sqrt, PI, cos, sin, atan2} = Math;
 
 module.exports = (colors, mode='lrgb', weights=null) => {
     const l = colors.length;
-    if (!weights) weights = Array.from(new Array(l)).map(() => 1);
+    if (!weights) weights = new Array(l).fill(1);
     // normalize weights
     const k = l / weights.reduce(function(a, b) { return a + b; });
     weights.forEach((w,i) => { weights[i] *= k })
@@ -13,6 +13,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
     if (mode === 'lrgb') {
         return _average_lrgb(colors, weights)
     }
+    const intMode = mode.replace(/(^ok)/gi, ''); // OKLCH behaves like LCH
     const first = colors.shift();
     const xyz = first.get(mode);
     const cnt = [];
@@ -22,7 +23,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
     for (let i=0; i<xyz.length; i++) {
         xyz[i] = (xyz[i] || 0) * weights[0];
         cnt.push(isNaN(xyz[i]) ? 0 : weights[0]);
-        if (mode.replace('ok', '').charAt(i) === 'h' && !isNaN(xyz[i])) {
+        if (intMode.charAt(i) === 'h' && !isNaN(xyz[i])) {
             const A = xyz[i] / 180 * PI;
             dx += cos(A) * weights[0];
             dy += sin(A) * weights[0];
@@ -36,7 +37,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
         for (let i=0; i<xyz.length; i++) {
             if (!isNaN(xyz2[i])) {
                 cnt[i] += weights[ci+1];
-                if (mode.replace('ok', '').charAt(i) === 'h') {
+                if (intMode.charAt(i) === 'h') {
                     const A = xyz2[i] / 180 * PI;
                     dx += cos(A) * weights[ci+1];
                     dy += sin(A) * weights[ci+1];
@@ -48,7 +49,7 @@ module.exports = (colors, mode='lrgb', weights=null) => {
     });
 
     for (let i=0; i<xyz.length; i++) {
-        if (mode.replace('ok', '').charAt(i) === 'h') {
+        if (intMode.charAt(i) === 'h') {
             let A = atan2(dy / cnt[i], dx / cnt[i]) / PI * 180;
             while (A < 0) A += 360;
             while (A >= 360) A -= 360;
