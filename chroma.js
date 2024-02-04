@@ -225,17 +225,18 @@
 
     var Color_1 = Color$E;
 
-    var chroma$l = function () {
+    var chroma$r = function () {
     	var args = [], len = arguments.length;
     	while ( len-- ) args[ len ] = arguments[ len ];
 
-    	return new (Function.prototype.bind.apply( chroma$l.Color, [ null ].concat( args) ));
+    	return new (Function.prototype.bind.apply( chroma$r.Color, [ null ].concat( args) ));
     };
 
-    chroma$l.Color = Color_1;
-    chroma$l.version = '2.7.0';
+    chroma$r.Color = Color_1;
+    chroma$r.version = '2.7.0';
+    chroma$r.hueNaN = true; // Whether treat black/white as having NaN hue or zero on specific color spaces (LCH, ...)
 
-    var chroma_1 = chroma$l;
+    var chroma_1 = chroma$r;
 
     var unpack$B = utils.unpack;
     var max$2 = Math.max;
@@ -284,7 +285,7 @@
 
     var cmyk2rgb_1 = cmyk2rgb;
 
-    var chroma$k = chroma_1;
+    var chroma$q = chroma_1;
     var Color$D = Color_1;
     var input$h = input$i;
     var unpack$z = utils.unpack;
@@ -296,7 +297,7 @@
         return rgb2cmyk(this._rgb);
     };
 
-    chroma$k.cmyk = function () {
+    chroma$q.cmyk = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -351,6 +352,7 @@
     var hsl2css_1 = hsl2css$1;
 
     var unpack$x = utils.unpack;
+    var chroma$p = chroma_1;
 
     /*
      * supported arguments:
@@ -381,7 +383,7 @@
 
         if (max === min){
             s = 0;
-            h = Number.NaN;
+            h = chroma$p.hueNaN ? Number.NaN : 0;
         } else {
             s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
         }
@@ -392,6 +394,7 @@
 
         h *= 60;
         if (h < 0) { h += 360; }
+        else if (!chroma$p.hueNaN && isNaN(h)) {h = 0;}
         if (args.length>3 && args[3]!==undefined) { return [h,s,l,args[3]]; }
         return [h,s,l];
     };
@@ -575,7 +578,7 @@
 
     var css2rgb_1 = css2rgb$1;
 
-    var chroma$j = chroma_1;
+    var chroma$o = chroma_1;
     var Color$C = Color_1;
     var input$f = input$i;
     var type$m = utils.type;
@@ -587,7 +590,7 @@
         return rgb2css(this._rgb, mode);
     };
 
-    chroma$j.css = function () {
+    chroma$o.css = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -609,7 +612,7 @@
     });
 
     var Color$B = Color_1;
-    var chroma$i = chroma_1;
+    var chroma$n = chroma_1;
     var input$e = input$i;
     var unpack$u = utils.unpack;
 
@@ -624,7 +627,7 @@
         return rgb;
     };
 
-    chroma$i.gl = function () {
+    chroma$n.gl = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -637,6 +640,7 @@
     };
 
     var unpack$t = utils.unpack;
+    var chroma$m = chroma_1;
 
     var rgb2hcg$1 = function () {
         var args = [], len = arguments.length;
@@ -653,13 +657,14 @@
         var _g = min / (255 - delta) * 100;
         var h;
         if (delta === 0) {
-            h = Number.NaN;
+            h = chroma$m.hueNaN ? Number.NaN : 0;
         } else {
             if (r === max) { h = (g - b) / delta; }
             if (g === max) { h = 2+(b - r) / delta; }
             if (b === max) { h = 4+(r - g) / delta; }
             h *= 60;
             if (h < 0) { h += 360; }
+            else if (!chroma$m.hueNaN && isNaN(h)) {h = 0;}
         }
         return [h, c, _g];
     };
@@ -718,7 +723,7 @@
 
     var unpack$r = utils.unpack;
     var type$l = utils.type;
-    var chroma$h = chroma_1;
+    var chroma$l = chroma_1;
     var Color$A = Color_1;
     var input$d = input$i;
 
@@ -728,7 +733,7 @@
         return rgb2hcg(this._rgb);
     };
 
-    chroma$h.hcg = function () {
+    chroma$l.hcg = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -834,7 +839,7 @@
 
     var hex2rgb_1 = hex2rgb$1;
 
-    var chroma$g = chroma_1;
+    var chroma$k = chroma_1;
     var Color$z = Color_1;
     var type$k = utils.type;
     var input$c = input$i;
@@ -845,7 +850,7 @@
         return rgb2hex$1(this._rgb, mode);
     };
 
-    chroma$g.hex = function () {
+    chroma$k.hex = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -870,6 +875,7 @@
     var min$2 = Math.min;
     var sqrt$4 = Math.sqrt;
     var acos = Math.acos;
+    var chroma$j = chroma_1;
 
     var rgb2hsi$1 = function () {
         var args = [], len = arguments.length;
@@ -891,7 +897,7 @@
         var i = (r+g+b) / 3;
         var s = i > 0 ? 1 - min_/i : 0;
         if (s === 0) {
-            h = NaN;
+            h = chroma$j.hueNaN ? Number.NaN : 0;
         } else {
             h = ((r-g)+(r-b)) / 2;
             h /= sqrt$4((r-g)*(r-g) + (r-b)*(g-b));
@@ -900,6 +906,7 @@
                 h = TWOPI$2 - h;
             }
             h /= TWOPI$2;
+            if (!chroma$j.hueNaN && isNaN(h)) {h = 0;}
         }
         return [h*360,s,i];
     };
@@ -962,7 +969,7 @@
 
     var unpack$n = utils.unpack;
     var type$j = utils.type;
-    var chroma$f = chroma_1;
+    var chroma$i = chroma_1;
     var Color$y = Color_1;
     var input$b = input$i;
 
@@ -972,7 +979,7 @@
         return rgb2hsi(this._rgb);
     };
 
-    chroma$f.hsi = function () {
+    chroma$i.hsi = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -996,7 +1003,7 @@
 
     var unpack$m = utils.unpack;
     var type$i = utils.type;
-    var chroma$e = chroma_1;
+    var chroma$h = chroma_1;
     var Color$x = Color_1;
     var input$a = input$i;
 
@@ -1006,7 +1013,7 @@
         return rgb2hsl$1(this._rgb);
     };
 
-    chroma$e.hsl = function () {
+    chroma$h.hsl = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1031,6 +1038,7 @@
     var unpack$l = utils.unpack;
     var min$1 = Math.min;
     var max$1 = Math.max;
+    var chroma$g = chroma_1;
 
     /*
      * supported arguments:
@@ -1052,7 +1060,7 @@
         var h,s,v;
         v = max_ / 255.0;
         if (max_ === 0) {
-            h = Number.NaN;
+            h = chroma$g.hueNaN ? Number.NaN : 0;
             s = 0;
         } else {
             s = delta / max_;
@@ -1061,6 +1069,7 @@
             if (b === max_) { h = 4+(r - g) / delta; }
             h *= 60;
             if (h < 0) { h += 360; }
+            else if (!chroma$g.hueNaN && isNaN(h)) {h = 0;}
         }
         return [h, s, v]
     };
@@ -1111,7 +1120,7 @@
 
     var unpack$j = utils.unpack;
     var type$h = utils.type;
-    var chroma$d = chroma_1;
+    var chroma$f = chroma_1;
     var Color$w = Color_1;
     var input$9 = input$i;
 
@@ -1121,7 +1130,7 @@
         return rgb2hsv(this._rgb);
     };
 
-    chroma$d.hsv = function () {
+    chroma$f.hsv = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1246,7 +1255,7 @@
 
     var unpack$g = utils.unpack;
     var type$g = utils.type;
-    var chroma$c = chroma_1;
+    var chroma$e = chroma_1;
     var Color$v = Color_1;
     var input$8 = input$i;
 
@@ -1256,7 +1265,7 @@
         return rgb2lab$1(this._rgb);
     };
 
-    chroma$c.lab = function () {
+    chroma$e.lab = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1283,6 +1292,7 @@
     var sqrt$3 = Math.sqrt;
     var atan2$2 = Math.atan2;
     var round$3 = Math.round;
+    var chroma$d = chroma_1;
 
     var lab2lch$2 = function () {
         var args = [], len = arguments.length;
@@ -1294,7 +1304,7 @@
         var b = ref[2];
         var c = sqrt$3(a * a + b * b);
         var h = (atan2$2(b, a) * RAD2DEG + 360) % 360;
-        if (round$3(c*10000) === 0) { h = Number.NaN; }
+        if (round$3(c*10000) === 0) {h = chroma$d.hueNaN ? Number.NaN : 0;}
         return [l, c, h];
     };
 
@@ -1388,7 +1398,7 @@
 
     var unpack$a = utils.unpack;
     var type$f = utils.type;
-    var chroma$b = chroma_1;
+    var chroma$c = chroma_1;
     var Color$u = Color_1;
     var input$7 = input$i;
 
@@ -1397,13 +1407,13 @@
     Color$u.prototype.lch = function() { return rgb2lch(this._rgb); };
     Color$u.prototype.hcl = function() { return rgb2lch(this._rgb).reverse(); };
 
-    chroma$b.lch = function () {
+    chroma$c.lch = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
         return new (Function.prototype.bind.apply( Color$u, [ null ].concat( args, ['lch']) ));
     };
-    chroma$b.hcl = function () {
+    chroma$c.hcl = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1657,7 +1667,7 @@
 
     var num2rgb_1 = num2rgb;
 
-    var chroma$a = chroma_1;
+    var chroma$b = chroma_1;
     var Color$s = Color_1;
     var input$5 = input$i;
     var type$c = utils.type;
@@ -1668,7 +1678,7 @@
         return rgb2num(this._rgb);
     };
 
-    chroma$a.num = function () {
+    chroma$b.num = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1689,7 +1699,7 @@
         }
     });
 
-    var chroma$9 = chroma_1;
+    var chroma$a = chroma_1;
     var Color$r = Color_1;
     var input$4 = input$i;
     var unpack$8 = utils.unpack;
@@ -1711,7 +1721,7 @@
         });
     };
 
-    chroma$9.rgb = function () {
+    chroma$a.rgb = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1798,7 +1808,7 @@
 
     var rgb2temperature_1 = rgb2temperature$1;
 
-    var chroma$8 = chroma_1;
+    var chroma$9 = chroma_1;
     var Color$q = Color_1;
     var input$3 = input$i;
 
@@ -1810,9 +1820,9 @@
         return rgb2temperature(this._rgb);
     };
 
-    chroma$8.temp =
-    chroma$8.kelvin =
-    chroma$8.temperature = function () {
+    chroma$9.temp =
+    chroma$9.kelvin =
+    chroma$9.temperature = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1905,7 +1915,7 @@
 
     var unpack$4 = utils.unpack;
     var type$a = utils.type;
-    var chroma$7 = chroma_1;
+    var chroma$8 = chroma_1;
     var Color$p = Color_1;
     var input$2 = input$i;
 
@@ -1915,7 +1925,7 @@
         return rgb2oklab$1(this._rgb);
     };
 
-    chroma$7.oklab = function () {
+    chroma$8.oklab = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1985,7 +1995,7 @@
 
     var unpack$1 = utils.unpack;
     var type$9 = utils.type;
-    var chroma$6 = chroma_1;
+    var chroma$7 = chroma_1;
     var Color$o = Color_1;
     var input$1 = input$i;
 
@@ -1995,7 +2005,7 @@
         return rgb2oklch(this._rgb);
     };
 
-    chroma$6.oklch = function () {
+    chroma$7.oklch = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -2059,7 +2069,7 @@
 
     var and2rgb_1 = and2rgb;
 
-    var chroma$5 = chroma_1;
+    var chroma$6 = chroma_1;
     var Color$n = Color_1;
     var input = input$i;
     var type$7 = utils.type;
@@ -2070,7 +2080,7 @@
         return rgb2and(this._rgb, mode);
     };
 
-    chroma$5.android = function () {
+    chroma$6.android = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -2625,7 +2635,7 @@
 
     // @requires utils color analyze
 
-    var chroma$4 = chroma_1;
+    var chroma$5 = chroma_1;
     var type$2 = utils.type;
 
     var pow$3 = Math.pow;
@@ -2634,7 +2644,7 @@
 
         // constructor
         var _mode = 'rgb';
-        var _nacol = chroma$4('#ccc');
+        var _nacol = chroma$5('#ccc');
         var _spread = 0;
         // const _fixed = false;
         var _domain = [0, 1];
@@ -2654,9 +2664,9 @@
 
         var setColors = function(colors) {
             colors = colors || ['#fff', '#000'];
-            if (colors && type$2(colors) === 'string' && chroma$4.brewer &&
-                chroma$4.brewer.hasOwnProperty(colors.toLowerCase()) && colors !== 'palettes') {
-                colors = chroma$4.brewer[colors.toLowerCase()];
+            if (colors && type$2(colors) === 'string' && chroma$5.brewer &&
+                chroma$5.brewer.hasOwnProperty(colors.toLowerCase()) && colors !== 'palettes') {
+                colors = chroma$5.brewer[colors.toLowerCase()];
             }
             if (type$2(colors) === 'array') {
                 // handle single color
@@ -2667,7 +2677,7 @@
                 colors = colors.slice(0);
                 // convert to chroma classes
                 for (var c=0; c<colors.length; c++) {
-                    colors[c] = chroma$4(colors[c]);
+                    colors[c] = chroma$5(colors[c]);
                 }
                 // auto-fill color position
                 _pos.length = 0;
@@ -2757,7 +2767,7 @@
                         }
                         if (t > p && t < _pos[i+1]) {
                             t = (t-p)/(_pos[i+1]-p);
-                            col = chroma$4.interpolate(_colors[i], _colors[i+1], t, _mode);
+                            col = chroma$5.interpolate(_colors[i], _colors[i+1], t, _mode);
                             break;
                         }
                     }
@@ -2776,7 +2786,7 @@
         // public interface
 
         var f = function(v) {
-            var c = chroma$4(getColor(v));
+            var c = chroma$5(getColor(v));
             if (_out && c[_out]) { return c[_out](); } else { return c; }
         };
 
@@ -2786,11 +2796,11 @@
                     _classes = classes;
                     _domain = [classes[0], classes[classes.length-1]];
                 } else {
-                    var d = chroma$4.analyze(_domain);
+                    var d = chroma$5.analyze(_domain);
                     if (classes === 0) {
                         _classes = [d.min, d.max];
                     } else {
-                        _classes = chroma$4.limits(d, 'e', classes);
+                        _classes = chroma$5.limits(d, 'e', classes);
                     }
                 }
                 return f;
@@ -2944,7 +2954,7 @@
                 result = samples.map(function (v) { return f(v); });
             }
 
-            if (chroma$4[out]) {
+            if (chroma$5[out]) {
                 result = result.map(function (c) { return c[out](); });
             }
             return result;
@@ -2970,7 +2980,7 @@
 
         f.nodata = function(d) {
             if (d != null) {
-                _nacol = chroma$4(d);
+                _nacol = chroma$5(d);
                 return f;
             } else {
                 return _nacol;
@@ -3076,7 +3086,7 @@
      * https://web.archive.org/web/20180110014946/http://www.venture-ware.com/kevin/coding/lets-learn-math-photoshop-blend-modes/
      */
 
-    var chroma$3 = chroma_1;
+    var chroma$4 = chroma_1;
 
     var blend = function (bottom, top, mode) {
         if (!blend[mode]) {
@@ -3086,9 +3096,9 @@
     };
 
     var blend_f = function (f) { return function (bottom,top) {
-            var c0 = chroma$3(top).rgb();
-            var c1 = chroma$3(bottom).rgb();
-            return chroma$3.rgb(f(c0, c1));
+            var c0 = chroma$4(top).rgb();
+            var c1 = chroma$4(bottom).rgb();
+            return chroma$4.rgb(f(c0, c1));
         }; };
 
     var each = function (f) { return function (c0, c1) {
@@ -3137,7 +3147,7 @@
     var pow$2 = Math.pow;
     var sin$1 = Math.sin;
     var cos$1 = Math.cos;
-    var chroma$2 = chroma_1;
+    var chroma$3 = chroma_1;
 
     var cubehelix = function(start, rotations, hue, gamma, lightness) {
         if ( start === void 0 ) start=300;
@@ -3164,7 +3174,7 @@
             var r = l + (amp * ((-0.14861 * cos_a) + (1.78277* sin_a)));
             var g = l + (amp * ((-0.29227 * cos_a) - (0.90649* sin_a)));
             var b = l + (amp * (+1.97294 * cos_a));
-            return chroma$2(clip_rgb([r*255,g*255,b*255,1]));
+            return chroma$3(clip_rgb([r*255,g*255,b*255,1]));
         };
 
         f.start = function(s) {
@@ -3209,7 +3219,7 @@
             return f;
         };
 
-        f.scale = function () { return chroma$2.scale(f); };
+        f.scale = function () { return chroma$3.scale(f); };
 
         f.hue(hue);
 
@@ -3560,6 +3570,15 @@
         }
     };
 
+    var chroma$2 = chroma_1;
+
+    var nohueaszero = function (bNoHueAsZero) {
+        if ( bNoHueAsZero === void 0 ) bNoHueAsZero=false;
+
+        chroma$2.hueNaN = !bNoHueAsZero; // Whether treat black/white/gray as having NaN hue or Zero on specific color spaces (LCH, ...)
+        return !chroma$2.hueNaN;
+    };
+
     // some pre-defined color scales:
     var chroma$1 = chroma_1;
 
@@ -3748,6 +3767,7 @@
     chroma.distance = distance;
     chroma.limits = analyze_1.limits;
     chroma.valid = valid;
+    chroma.noHueAsZero = nohueaszero;
 
     // scale
     chroma.scales = scales;

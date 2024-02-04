@@ -60,9 +60,15 @@ vows
             }
         },
         'three colors, weighted hsl average': {
-            topic: chroma.average(['blue', 'red', 'white'], 'hsl', [0.25,1,0.5]),
+            topic: !chroma.noHueAsZero(false) && chroma.average(['blue', 'red', 'white'], 'hsl', [0.25,1,0.5]),
             'is #e58263'(topic) {
                 assert.equal(topic.hex(), '#e58263')
+            }
+        },
+        'three colors, weighted hsl zero hue average': {
+            topic: chroma.noHueAsZero(true) && chroma.average(['blue', 'red', 'white'], 'hsl', [0.25,1,0.5]),
+            'is #e57863'(topic) {
+                assert.equal(topic.hex(), '#e57863')
             }
         },
     })

@@ -15,9 +15,18 @@ const round = function(digits) {
 
 vows.describe('Some tests for chroma.color()').addBatch({
     'hsv black': {
-        topic: chroma('black').hsv(),
+        topic: !chroma.noHueAsZero(false) && chroma('black').hsv(),
         'hue is NaN': function(topic) {
             return assert(isNaN(topic[0]));
+        },
+        'but hue is defined': function(topic) {
+            return assert(topic[0] != null);
+        }
+    },
+    'hsv black zero hue': {
+        topic: chroma.noHueAsZero(true) && chroma('black').hsv(),
+        'hue is 0': function(topic) {
+            return assert.equal(topic[0], 0);
         },
         'but hue is defined': function(topic) {
             return assert(topic[0] != null);
@@ -98,13 +107,31 @@ vows.describe('Some tests for chroma.color()').addBatch({
     'hcl.h is NaN for hue-less colors': {
         topic: [chroma('black'), chroma('gray'), chroma('white')],
         'black': function(topic) {
+            chroma.noHueAsZero(false);
             return assert.isNaN(topic[0].hcl()[0]);
         },
         'gray': function(topic) {
+            chroma.noHueAsZero(false);
             return assert.isNaN(topic[1].hcl()[0]);
         },
         'white': function(topic) {
+            chroma.noHueAsZero(false);
             return assert.isNaN(topic[2].hcl()[0]);
+        }
+    },
+    'hcl.h is 0 for hue-less colors': {
+        topic: [chroma('black'), chroma('gray'), chroma('white')],
+        'black': function(topic) {
+            chroma.noHueAsZero(true);
+            return assert.equal(topic[0].hcl()[0], 0);
+        },
+        'gray': function(topic) {
+            chroma.noHueAsZero(true);
+            return assert.equal(topic[1].hcl()[0], 0);
+        },
+        'white': function(topic) {
+            chroma.noHueAsZero(true);
+            return assert.equal(topic[2].hcl()[0], 0);
         }
     },
     'lab-rgb precision': {

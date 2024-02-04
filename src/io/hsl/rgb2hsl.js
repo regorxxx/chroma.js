@@ -1,4 +1,5 @@
 const {unpack} = require('../../utils');
+const chroma = require('../../chroma');
 
 /*
  * supported arguments:
@@ -24,7 +25,7 @@ const rgb2hsl = (...args) => {
 
     if (max === min){
         s = 0;
-        h = Number.NaN;
+        h = chroma.hueNaN ? Number.NaN : 0;
     } else {
         s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
     }
@@ -35,6 +36,7 @@ const rgb2hsl = (...args) => {
 
     h *= 60;
     if (h < 0) h += 360;
+    else if (!chroma.hueNaN && isNaN(h)) {h = 0;}
     if (args.length>3 && args[3]!==undefined) return [h,s,l,args[3]];
     return [h,s,l];
 }

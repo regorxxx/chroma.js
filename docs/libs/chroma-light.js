@@ -225,17 +225,18 @@
 
     var Color_1 = Color$g;
 
-    var chroma$8 = function () {
+    var chroma$a = function () {
     	var args = [], len = arguments.length;
     	while ( len-- ) args[ len ] = arguments[ len ];
 
-    	return new (Function.prototype.bind.apply( chroma$8.Color, [ null ].concat( args) ));
+    	return new (Function.prototype.bind.apply( chroma$a.Color, [ null ].concat( args) ));
     };
 
-    chroma$8.Color = Color_1;
-    chroma$8.version = '2.7.0';
+    chroma$a.Color = Color_1;
+    chroma$a.version = '2.7.0';
+    chroma$a.hueNaN = true; // Whether treat black/white as having NaN hue or zero on specific color spaces (LCH, ...)
 
-    var chroma_1 = chroma$8;
+    var chroma_1 = chroma$a;
 
     var unpack$d = utils.unpack;
     var last$3 = utils.last;
@@ -270,6 +271,7 @@
     var hsl2css_1 = hsl2css$1;
 
     var unpack$c = utils.unpack;
+    var chroma$9 = chroma_1;
 
     /*
      * supported arguments:
@@ -300,7 +302,7 @@
 
         if (max === min){
             s = 0;
-            h = Number.NaN;
+            h = chroma$9.hueNaN ? Number.NaN : 0;
         } else {
             s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
         }
@@ -311,6 +313,7 @@
 
         h *= 60;
         if (h < 0) { h += 360; }
+        else if (!chroma$9.hueNaN && isNaN(h)) {h = 0;}
         if (args.length>3 && args[3]!==undefined) { return [h,s,l,args[3]]; }
         return [h,s,l];
     };
@@ -494,7 +497,7 @@
 
     var css2rgb_1 = css2rgb$1;
 
-    var chroma$7 = chroma_1;
+    var chroma$8 = chroma_1;
     var Color$f = Color_1;
     var input$6 = input$8;
     var type$a = utils.type;
@@ -506,7 +509,7 @@
         return rgb2css(this._rgb, mode);
     };
 
-    chroma$7.css = function () {
+    chroma$8.css = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -611,7 +614,7 @@
 
     var hex2rgb_1 = hex2rgb;
 
-    var chroma$6 = chroma_1;
+    var chroma$7 = chroma_1;
     var Color$e = Color_1;
     var type$9 = utils.type;
     var input$5 = input$8;
@@ -622,7 +625,7 @@
         return rgb2hex(this._rgb, mode);
     };
 
-    chroma$6.hex = function () {
+    chroma$7.hex = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -644,7 +647,7 @@
 
     var unpack$8 = utils.unpack;
     var type$8 = utils.type;
-    var chroma$5 = chroma_1;
+    var chroma$6 = chroma_1;
     var Color$d = Color_1;
     var input$4 = input$8;
 
@@ -654,7 +657,7 @@
         return rgb2hsl(this._rgb);
     };
 
-    chroma$5.hsl = function () {
+    chroma$6.hsl = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -779,7 +782,7 @@
 
     var unpack$5 = utils.unpack;
     var type$7 = utils.type;
-    var chroma$4 = chroma_1;
+    var chroma$5 = chroma_1;
     var Color$c = Color_1;
     var input$3 = input$8;
 
@@ -789,7 +792,7 @@
         return rgb2lab(this._rgb);
     };
 
-    chroma$4.lab = function () {
+    chroma$5.lab = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -893,7 +896,7 @@
 
     var unpack$2 = utils.unpack;
     var type$6 = utils.type;
-    var chroma$3 = chroma_1;
+    var chroma$4 = chroma_1;
     var Color$b = Color_1;
     var input$2 = input$8;
 
@@ -903,7 +906,7 @@
         return rgb2oklab(this._rgb);
     };
 
-    chroma$3.oklab = function () {
+    chroma$4.oklab = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -925,7 +928,7 @@
         }
     });
 
-    var chroma$2 = chroma_1;
+    var chroma$3 = chroma_1;
     var Color$a = Color_1;
     var input$1 = input$8;
     var unpack$1 = utils.unpack;
@@ -947,7 +950,7 @@
         });
     };
 
-    chroma$2.rgb = function () {
+    chroma$3.rgb = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1019,7 +1022,7 @@
 
     var and2rgb_1 = and2rgb;
 
-    var chroma$1 = chroma_1;
+    var chroma$2 = chroma_1;
     var Color$9 = Color_1;
     var input = input$8;
     var type$3 = utils.type;
@@ -1030,7 +1033,7 @@
         return rgb2and(this._rgb, mode);
     };
 
-    chroma$1.android = function () {
+    chroma$2.android = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
@@ -1252,6 +1255,15 @@
         }
     };
 
+    var chroma$1 = chroma_1;
+
+    var nohueaszero = function (bNoHueAsZero) {
+        if ( bNoHueAsZero === void 0 ) bNoHueAsZero=false;
+
+        chroma$1.hueNaN = !bNoHueAsZero; // Whether treat black/white/gray as having NaN hue or Zero on specific color spaces (LCH, ...)
+        return !chroma$1.hueNaN;
+    };
+
     var chroma = chroma_1;
 
     // feel free to comment out anything to rollup
@@ -1282,6 +1294,7 @@
 
     // other utility methods
     chroma.valid = valid;
+    chroma.noHueAsZero = nohueaszero;
 
     var indexLight = chroma;
 

@@ -3,17 +3,21 @@ const assert = require('assert');
 require('es6-shim');
 
 const rgb2oklch = require('../src/io/oklch/rgb2oklch');
+const chroma = require('../src/chroma');
 
 const tests = {
-    black: { oklch: [0.0, 0.0, NaN], rgb: [0, 0, 0, 1] },
-    white: { oklch: [1.0, 0.0, NaN], rgb: [255, 255, 255, 1] },
-    gray: { oklch: [0.6, 0.0, NaN], rgb: [128, 128, 128, 1] },
-    red: { oklch: [0.628, 0.258, 29.234], rgb: [255, 0, 0, 1] },
-    yellow: { oklch: [0.968, 0.211, 109.769], rgb: [255, 255, 0, 1] },
-    green: { oklch: [0.52, 0.177, 142.495], rgb: [0, 128, 0, 1] },
-    cyan: { oklch: [0.905, 0.155, 194.769], rgb: [0, 255, 255, 1] },
-    blue: { oklch: [0.452, 0.313, 264.052], rgb: [0, 0, 255, 1] },
-    magenta: { oklch: [0.702, 0.322, 328.363], rgb: [255, 0, 255, 1] }
+    black:        { oklch: [0.0, 0.0, NaN],         rgb: [0, 0, 0, 1] },
+    white:        { oklch: [1.0, 0.0, NaN],         rgb: [255, 255, 255, 1] },
+    gray:         { oklch: [0.6, 0.0, NaN],         rgb: [128, 128, 128, 1] },
+    blackZeroHue: { oklch: [0.0, 0.0, 0.0],         rgb: [0, 0, 0, 1],       noHueAsZero: true },
+    whiteZeroHue: { oklch: [1.0, 0.0, 0.0],         rgb: [255, 255, 255, 1], noHueAsZero: true },
+    grayZeroHue:  { oklch: [0.6, 0.0, 0.0],         rgb: [128, 128, 128, 1], noHueAsZero: true },
+    red:          { oklch: [0.628, 0.258, 29.234],  rgb: [255, 0, 0, 1] },
+    yellow:       { oklch: [0.968, 0.211, 109.769], rgb: [255, 255, 0, 1] },
+    green:        { oklch: [0.52, 0.177, 142.495],  rgb: [0, 128, 0, 1] },
+    cyan:         { oklch: [0.905, 0.155, 194.769], rgb: [0, 255, 255, 1] },
+    blue:         { oklch: [0.452, 0.313, 264.052], rgb: [0, 0, 255, 1] },
+    magenta:      { oklch: [0.702, 0.322, 328.363], rgb: [255, 0, 255, 1] }
 };
 
 const round = digits => {
@@ -31,13 +35,16 @@ Object.keys(tests).forEach(key => {
     batch[`rgb2oklch ${key}`] = {
         topic: tests[key],
         array(topic) {
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2oklch(topic.rgb).map(rnd), topic.oklch);
         },
         obj(topic) {
             let [r, g, b] = topic.rgb;
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2oklch({ r, g, b }).map(rnd), topic.oklch);
         },
         args(topic) {
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2oklch.apply(null, topic.rgb).map(rnd), topic.oklch);
         }
     };

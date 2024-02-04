@@ -3,17 +3,21 @@ const assert = require('assert');
 require('es6-shim');
 
 const rgb2lch = require('../src/io/lch/rgb2lch');
+const chroma = require('../src/chroma');
 
 const tests = {
-    black:      { lch: [0,0,NaN],             rgb: [0,0,0] },
-    white:      { lch: [100,0,NaN],           rgb: [255,255,255] },
-    gray:       { lch: [53.59,0,NaN],         rgb: [128,128,128] },
-    red:        { lch: [53.24,104.55,40],     rgb: [255,0,0] },
-    yellow:     { lch: [97.14,96.91,102.85],  rgb: [255,255,0] },
-    green:      { lch: [87.73,119.78,136.02], rgb: [0,255,0] },
-    cyan:       { lch: [91.11,50.12,196.38],  rgb: [0,255,255] },
-    blue:       { lch: [32.3,133.81,306.28],  rgb: [0,0,255] },
-    magenta:    { lch: [60.32,115.54,328.23], rgb: [255,0,255] },
+    black:        { lch: [0,0,NaN],             rgb: [0,0,0] },
+    white:        { lch: [100,0,NaN],           rgb: [255,255,255] },
+    gray:         { lch: [53.59,0,NaN],         rgb: [128,128,128] },
+    blackZeroHue: { lch: [0,0,0],               rgb: [0,0,0],       noHueAsZero: true },
+    whiteZeroHue: { lch: [100,0,0],             rgb: [255,255,255], noHueAsZero: true  },
+    grayZeroHue:  { lch: [53.59,0,0],           rgb: [128,128,128], noHueAsZero: true  },
+    red:          { lch: [53.24,104.55,40],     rgb: [255,0,0] },
+    yellow:       { lch: [97.14,96.91,102.85],  rgb: [255,255,0] },
+    green:        { lch: [87.73,119.78,136.02], rgb: [0,255,0] },
+    cyan:         { lch: [91.11,50.12,196.38],  rgb: [0,255,255] },
+    blue:         { lch: [32.3,133.81,306.28],  rgb: [0,0,255] },
+    magenta:      { lch: [60.32,115.54,328.23], rgb: [255,0,255] },
 };
 
 const round = (digits) => {
@@ -31,13 +35,16 @@ Object.keys(tests).forEach(key => {
     batch[`rgb2lch ${key}`] = {
         topic: tests[key],
         array(topic) {
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2lch(topic.rgb).map(rnd), topic.lch);
         },
         obj(topic) {
             let [r,g,b] = topic.rgb;
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2lch({r,g,b}).map(rnd), topic.lch);
         },
         args(topic) {
+            chroma.noHueAsZero(topic.noHueAsZero || false);
             assert.deepStrictEqual(rgb2lch.apply(null, topic.rgb).map(rnd), topic.lch);
         }
     }

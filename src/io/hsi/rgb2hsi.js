@@ -1,5 +1,6 @@
 const {unpack,TWOPI} = require('../../utils');
 const {min,sqrt,acos} = Math;
+const chroma = require('../../chroma');
 
 const rgb2hsi = (...args) => {
     /*
@@ -15,7 +16,7 @@ const rgb2hsi = (...args) => {
     const i = (r+g+b) / 3;
     const s = i > 0 ? 1 - min_/i : 0;
     if (s === 0) {
-        h = NaN;
+        h = chroma.hueNaN ? Number.NaN : 0;
     } else {
         h = ((r-g)+(r-b)) / 2;
         h /= sqrt((r-g)*(r-g) + (r-b)*(g-b));
@@ -24,6 +25,7 @@ const rgb2hsi = (...args) => {
             h = TWOPI - h;
         }
         h /= TWOPI;
+        if (!chroma.hueNaN && isNaN(h)) {h = 0;}
     }
     return [h*360,s,i];
 }

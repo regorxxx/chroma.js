@@ -41,33 +41,33 @@
 <li>linear and bezier interpolation in different color spaces</li>
 </ul>
 <p>Here&#39;s an example for a simple read / manipulate / output chain:</p>
-<pre><code class="language-js">chroma(&#39;pink&#39;).darken().saturate(2).hex()
+<pre><code class="language-js">chroma(&#39;pink&#39;).darken().saturate(2).hex();
 </code></pre>
 <p>Aside from that, chroma.js can also help you <strong>generate nice colors</strong> using various methods, for instance to be <a href="https://www.vis4.net/blog/posts/avoid-equidistant-hsv-colors/">used</a> in color palette for maps or data visualization.</p>
 <pre><code class="language-js">chroma.scale([&#39;#fafa6e&#39;,&#39;#2A4858&#39;])
-    .mode(&#39;lch&#39;).colors(6)
+    .mode(&#39;lch&#39;).colors(6);
 </code></pre>
 <p>chroma.js has a lot more to offer, but that&#39;s the gist of it.</p>
 <h2 id="api">API</h2>
 <h3 id="chroma">chroma</h3>
 <h4 id="color">(<em>color</em>)</h4>
 <p>The first step is to get your color into chroma.js. That&#39;s what the generic constructor <code>chroma()</code> does. This function attempts to guess the format of the input color for you. For instance, it will recognize any named color from the W3CX11 specification:</p>
-<pre><code class="language-js">chroma(&#39;hotpink&#39;)
+<pre><code class="language-js">chroma(&#39;hotpink&#39;);
 </code></pre>
 <p>If there&#39;s no matching named color, chroma.js checks for a <strong>hexadecimal string</strong>. It ignores case, the <code>#</code> sign is optional, and it can  recognize the shorter three letter format as well. So, any of these are valid hexadecimal representations: <code>#ff3399</code>, <code>FF3399</code>, <code>#f39</code>, etc.</p>
 <pre><code class="language-js">chroma(&#39;#ff3399&#39;);
 chroma(&#39;F39&#39;);
 </code></pre>
 <p>In addition to hex strings, <strong>hexadecimal numbers</strong> (in fact, just any number between <code>0</code> and <code>16777215</code>) will be recognized, too.</p>
-<pre><code class="language-js">chroma(0xff3399)
+<pre><code class="language-js">chroma(0xff3399);
 </code></pre>
 <p>You also can pass RGB values individually. Each parameter must be within <code>0..255</code>. You can pass the numbers as individual arguments or as an array.</p>
 <pre><code class="language-js">chroma(0xff, 0x33, 0x99);
 chroma(255, 51, 153);
 chroma([255, 51, 153]);
 </code></pre>
-<p>You can construct colors from different color spaces by passing the name of color space as the last argument. Here we define the same color in HSL by passing the h*ue angle (0-360) and percentages for <em>s</em>aturation and <em>l</em>ightness:</p>
-<pre><code class="language-js">chroma(330, 1, 0.6, &#39;hsl&#39;)
+<p>You can construct colors from different color spaces by passing the name of color space as the last argument. Here we define the same color in HSL by passing the <em>hue angle (0-360)</em> and percentages for <em>saturation</em> and <em>lightness</em>:</p>
+<pre><code class="language-js">chroma(330, 1, 0.6, &#39;hsl&#39;);
 </code></pre>
 <p><strong>New (since <a href="#200">2.0.0</a>):</strong> you can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
 <pre><code class="language-js">chroma({ h:120, s:1, l:0.75});
@@ -84,14 +84,19 @@ chroma.valid(&#39;#FOOOOD&#39;);
 <h3 id="chromahsl">chroma.hsl</h3>
 <h4 id="hue-saturation-lightness">(hue, saturation, lightness)</h4>
 <p>Alternatively, every color space has its own constructor function under the <code>chroma</code> namespace. For a list of all supported color spaces, check the <a href="#supported-color-spaces-and-output-formats">appendix</a>.</p>
-<pre><code class="language-js">chroma.hsl(330, 1, 0.6)
+<pre><code class="language-js">chroma.hsl(330, 1, 0.6);
+chroma(330, 1, 0.6, &#39;hsl&#39;);
 </code></pre>
 <h3 id="chromahsv">chroma.hsv</h3>
 <h4 id="hue-saturation-value">(hue, saturation, value)</h4>
+<pre><code class="language-js">chroma.hsv(330, 0.8, 1);
+chroma(330, 0.8, 1, &#39;hsv&#39;);
+</code></pre>
 <h3 id="chromalab">chroma.lab</h3>
 <h4 id="lightness-a-b">(Lightness, a, b)</h4>
 <p>CIELAB color space</p>
 <pre><code class="language-js">chroma.lab(40,-20,50);
+chroma(40,-20,50,&#39;lab&#39;);
 chroma.lab(50,-20,50);
 chroma.lab(80,-20,50);
 </code></pre>
@@ -99,6 +104,7 @@ chroma.lab(80,-20,50);
 <h4 id="lightness-a-b-1">(Lightness, a, b)</h4>
 <p><a href="https://bottosson.github.io/posts/oklab/">Oklab color space</a></p>
 <pre><code class="language-js">chroma.oklab(0.4,-0.2,0.5);
+chroma(0.4,-0.2,0.5,&#39;oklab&#39;);
 chroma.oklab(0.5,-0.2,0.5);
 chroma.oklab(0.8,-0.2,0.5);
 </code></pre>
@@ -129,8 +135,22 @@ chroma(0.2, 0.8, 0, 0, &#39;cmyk&#39;);
 <h4 id="red-green-blue-alpha">(red, green, blue, [alpha])</h4>
 <p><strong>GL</strong> is a variant of RGB(A), with the only difference that the components are normalized to the range of <code>0..1</code>.</p>
 <pre><code class="language-js">chroma.gl(0.6, 0, 0.8);
-chroma.gl(0.6, 0, 0.8, 0.5);
 chroma(0.6, 0, 0.8, &#39;gl&#39;);
+chroma.gl(0.6, 0, 0.8, 0.5);
+</code></pre>
+<h3 id="chromanohueaszero">chroma.noHueAsZero</h3>
+<h4 id="bnohueaszerofalse">(bNoHueAsZero=false)</h4>
+<p>Some color spaces, like <a href="#hsl">HSL</a>, treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.</p>
+<pre><code class="language-js">chroma.noHueAsZero(false);
+chroma(&#39;white&#39;).hsl();
+chroma.noHueAsZero(true);
+chroma(&#39;white&#39;).hsl();
+</code></pre>
+<p>Note this flag not only affects the color constructors, but also output from methods like <code>chroma.average</code> or <code>chroma.interpolate</code>:</p>
+<pre><code class="language-js">chroma.noHueAsZero(false);
+chroma.mix(&#39;white&#39;, &#39;blue&#39;, 0.5, &#39;hsl&#39;);
+chroma.noHueAsZero(true);
+chroma.mix(&#39;white&#39;, &#39;blue&#39;, 0.5, &#39;hsl&#39;);
 </code></pre>
 <h3 id="chromatemperature">chroma.temperature</h3>
 <h4 id="k">(K)</h4>
@@ -141,7 +161,7 @@ chroma.temperature(6500); // daylight
 </code></pre>
 <p>The effective temperature range goes from <code>0</code> to about <code>30000</code> Kelvin,</p>
 <pre><code class="language-js">f = function(i) {
-    return chroma.temperature(i * 30000)
+    return chroma.temperature(i * 30000);
 }
 </code></pre>
 <h3 id="chromamix">chroma.mix</h3>
@@ -210,7 +230,7 @@ chroma.distance(&#39;#fff&#39;, &#39;#f0f&#39;);
 </code></pre>
 <h3 id="chromadeltae">chroma.deltaE</h3>
 <h4 id="color1-color2-kl1-kc1-kh1">(color1, color2, Kl=1, Kc=1, Kh=1)</h4>
-<p>Computes <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">color difference</a> as developed by the International Commission on Illumination (CIE) in 2000. The implementation is based on the formula from <a href="http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CIE2000.html">Bruce Lindbloom</a>. Resulting values range from 0 (no difference) to 100 (maximum difference), and are a metric for how the human eye percieves color difference. The optional parameters Kl, Kc, and Kh may be used to adjust weightings of lightness, chroma, and hue.</p>
+<p>Computes <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">color difference</a> as developed by the International Commission on Illumination (CIE) in 2000. The implementation is based on the formula from <a href="http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CIE2000.html">Bruce Lindbloom</a>. Resulting values range from 0 (no difference) to 100 (maximum difference), and are a metric for how the human eye perceives color difference. The optional parameters Kl, Kc, and Kh may be used to adjust weightings of lightness, chroma, and hue.</p>
 <pre><code class="language-js">chroma.deltaE(&#39;#ededee&#39;, &#39;#ededee&#39;);
 chroma.deltaE(&#39;#ededee&#39;, &#39;#edeeed&#39;);
 chroma.deltaE(&#39;#ececee&#39;, &#39;#eceeec&#39;);
@@ -221,13 +241,13 @@ chroma.deltaE(&#39;#000000&#39;, &#39;#ffffff&#39;);
 </code></pre>
 <h3 id="chromabrewer">chroma.brewer</h3>
 <p>chroma.brewer is a map of <a href="http://colorbrewer2.org/">ColorBrewer scales</a> that are included in chroma.js for convenience. chroma.scale uses the colors to construct. These properties are read-only.</p>
-<pre><code class="language-js">chroma.brewer.OrRd
+<pre><code class="language-js">chroma.brewer.OrRd;
 </code></pre>
 <p>Scales are grouped within palettes, which can be found with:</p>
-<pre><code class="language-js">chroma.brewer.palettes
+<pre><code class="language-js">chroma.brewer.palettes;
 </code></pre>
 <p>And the available scales within a palette:</p>
-<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2)
+<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2);
 </code></pre>
 <h3 id="chromalimits">chroma.limits</h3>
 <h4 id="data-mode-n">(data, mode, n)</h4>
@@ -328,7 +348,7 @@ chroma(&#39;aquamarine&#39;).luminance(0.5, &#39;hsl&#39;);
 <h3 id="colorhex">color.hex</h3>
 <h4 id="modeautorgbrgba">(mode=&#39;auto|rgb|rgba&#39;)</h4>
 <p>Finally, chroma.js allows you to output colors in various color spaces and formats. Most often you will want to output the color as hexadecimal string.</p>
-<pre><code class="language-js">chroma(&#39;orange&#39;).hex()
+<pre><code class="language-js">chroma(&#39;orange&#39;).hex();
 </code></pre>
 <p><strong>Note</strong> that as of version 1.4.0 the default mode is &quot;auto&quot; which means that the hex string will include the alpha channel if it&#39;s less than 1. If you don&#39;t want the alpha channel to be included you must explicitly set the mode to &quot;rgb&quot; now:</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hex();
@@ -360,39 +380,39 @@ chroma(&#39;orange&#39;).darken().rgb(false);
 chroma(&#39;hsla(20, 100%, 40%, 0.5)&#39;).rgba();
 </code></pre>
 <h3 id="colorhsl">color.hsl</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>lightness</code> component. Hue is the color angle in degree (<code>0..360</code>), saturation and lightness are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>lightness</code> component. Hue is the color angle in degree (<code>0..360</code>), saturation and lightness are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsl();
 chroma(&#39;white&#39;).hsl();
 </code></pre>
 <h3 id="colorhsv">color.hsv</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>value</code> components. Hue is the color angle in degree (<code>0..360</code>), saturation and value are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>value</code> components. Hue is the color angle in degree (<code>0..360</code>), saturation and value are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsv();
 chroma(&#39;white&#39;).hsv();
 </code></pre>
 <h3 id="colorhsi">color.hsi</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>intensity</code> components, each as number between 0 and 255. Note that for hue-less colors (black, white, and grays), the hue component will be NaN.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>intensity</code> components, each as number between 0 and 255. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsi();
 chroma(&#39;white&#39;).hsi();
 </code></pre>
 <h3 id="colorlab">color.lab</h3>
 <p>Returns an array with the <strong>L</strong>, <strong>a</strong>, and <strong>b</strong> components.</p>
-<pre><code class="language-js">chroma(&#39;orange&#39;).lab()
+<pre><code class="language-js">chroma(&#39;orange&#39;).lab();
 </code></pre>
 <h3 id="coloroklab">color.oklab</h3>
 <p>Returns an array with the <strong>L</strong>, <strong>a</strong>, and <strong>b</strong> components.</p>
-<pre><code class="language-js">chroma(&#39;orange&#39;).oklab()
+<pre><code class="language-js">chroma(&#39;orange&#39;).oklab();
 </code></pre>
 <h3 id="colorlch">color.lch</h3>
-<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components.</p>
-<pre><code class="language-js">chroma(&#39;skyblue&#39;).lch()
+<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<pre><code class="language-js">chroma(&#39;skyblue&#39;).lch();
 </code></pre>
 <h3 id="colorhcl">color.hcl</h3>
-<p>Alias of <a href="#color-lch">lch</a>, but with the components in reverse order.</p>
-<pre><code class="language-js">chroma(&#39;skyblue&#39;).hcl()
+<p>Alias of <a href="#color-lch">lch</a>, but with the components in reverse order. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<pre><code class="language-js">chroma(&#39;skyblue&#39;).hcl();
 </code></pre>
 <h3 id="coloroklch">color.oklch</h3>
-<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components.</p>
-<pre><code class="language-js">chroma(&#39;skyblue&#39;).oklch()
+<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<pre><code class="language-js">chroma(&#39;skyblue&#39;).oklch();
 </code></pre>
 <h3 id="colornum">color.num</h3>
 <p>Returns the numeric representation of the hexadecimal RGB color.</p>
@@ -549,13 +569,13 @@ chroma.scale(&#39;Sequential&#39;);
 <pre><code class="language-js">chroma.scale(&#39;Spectral&#39;).domain([1,0]);
 </code></pre>
 <p>You can access the colors directly using <code>chroma.brewer</code>. These properties are read-only.</p>
-<pre><code class="language-js">chroma.brewer.OrRd
+<pre><code class="language-js">chroma.brewer.OrRd;
 </code></pre>
 <p>The available palettes can be found with:</p>
-<pre><code class="language-js">chroma.brewer.palettes
+<pre><code class="language-js">chroma.brewer.palettes;
 </code></pre>
 <p>And the available scales within a palette:</p>
-<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2)
+<pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2);
 </code></pre>
 <h3 id="chromabezier">chroma.bezier</h3>
 <h4 id="colors">(colors)</h4>
@@ -631,13 +651,19 @@ chroma.cubehelix().lightness([0.3,0.7]);
 </code></pre>
 <h2 id="changelog">Changelog</h2>
 <h3 id="unreleased">unreleased</h3>
+<ul>
+<li>added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using &quot;chroma.noHueAsZero(true)&quot; first at any time.</li>
+<li>added weights for every component at chroma.distance()</li>
+<li>improved support for OKLCH colors using chroma.average() or chroma.distance()</li>
+<li>fix chroma(&#39;#000000&#39;).oklch() giving NaN for the hue component. See <a href="https://github.com/gka/chroma.js/issues/322">Issue 322</a></li>
+</ul>
 <h3 id="270">2.7.0</h3>
 <ul>
-<li>added chroma.brewer.getPalettes() to retrieve all available palettes (keys). <a href="http://colorbrewer2.org/">ColorBrewer</a> schemes (scales) are divided into palettes according to their type.</li>
+<li>added chroma.brewer.getPalettes() to retrieve all available palettes (keys). <a href="http://colorbrewer2.org/">ColorBrewer</a> schemes (scales) are divided into palettes according to their type</li>
 <li>added chroma.brewer.getPalette(palette) to retrieve all schemes from an specific palette (for ex. &#39;Qualitative&#39;)</li>
 <li>added &#39;Diverging&#39;,&#39;Qualitative&#39;, and &#39;Sequential&#39; scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale(&#39;Sequential&#39;) -&gt; chroma.scale(&#39;OrRd&#39;) </li>
 <li>chroma.brewer object can no longer be modified in any way (or its scales). Make a copy of it if required</li>
-<li>replace deprecated .substr usage.</li>
+<li>replace deprecated .substr usage</li>
 <li>fixed &#39;npm run docs-preview&#39; CMD command</li>
 <li>minor improvements to documentation</li>
 <li>added favicons to documentation <img src="assets/favicon/favicon-16x16.png" alt="chromaicon"></li>

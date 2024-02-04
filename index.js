@@ -62,6 +62,7 @@ chroma.deltaE = require('./src/utils/delta-e');
 chroma.distance = require('./src/utils/distance');
 chroma.limits = require('./src/utils/analyze').limits;
 chroma.valid = require('./src/utils/valid');
+chroma.noHueAsZero = require('./src/utils/nohueaszero');
 
 // scale
 chroma.scales = require('./src/utils/scales');

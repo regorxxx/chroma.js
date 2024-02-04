@@ -4,6 +4,7 @@ const chroma = (...args) => {
 };
 
 chroma.Color = require('./Color');
-chroma.version = '@@version'
+chroma.version = '@@version';
+chroma.hueNaN = true; // Whether treat black/white as having NaN hue or zero on specific color spaces (LCH, ...)
 
 module.exports = chroma;

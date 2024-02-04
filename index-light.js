@@ -28,5 +28,6 @@ chroma.mix = chroma.interpolate = require('./src/generator/mix');
 
 // other utility methods
 chroma.valid = require('./src/utils/valid');
+chroma.noHueAsZero = require('./src/utils/nohueaszero');
 
 module.exports = chroma;

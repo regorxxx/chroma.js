@@ -104,7 +104,7 @@ vows.describe('Some tests for chroma.color()').addBatch({
         }
     },
     'hsv black': {
-        topic: chroma('black').hsv(),
+        topic: !chroma.noHueAsZero(false) && chroma('black').hsv(),
         'hue is NaN': function(topic) {
             return assert(isNaN(topic[0]));
         },
@@ -112,10 +112,35 @@ vows.describe('Some tests for chroma.color()').addBatch({
             return assert(topic[0] != null);
         }
     },
+    'hsv black zero hue': {
+        topic: chroma.noHueAsZero(true) && chroma('black').hsv(),
+        'hue is 0': function(topic) {
+            return assert.equal(topic[0], 0);
+        },
+        'but hue is defined': function(topic) {
+            return assert(topic[0] != null);
+        }
+    },
     'hsl black': {
-        topic: chroma('black').hsl(),
+        topic: !chroma.noHueAsZero(false) && chroma('black').hsl(),
         'hue is NaN': function(topic) {
             return assert(isNaN(topic[0]));
+        },
+        'but hue is defined': function(topic) {
+            return assert(topic[0] != null);
+        },
+        'sat is 0': function(topic) {
+            return assert.equal(topic[1], 0);
+        },
+        'lightness is 0': function(topic) {
+            return assert.equal(topic[2], 0);
+        }
+    },
+    'hsl black zero hue': {
+        topic: chroma.noHueAsZero(true) && chroma('black').hsl(),
+        'hue is 0': function(topic) {
+            chroma.noHueAsZero(true);
+            return assert.equal(topic[1], 0);
         },
         'but hue is defined': function(topic) {
             return assert(topic[0] != null);

@@ -225,17 +225,18 @@
 
     var Color_1 = Color$6;
 
-    var chroma$5 = function () {
+    var chroma$6 = function () {
     	var args = [], len = arguments.length;
     	while ( len-- ) args[ len ] = arguments[ len ];
 
-    	return new (Function.prototype.bind.apply( chroma$5.Color, [ null ].concat( args) ));
+    	return new (Function.prototype.bind.apply( chroma$6.Color, [ null ].concat( args) ));
     };
 
-    chroma$5.Color = Color_1;
-    chroma$5.version = '2.7.0';
+    chroma$6.Color = Color_1;
+    chroma$6.version = '2.7.0';
+    chroma$6.hueNaN = true; // Whether treat black/white as having NaN hue or zero on specific color spaces (LCH, ...)
 
-    var chroma_1 = chroma$5;
+    var chroma_1 = chroma$6;
 
     var unpack$6 = utils.unpack;
     var last$3 = utils.last;
@@ -270,6 +271,7 @@
     var hsl2css_1 = hsl2css$1;
 
     var unpack$5 = utils.unpack;
+    var chroma$5 = chroma_1;
 
     /*
      * supported arguments:
@@ -300,7 +302,7 @@
 
         if (max === min){
             s = 0;
-            h = Number.NaN;
+            h = chroma$5.hueNaN ? Number.NaN : 0;
         } else {
             s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
         }
@@ -311,6 +313,7 @@
 
         h *= 60;
         if (h < 0) { h += 360; }
+        else if (!chroma$5.hueNaN && isNaN(h)) {h = 0;}
         if (args.length>3 && args[3]!==undefined) { return [h,s,l,args[3]]; }
         return [h,s,l];
     };

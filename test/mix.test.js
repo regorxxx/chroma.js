@@ -25,8 +25,13 @@ vows
         },
 
         'hsl interpolation white <-> red': {
-            topic: chroma('white').interpolate('red', 0.5, 'hsl'),
+            topic: !chroma.noHueAsZero(false) && chroma('white').interpolate('red', 0.5, 'hsl'),
             'works'(topic) { return assert.deepEqual(topic.hex(), '#ff8080'); }
+        },
+
+        'hsl zero hue interpolation white <-> red': {
+            topic: chroma.noHueAsZero(true) && chroma('white').interpolate('red', 0.5, 'hsl'),
+            'works'(topic) { return assert.deepEqual(topic.hex(), '#df9f9f'); }
         },
 
         'rgb interpolation white <-> red': {
@@ -40,8 +45,13 @@ vows
         },
 
         'hsl interpolation red <-> white': {
-            topic: chroma('red').interpolate('white', 0.5, 'hsl'),
+            topic: !chroma.noHueAsZero(false) && chroma('red').interpolate('white', 0.5, 'hsl'),
             'works'(topic) { return assert.deepEqual(topic.hex(), '#ff8080'); }
+        },
+
+        'hsl zero hue interpolation red <-> white': {
+            topic: chroma.noHueAsZero(true) && chroma('red').interpolate('white', 0.5, 'hsl'),
+            'works'(topic) { return assert.deepEqual(topic.hex(), '#df9f9f'); }
         },
 
         'rgb interpolation red <-> white': {

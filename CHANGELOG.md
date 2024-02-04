@@ -1,8 +1,10 @@
 ## Changelog
 
 ### unreleased
+* added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using "chroma.noHueAsZero(true)" first at any time. See [Issue 322](https://github.com/gka/chroma.js/issues/322)
 * added weights for every component at chroma.distance()
 * improved support for OKLCH colors using chroma.average() or chroma.distance()
+* minor improvements to documentation
 
 ### 2.7.0
 * added chroma.brewer.getPalettes() to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
