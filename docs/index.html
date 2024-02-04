@@ -199,10 +199,12 @@ chroma.contrast(&#39;pink&#39;, &#39;hotpink&#39;);
 chroma.contrast(&#39;pink&#39;, &#39;purple&#39;);
 </code></pre>
 <h3 id="chromadistance">chroma.distance</h3>
-<h4 id="color1-color2-modelab">(color1, color2, mode=&#39;lab&#39;)</h4>
-<p>Computes the <a href="https://en.wikipedia.org/wiki/Euclidean_distance#Three_dimensions">Euclidean distance</a> between two colors in a given color space (default is <code>Lab</code>).</p>
+<h4 id="color1-color2-modelab-weights">(color1, color2, mode=&#39;lab&#39;, weights=[])</h4>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Euclidean_distance#Three_dimensions">Euclidean distance</a> between two colors in a given color space (default is <code>Lab</code>). Weight may be provided for every color component (as an array). Note CMYK colors require 4 components.</p>
 <pre><code class="language-js">chroma.distance(&#39;#fff&#39;, &#39;#ff0&#39;, &#39;rgb&#39;);
 chroma.distance(&#39;#fff&#39;, &#39;#f0f&#39;, &#39;rgb&#39;);
+chroma.distance(&#39;#fff&#39;, &#39;#f0f&#39;, &#39;rgb&#39;, [1,0,1]);
+chroma.distance(&#39;#fff&#39;, &#39;#f0f&#39;, &#39;cmyk&#39;);
 chroma.distance(&#39;#fff&#39;, &#39;#ff0&#39;);
 chroma.distance(&#39;#fff&#39;, &#39;#f0f&#39;);
 </code></pre>

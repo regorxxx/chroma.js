@@ -297,13 +297,15 @@ chroma.contrast('pink', 'purple');
 ```
 
 ### chroma.distance
-#### (color1, color2, mode='lab')
+#### (color1, color2, mode='lab', weights=[])
 
-Computes the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance#Three_dimensions) between two colors in a given color space (default is `Lab`).
+Computes the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance#Three_dimensions) between two colors in a given color space (default is `Lab`). Weight may be provided for every color component (as an array). Note CMYK colors require 4 components.
 
 ```js
 chroma.distance('#fff', '#ff0', 'rgb');
 chroma.distance('#fff', '#f0f', 'rgb');
+chroma.distance('#fff', '#f0f', 'rgb', [1,0,1]);
+chroma.distance('#fff', '#f0f', 'cmyk');
 chroma.distance('#fff', '#ff0');
 chroma.distance('#fff', '#f0f');
 ```
