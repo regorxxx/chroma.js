@@ -2543,7 +2543,7 @@
         if ( weights === void 0 ) weights=null;
 
         var l = colors.length;
-        if (!weights) { weights = Array.from(new Array(l)).map(function () { return 1; }); }
+        if (!weights) { weights = new Array(l).fill(1); }
         // normalize weights
         var k = l / weights.reduce(function(a, b) { return a + b; });
         weights.forEach(function (w,i) { weights[i] *= k; });
@@ -2552,6 +2552,7 @@
         if (mode === 'lrgb') {
             return _average_lrgb(colors, weights)
         }
+        var intMode = mode.replace(/(^ok)/gi, ''); // OKLCH behaves like LCH
         var first = colors.shift();
         var xyz = first.get(mode);
         var cnt = [];
@@ -2561,7 +2562,7 @@
         for (var i=0; i<xyz.length; i++) {
             xyz[i] = (xyz[i] || 0) * weights[0];
             cnt.push(isNaN(xyz[i]) ? 0 : weights[0]);
-            if (mode.replace('ok', '').charAt(i) === 'h' && !isNaN(xyz[i])) {
+            if (intMode.charAt(i) === 'h' && !isNaN(xyz[i])) {
                 var A = xyz[i] / 180 * PI$1;
                 dx += cos$2(A) * weights[0];
                 dy += sin$2(A) * weights[0];
@@ -2575,7 +2576,7 @@
             for (var i=0; i<xyz.length; i++) {
                 if (!isNaN(xyz2[i])) {
                     cnt[i] += weights[ci+1];
-                    if (mode.replace('ok', '').charAt(i) === 'h') {
+                    if (intMode.charAt(i) === 'h') {
                         var A = xyz2[i] / 180 * PI$1;
                         dx += cos$2(A) * weights[ci+1];
                         dy += sin$2(A) * weights[ci+1];
@@ -2587,7 +2588,7 @@
         });
 
         for (var i$1=0; i$1<xyz.length; i$1++) {
-            if (mode.replace('ok', '').charAt(i$1) === 'h') {
+            if (intMode.charAt(i$1) === 'h') {
                 var A$1 = atan2$1(dy / cnt[i$1], dx / cnt[i$1]) / PI$1 * 180;
                 while (A$1 < 0) { A$1 += 360; }
                 while (A$1 >= 360) { A$1 -= 360; }
@@ -3514,19 +3515,26 @@
     // simple Euclidean distance
     var distance = function(a, b, mode, weights) {
         if ( mode === void 0 ) mode='lab';
-        if ( weights === void 0 ) weights = [1, 1, 1, 1];
-    //need 4 color weights for CMYK color space
+        if ( weights === void 0 ) weights=null;
 
+        if (weights) { //needs 4 color weights for CMYK color space
+            var inputWeights = weights;
+            weights = new Array(4).fill(1);
+            inputWeights.slice(0,4).forEach(function (w, i) {
+                if (!isNaN(w)) {weights[i] = w;}
+            });
+        } else {weights = Array(4).fill(1);}
         // Delta E (CIE 1976)
         // see http://www.brucelindbloom.com/index.html?Equations.html
         a = new Color$1(a);
         b = new Color$1(b);
         var l1 = a.get(mode);
         var l2 = b.get(mode);
+        var intMode = mode.replace(/(^ok)/gi, ''); // OKLCH behaves like LCH
         var sum_sq = 0;
         var d;
         for (var i in l1) {
-            if (mode.replace('ok', '').charAt[i] === 'h') {
+            if (intMode.charAt[i] === 'h') {
                 var hueDifference = (l1[i] || 0) - (l2[i] || 0);
                 d = Math.abs(hueDifference + 180) % 360 - 180;
             }
