@@ -1,13 +1,15 @@
 ## Changelog
 
 ### unreleased
+* added weights for every component at chroma.distance()
+* improved support for OKLCH colors using chroma.average() or chroma.distance()
 
 ### 2.7.0
-* added chroma.brewer.getPalettes() to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type.
+* added chroma.brewer.getPalettes() to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
 * added chroma.brewer.getPalette(palette) to retrieve all schemes from an specific palette (for ex. 'Qualitative')
 * added 'Diverging','Qualitative', and 'Sequential' scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale('Sequential') -> chroma.scale('OrRd') 
 * chroma.brewer object can no longer be modified in any way (or its scales). Make a copy of it if required
-* replace deprecated .substr usage.
+* replace deprecated .substr usage
 * fixed 'npm run docs-preview' CMD command
 * minor improvements to documentation
 * added favicons to documentation ![chromaicon](assets/favicon/favicon-16x16.png)
