@@ -108,6 +108,6 @@ Versions prior to 0.4 were released under [GPL](http://www.gnu.org/licenses/gpl-
 
 ### FAQ
 
-**There have been no commits in X weeks. Is chroma.js dead?**
+**There have been no commits in X weeks. Is the original repo of chroma.js dead?**
 
 Yes! That's why it has been forked and now maintained here.
