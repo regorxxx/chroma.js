@@ -16,7 +16,7 @@ const lch2css = (...args) => {
     lcha[1] = rnd(lcha[1]) + '%';
     lcha[2] = rnd(lcha[2] || 0);
     if (mode === 'lcha' || (lcha.length > 3 && lcha[3]<1)) {
-        lcha[3] = '/' + (lcha.length > 3 ? lcha[3] : 1);
+        lcha[3] = '/ ' + (lcha.length > 3 ? lcha[3] : 1);
     } else {
         lcha.length = 3;
     }

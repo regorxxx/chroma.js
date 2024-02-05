@@ -16,7 +16,7 @@ const oklab2css = (...args) => {
     laba[1] = rnd(laba[1]*100) + '%';
     laba[2] = rnd(laba[2]*100) + '%';
     if (mode === 'laba' || (laba.length > 3 && laba[3]<1)) {
-        laba[3] = '/' + (laba.length > 3 ? laba[3] : 1);
+        laba[3] = '/ ' + (laba.length > 3 ? laba[3] : 1);
     } else {
         laba.length = 3;
     }
