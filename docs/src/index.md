@@ -1119,5 +1119,5 @@ chroma(-16777216, 'android');
 chroma(-16777216);
 ```
 
-Note in some cases the format must be specified to not confuse the color input with a RGB array (which is always preferred over any other format during the identification process). Alternatively, components may be passed in an object to avoid any confussion (see [`chroma(color)`](#chromacolor).
+Note in some cases the format must be specified to not confuse the color input with a RGB array (which is always preferred over any other format during the identification process). Alternatively, components may be passed in an object to avoid any confussion (see [`chroma(color)`](#color).
 
