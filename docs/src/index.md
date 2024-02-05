@@ -555,6 +555,7 @@ chroma('#ffa505').name();
 ```
 
 ### color.css
+#### (mode='rgb|hsl|lab|lch|oklch|oklab')
 
 Returns a `RGB()`, `HSL()`, `LAB()`, `LCH()`, `OKLCH()` or `OKLAB()` string representation that can be used as CSS-color definition.
 
