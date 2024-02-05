@@ -88,7 +88,7 @@ You can construct colors from different color spaces by passing the name of colo
 chroma(330, 1, 0.6, 'hsl');
 ```
 
-**New (since [2.0.0](#200)):** you can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:
+You can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:
 
 ```js
 chroma({ h:120, s:1, l:0.75});
@@ -200,7 +200,7 @@ chroma.gl(0.6, 0, 0.8, 0.5);
 
 ### chroma.noHueAsZero
 #### (bNoHueAsZero=false)
-Some color spaces, like [HSL](#hsl), treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.
+**New (since [2.8.0](#280)):** Some color spaces, like [HSL](#hsl), treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.
 
 ```js
 chroma.noHueAsZero(false);
@@ -556,12 +556,13 @@ chroma('#ffa505').name();
 
 ### color.css
 
-Returns a `RGB()` or `HSL()` string representation that can be used as CSS-color definition.
+Returns a `RGB()`, `HSL()`, `LAB()`, `LCH()`, `OKLCH()` or `OKLAB()` string representation that can be used as CSS-color definition.
 
 ```js
 chroma('teal').css();
 chroma('teal').alpha(0.5).css();
 chroma('teal').css('hsl');
+chroma('teal').css('oklch');
 ```
 
 ### color.rgb
@@ -587,7 +588,7 @@ chroma('hsla(20, 100%, 40%, 0.5)').rgba();
 
 ### color.hsl
 
-Returns an array with the `hue`, `saturation`, and `lightness` component. Hue is the color angle in degree (`0..360`), saturation and lightness are within `0..1`. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `lightness` component. Hue is the color angle in degree (`0..360`), saturation and lightness are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('orange').hsl();
@@ -596,7 +597,7 @@ chroma('white').hsl();
 
 ### color.hsv
 
-Returns an array with the `hue`, `saturation`, and `value` components. Hue is the color angle in degree (`0..360`), saturation and value are within `0..1`. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `value` components. Hue is the color angle in degree (`0..360`), saturation and value are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('orange').hsv();
@@ -605,7 +606,7 @@ chroma('white').hsv();
 
 ### color.hsi
 
-Returns an array with the `hue`, `saturation`, and `intensity` components, each as number between 0 and 255. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `intensity` components, each as number between 0 and 255. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('orange').hsi();
@@ -631,7 +632,7 @@ chroma('orange').oklab();
 
 ### color.lch
 
-Returns an array with the **Lightness**, **chroma**, and **hue** components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('skyblue').lch();
@@ -639,7 +640,7 @@ chroma('skyblue').lch();
 
 ### color.hcl
 
-Alias of [lch](#color-lch), but with the components in reverse order. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Alias of [lch](#color-lch), but with the components in reverse order. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('skyblue').hcl();
@@ -647,7 +648,7 @@ chroma('skyblue').hcl();
 
 ### color.oklch
 
-Returns an array with the **Lightness**, **chroma**, and **hue** components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
 
 ```js
 chroma('skyblue').oklch();

@@ -69,7 +69,7 @@ chroma([255, 51, 153]);
 <p>You can construct colors from different color spaces by passing the name of color space as the last argument. Here we define the same color in HSL by passing the <em>hue angle (0-360)</em> and percentages for <em>saturation</em> and <em>lightness</em>:</p>
 <pre><code class="language-js">chroma(330, 1, 0.6, &#39;hsl&#39;);
 </code></pre>
-<p><strong>New (since <a href="#200">2.0.0</a>):</strong> you can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
+<p>You can also construct colors by passing a plain JS object with attributes corresponding to a color space supported by chroma.js:</p>
 <pre><code class="language-js">chroma({ h:120, s:1, l:0.75});
 chroma({ l:80, c:25, h:200 });
 chroma({ c:1, m:0.5, y:0, k:0.2});
@@ -140,7 +140,7 @@ chroma.gl(0.6, 0, 0.8, 0.5);
 </code></pre>
 <h3 id="chromanohueaszero">chroma.noHueAsZero</h3>
 <h4 id="bnohueaszerofalse">(bNoHueAsZero=false)</h4>
-<p>Some color spaces, like <a href="#hsl">HSL</a>, treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.</p>
+<p><strong>New (since <a href="#280">2.8.0</a>):</strong> Some color spaces, like <a href="#hsl">HSL</a>, treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.</p>
 <pre><code class="language-js">chroma.noHueAsZero(false);
 chroma(&#39;white&#39;).hsl();
 chroma.noHueAsZero(true);
@@ -361,10 +361,11 @@ chroma(&#39;orange&#39;).alpha(0.5).hex(&#39;rgb&#39;);
 chroma(&#39;#ffa505&#39;).name();
 </code></pre>
 <h3 id="colorcss">color.css</h3>
-<p>Returns a <code>RGB()</code> or <code>HSL()</code> string representation that can be used as CSS-color definition.</p>
+<p>Returns a <code>RGB()</code>, <code>HSL()</code>, <code>LAB()</code>, <code>LCH()</code>, <code>OKLCH()</code> or <code>OKLAB()</code> string representation that can be used as CSS-color definition.</p>
 <pre><code class="language-js">chroma(&#39;teal&#39;).css();
 chroma(&#39;teal&#39;).alpha(0.5).css();
 chroma(&#39;teal&#39;).css(&#39;hsl&#39;);
+chroma(&#39;teal&#39;).css(&#39;oklch&#39;);
 </code></pre>
 <h3 id="colorrgb">color.rgb</h3>
 <h4 id="roundtrue">(round=true)</h4>
@@ -380,17 +381,17 @@ chroma(&#39;orange&#39;).darken().rgb(false);
 chroma(&#39;hsla(20, 100%, 40%, 0.5)&#39;).rgba();
 </code></pre>
 <h3 id="colorhsl">color.hsl</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>lightness</code> component. Hue is the color angle in degree (<code>0..360</code>), saturation and lightness are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>lightness</code> component. Hue is the color angle in degree (<code>0..360</code>), saturation and lightness are within <code>0..1</code>. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsl();
 chroma(&#39;white&#39;).hsl();
 </code></pre>
 <h3 id="colorhsv">color.hsv</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>value</code> components. Hue is the color angle in degree (<code>0..360</code>), saturation and value are within <code>0..1</code>. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>value</code> components. Hue is the color angle in degree (<code>0..360</code>), saturation and value are within <code>0..1</code>. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsv();
 chroma(&#39;white&#39;).hsv();
 </code></pre>
 <h3 id="colorhsi">color.hsi</h3>
-<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>intensity</code> components, each as number between 0 and 255. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Returns an array with the <code>hue</code>, <code>saturation</code>, and <code>intensity</code> components, each as number between 0 and 255. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;orange&#39;).hsi();
 chroma(&#39;white&#39;).hsi();
 </code></pre>
@@ -403,15 +404,15 @@ chroma(&#39;white&#39;).hsi();
 <pre><code class="language-js">chroma(&#39;orange&#39;).oklab();
 </code></pre>
 <h3 id="colorlch">color.lch</h3>
-<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;skyblue&#39;).lch();
 </code></pre>
 <h3 id="colorhcl">color.hcl</h3>
-<p>Alias of <a href="#color-lch">lch</a>, but with the components in reverse order. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Alias of <a href="#color-lch">lch</a>, but with the components in reverse order. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;skyblue&#39;).hcl();
 </code></pre>
 <h3 id="coloroklch">color.oklch</h3>
-<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
+<p>Returns an array with the <strong>Lightness</strong>, <strong>chroma</strong>, and <strong>hue</strong> components. <strong>New (since <a href="#280">2.8.0</a>):</strong> Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see <a href="#noHueAsZero">noHueAsZero</a>.</p>
 <pre><code class="language-js">chroma(&#39;skyblue&#39;).oklch();
 </code></pre>
 <h3 id="colornum">color.num</h3>
@@ -652,10 +653,11 @@ chroma.cubehelix().lightness([0.3,0.7]);
 <h2 id="changelog">Changelog</h2>
 <h3 id="unreleased">unreleased</h3>
 <ul>
-<li>added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using &quot;chroma.noHueAsZero(true)&quot; first at any time.</li>
-<li>added weights for every component at chroma.distance()</li>
-<li>improved support for OKLCH colors using chroma.average() or chroma.distance()</li>
-<li>fix chroma(&#39;#000000&#39;).oklch() giving NaN for the hue component. See <a href="https://github.com/gka/chroma.js/issues/322">Issue 322</a></li>
+<li>added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using &quot;chroma.noHueAsZero(true)&quot; first at any time. See <a href="https://github.com/gka/chroma.js/issues/322">Issue 322</a></li>
+<li>added LAB, LCH, OKLCH and OKLAB support in &quot;chroma.css()&quot; <a href="https://github.com/gka/chroma.js/issues/325">Issue 325</a></li>
+<li>added weights for every component at chroma.distance() (@lulunac27a)</li>
+<li>improved support for OKLCH colors using chroma.average() or chroma.distance() (@lulunac27a)</li>
+<li>minor improvements to documentation</li>
 </ul>
 <h3 id="270">2.7.0</h3>
 <ul>
