@@ -74,7 +74,7 @@ In addition to hex strings, **hexadecimal numbers** (in fact, just any number be
 chroma(0xff3399);
 ```
 
-You also can pass RGB values individually. Each parameter must be within `0..255`. You can pass the numbers as individual arguments or as an array.
+You can also pass RGB values individually. Each parameter must be within `0..255`. You can pass the numbers as individual arguments or as an array.
 
 ```js
 chroma(0xff, 0x33, 0x99);
@@ -96,6 +96,13 @@ chroma({ l:80, c:25, h:200 });
 chroma({ c:1, m:0.5, y:0, k:0.2});
 ```
 
+And finally colors may be constructed by passing a plain CSS expression (see [CSS](#colorcss) for recognized expressions):
+
+```js
+chroma("lch(48.25% 30.07% 196.38)");
+chroma("hsl(180,100%,25.1%)");
+```
+
 ### chroma.valid
 
 Also new: you can use `chroma.valid` to try if a color argument can be correctly parsed as color by chroma.js:
@@ -110,7 +117,7 @@ chroma.valid('#FOOOOD');
 ### chroma.hsl
 #### (hue, saturation, lightness)
 
-Alternatively, every color space has its own constructor function under the `chroma` namespace. For a list of all supported color spaces, check the [appendix](#supported-color-spaces-and-output-formats).
+Alternatively, every color space has its own constructor function under the `chroma` namespace. For a list of all supported color spaces, check the [appendix](#supported-color-spaces).
 
 ```js
 chroma.hsl(330, 1, 0.6);
@@ -200,7 +207,7 @@ chroma.gl(0.6, 0, 0.8, 0.5);
 
 ### chroma.noHueAsZero
 #### (bNoHueAsZero=false)
-**New (since [2.8.0](#280)):** Some color spaces, like [HSL](#hsl), treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.
+**New (since [2.8.0](#280)):** Some color spaces, like [HSL](#colorhsl), treat colors with no hue like black, white, or grays in a special way. The default behavior is returning NaN in such cases (to maintain compatibility with old versions), but it can be changed to always output zero by setting a flag with this method.
 
 ```js
 chroma.noHueAsZero(false);
@@ -589,7 +596,7 @@ chroma('hsla(20, 100%, 40%, 0.5)').rgba();
 
 ### color.hsl
 
-Returns an array with the `hue`, `saturation`, and `lightness` component. Hue is the color angle in degree (`0..360`), saturation and lightness are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `lightness` component. Hue is the color angle in degree (`0..360`), saturation and lightness are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('orange').hsl();
@@ -598,7 +605,7 @@ chroma('white').hsl();
 
 ### color.hsv
 
-Returns an array with the `hue`, `saturation`, and `value` components. Hue is the color angle in degree (`0..360`), saturation and value are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `value` components. Hue is the color angle in degree (`0..360`), saturation and value are within `0..1`. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('orange').hsv();
@@ -607,7 +614,7 @@ chroma('white').hsv();
 
 ### color.hsi
 
-Returns an array with the `hue`, `saturation`, and `intensity` components, each as number between 0 and 255. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the `hue`, `saturation`, and `intensity` components, each as number between 0 and 255. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('orange').hsi();
@@ -633,7 +640,7 @@ chroma('orange').oklab();
 
 ### color.lch
 
-Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('skyblue').lch();
@@ -641,7 +648,7 @@ chroma('skyblue').lch();
 
 ### color.hcl
 
-Alias of [lch](#color-lch), but with the components in reverse order. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Alias of [lch](#color-lch), but with the components in reverse order. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('skyblue').hcl();
@@ -649,7 +656,7 @@ chroma('skyblue').hcl();
 
 ### color.oklch
 
-Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#noHueAsZero).
+Returns an array with the **Lightness**, **chroma**, and **hue** components. **New (since [2.8.0](#280)):** Note that for hue-less colors (black, white, and grays), the hue component will be NaN unless a special flag is set, see [noHueAsZero](#chromanoHueAsZero).
 
 ```js
 chroma('skyblue').oklch();
@@ -682,7 +689,7 @@ chroma('#ff00005e').android('rgba');
 
 ### color.temperature
 
-Estimate the temperature in Kelvin of any given color, though this makes the only sense for colors from the [temperature gradient](#chroma-temperature) above.
+Estimate the temperature in Kelvin of any given color, though this makes the only sense for colors from the [temperature gradient](#chromatemperature) above.
 
 ```js
 chroma('#ff3300').temperature();
@@ -1035,4 +1042,82 @@ chroma.cubehelix()
     .colors(5);
 ```
 
+## Supported color spaces
+Colors can be constructed via `chroma(color[, format])` or `chroma.[format]()`:
+* name
+```js
+chroma('red');
+```
+* hex
+```js
+chroma(0xff0000);
+chroma('#ff0000');
+chroma('ff0000');
+chroma('ff0000', 'hex');
+chroma(0xff, 0x00, 0x00);
+```
+* rgb(a)
+```js
+chroma([255, 165, 0]);
+chroma(255, 165, 0);
+chroma(255, 165, 0, 'rgb');
+chroma([255, 165, 0, 0.5]);
+chroma(255, 165, 0, 0.5);
+```
+* CSS expressions
+```js
+chroma("lch(48.25% 30.07% 196.38 / 1)");
+```
+* CIE L*a*b* (aka lab)
+```js
+chroma(40 ,-20, 50,'lab');
+```
+* hsl
+```js
+chroma(330, 1, 0.6, 'hsl');
+```
+* hsv
+```js
+chroma(330, 0.8, 1, 'hsv');
+```
+* hsi
+```js
+chroma(330, 0.8, 1, 'hsi');
+```
+* oklab
+```js
+chroma(0.4, -0.2, 0.5, 'oklab');
+```
+* lch
+```js
+chroma(80, 40, 130, 'lch');
+```
+* hcl
+```js
+chroma(130, 40, 80, 'hcl');
+```
+* oklch
+```js
+chroma(0.2, 0.8, 0, 0, 'oklch');
+```
+* cmyk
+```js
+chroma(0.2, 0.8, 0, 0, 'cmyk');
+```
+* gl
+```js
+chroma(0.2, 0.8, 0, 1, 'gl');
+```
+* num
+```js
+chroma(65280, 'num');
+chroma(65280);
+```
+* android
+```js
+chroma(-16777216, 'android');
+chroma(-16777216);
+```
+
+Note in some cases the format must be specified to not confuse the color input with a RGB array (which is always preferred over any other format during the identification process). Alternatively, components may be passed in an object to avoid any confussion (see [`chroma(color)`](#chromacolor).
 
