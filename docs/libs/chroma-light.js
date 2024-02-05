@@ -884,6 +884,7 @@
     var RE_OKLCHA = /^oklch\(\s*(\d+(?:\.\d+)?%?)\s* (\d+(?:\.\d+)?%?)\s* \s*(-?\d+(?:\.\d+)?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
 
     var round$3 = Math.round;
+    var abs = Math.abs;
 
     var css2rgb$1 = function (css) {
         css = css.toLowerCase().trim();
@@ -932,7 +933,7 @@
             for (var i$3=0; i$3<3; i$3++) {
                 rgb$3[i$3] = round$3(Number(rgb$3[i$3]) * 2.55);
             }
-            rgb$3[3] = +rgb$3[3];
+            rgb$3[3] = Number(rgb$3[3]);
             return rgb$3;
         }
 
@@ -954,7 +955,7 @@
             hsl$1[1] *= 0.01;
             hsl$1[2] *= 0.01;
             var rgb$5 = hsl2rgb(hsl$1);
-            rgb$5[3] = +m[4];  // default alpha = 1
+            rgb$5[3] = Number(m[4]);  // default alpha = 1
             return rgb$5;
         }
         
@@ -962,8 +963,9 @@
         if ((m = css.match(RE_LABA))) {
             var lab$1 = m.slice(1,4);
             for (var i$6 = 0; i$6 <= 2; i$6++) {lab$1[i$6] = Number(lab$1[i$6]);}
-            var rgb$6 = lab2rgb(lab$1);
-            rgb$6[3] = +m[4];  // default alpha = 1
+            var rgb$6 = lab2rgb(lab$1).map(function (i) { return abs(round$3(i)); });
+            rgb$6[3] = Number(m[4]); // default alpha = 1
+            if (!rgb$6[3] && rgb$6[3] !== 0) {rgb$6[3] = 1;}
             return rgb$6;
         }
         
@@ -971,8 +973,9 @@
         if ((m = css.match(RE_LCHA))) {
             var lch = m.slice(1,4);
             for (var i$7 = 0; i$7 <= 2; i$7++) {lch[i$7] = Number(lch[i$7]);}
-            var rgb$7 = lch2rgb(lch);
-            rgb$7[3] = +m[4];  // default alpha = 1
+            var rgb$7 = lch2rgb(lch).map(function (i) { return abs(round$3(i)); });
+            rgb$7[3] = Number(m[4]); // default alpha = 1
+            if (!rgb$7[3] && rgb$7[3] !== 0) {rgb$7[3] = 1;}
             return rgb$7;
         }
         
@@ -983,8 +986,9 @@
                 if (lab$2[i$8].endsWith('%')) {lab$2[i$8] = Number(lab$2[i$8].replace('%', '')) * 0.01;}
                 else {lab$2[i$8] = Number(lab$2[i$8]);}
             }
-            var rgb$8 = oklab2rgb(lab$2);
-            rgb$8[3] = +m[4];  // default alpha = 1
+            var rgb$8 = oklab2rgb(lab$2).map(function (i) { return abs(round$3(i)); });
+            rgb$8[3] = Number(m[4]); // default alpha = 1
+            if (!rgb$8[3] && rgb$8[3] !== 0) {rgb$8[3] = 1;}
             return rgb$8;
         }
         
@@ -995,8 +999,9 @@
                 if (lch$1[i$9].endsWith('%')) {lch$1[i$9] = Number(lch$1[i$9].replace('%', '')) * 0.01;}
                 else {lab[i$9] = Number(lab[i$9]);}
             }
-            var rgb$9 = oklch2rgb(lch$1);
-            rgb$9[3] = +m[4];  // default alpha = 1
+            var rgb$9 = oklch2rgb(lch$1).map(function (i) { return abs(round$3(i)); });
+            rgb$9[3] = Number(m[4]); // default alpha = 1
+            if (!rgb$9[3] && rgb$9[3] !== 0) {rgb$9[3] = 1;}
             return rgb$9;
         }
     };
