@@ -125,7 +125,7 @@
 
     var type$d = type$e;
 
-    var unpack$l = function (args, keyOrder) {
+    var unpack$o = function (args, keyOrder) {
         if ( keyOrder === void 0 ) keyOrder=null;
 
     	// if called with more than 3 arguments, we return the arguments
@@ -157,7 +157,7 @@
     	clip_rgb: clip_rgb$1,
     	limit: limit$1,
     	type: type$e,
-    	unpack: unpack$l,
+    	unpack: unpack$o,
     	last: last$9,
     	PI: PI,
     	TWOPI: PI*2,
@@ -238,7 +238,7 @@
 
     var chroma_1 = chroma$b;
 
-    var unpack$k = utils.unpack;
+    var unpack$n = utils.unpack;
     var last$7 = utils.last;
     var rnd$4 = function (a) { return Math.round(a*100)/100; };
 
@@ -254,7 +254,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var hsla = unpack$k(args, 'hsla');
+        var hsla = unpack$n(args, 'hsla');
         var mode = last$7(args) || 'lsa';
         hsla[0] = rnd$4(hsla[0] || 0);
         hsla[1] = rnd$4(hsla[1]*100) + '%';
@@ -270,7 +270,7 @@
 
     var hsl2css_1 = hsl2css$1;
 
-    var unpack$j = utils.unpack;
+    var unpack$m = utils.unpack;
     var chroma$a = chroma_1;
 
     /*
@@ -285,7 +285,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        args = unpack$j(args, 'rgba');
+        args = unpack$m(args, 'rgba');
         var r = args[0];
         var g = args[1];
         var b = args[2];
@@ -320,7 +320,7 @@
 
     var rgb2hsl_1 = rgb2hsl$2;
 
-    var unpack$i = utils.unpack;
+    var unpack$l = utils.unpack;
     var last$6 = utils.last;
     var rnd$3 = function (a) { return Math.round(a*100)/100; };
 
@@ -336,13 +336,13 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var lcha = unpack$i(args, 'lch');
+        var lcha = unpack$l(args, 'lch');
         var mode = last$6(args) || 'lch';
         lcha[0] = rnd$3(lcha[0]) + '%';
         lcha[1] = rnd$3(lcha[1]) + '%';
         lcha[2] = rnd$3(lcha[2] || 0);
         if (mode === 'lcha' || (lcha.length > 3 && lcha[3]<1)) {
-            lcha[3] = '/' + (lcha.length > 3 ? lcha[3] : 1);
+            lcha[3] = '/ ' + (lcha.length > 3 ? lcha[3] : 1);
         } else {
             lcha.length = 3;
         }
@@ -367,14 +367,14 @@
     };
 
     var LAB_CONSTANTS$2 = labConstants;
-    var unpack$h = utils.unpack;
+    var unpack$k = utils.unpack;
     var pow$4 = Math.pow;
 
     var rgb2lab$3 = function () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var ref = unpack$h(args, 'rgb');
+        var ref = unpack$k(args, 'rgb');
         var r = ref[0];
         var g = ref[1];
         var b = ref[2];
@@ -408,7 +408,7 @@
 
     var rgb2lab_1 = rgb2lab$3;
 
-    var unpack$g = utils.unpack;
+    var unpack$j = utils.unpack;
     var RAD2DEG = utils.RAD2DEG;
     var sqrt$1 = Math.sqrt;
     var atan2 = Math.atan2;
@@ -419,7 +419,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var ref = unpack$g(args, 'lab');
+        var ref = unpack$j(args, 'lab');
         var l = ref[0];
         var a = ref[1];
         var b = ref[2];
@@ -431,7 +431,7 @@
 
     var lab2lch_1 = lab2lch$2;
 
-    var unpack$f = utils.unpack;
+    var unpack$i = utils.unpack;
     var rgb2lab$2 = rgb2lab_1;
     var lab2lch$1 = lab2lch_1;
 
@@ -439,7 +439,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var ref = unpack$f(args, 'rgb');
+        var ref = unpack$i(args, 'rgb');
         var r = ref[0];
         var g = ref[1];
         var b = ref[2];
@@ -452,7 +452,7 @@
 
     var rgb2lch_1 = rgb2lch$1;
 
-    var unpack$e = utils.unpack;
+    var unpack$h = utils.unpack;
     var last$5 = utils.last;
     var rnd$2 = function (a) { return Math.round(a*100)/100; };
 
@@ -468,13 +468,13 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var laba = unpack$e(args, 'lab');
+        var laba = unpack$h(args, 'lab');
         var mode = last$5(args) || 'lab';
         laba[0] = rnd$2(laba[0]) + '%';
         laba[1] = rnd$2(laba[1]) + '%';
         laba[2] = rnd$2(laba[2]) + '%';
         if (mode === 'laba' || (laba.length > 3 && laba[3]<1)) {
-            laba[3] = '/' + (laba.length > 3 ? laba[3] : 1);
+            laba[3] = '/ ' + (laba.length > 3 ? laba[3] : 1);
         } else {
             laba.length = 3;
         }
@@ -483,7 +483,7 @@
 
     var lab2css_1 = lab2css$1;
 
-    var unpack$d = utils.unpack;
+    var unpack$g = utils.unpack;
     var last$4 = utils.last;
     var rnd$1 = function (a) { return Math.round(a*100)/100; };
 
@@ -499,13 +499,13 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var laba = unpack$d(args, 'lab');
+        var laba = unpack$g(args, 'lab');
         var mode = last$4(args) || 'lab';
         laba[0] = rnd$1(laba[0]*100) + '%';
         laba[1] = rnd$1(laba[1]*100) + '%';
         laba[2] = rnd$1(laba[2]*100) + '%';
         if (mode === 'laba' || (laba.length > 3 && laba[3]<1)) {
-            laba[3] = '/' + (laba.length > 3 ? laba[3] : 1);
+            laba[3] = '/ ' + (laba.length > 3 ? laba[3] : 1);
         } else {
             laba.length = 3;
         }
@@ -514,7 +514,7 @@
 
     var oklab2css_1 = oklab2css$1;
 
-    var unpack$c = utils.unpack;
+    var unpack$f = utils.unpack;
     var cbrt = Math.cbrt;
     var pow$3 = Math.pow;
     var sign$1 = Math.sign;
@@ -525,7 +525,7 @@
 
         // OKLab color space implementation taken from
         // https://bottosson.github.io/posts/oklab/
-        var ref = unpack$c(args, 'rgb');
+        var ref = unpack$f(args, 'rgb');
         var r = ref[0];
         var g = ref[1];
         var b = ref[2];
@@ -554,7 +554,7 @@
         return (sign$1(c) || 1) * pow$3((abs + 0.055) / 1.055, 2.4);
     }
 
-    var unpack$b = utils.unpack;
+    var unpack$e = utils.unpack;
     var last$3 = utils.last;
     var rnd = function (a) { return Math.round(a*100)/100; };
 
@@ -570,7 +570,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var lcha = unpack$b(args, 'lch');
+        var lcha = unpack$e(args, 'lch');
         var mode = last$3(args) || 'lch';
         lcha[0] = rnd(lcha[0]*100) + '%';
         lcha[1] = rnd(lcha[1]*100) + '%';
@@ -585,7 +585,7 @@
 
     var oklch2css_1 = oklch2css$1;
 
-    var unpack$a = utils.unpack;
+    var unpack$d = utils.unpack;
     var rgb2oklab$2 = rgb2oklab_1;
     var lab2lch = lab2lch_1;
 
@@ -593,7 +593,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var ref = unpack$a(args, 'rgb');
+        var ref = unpack$d(args, 'rgb');
         var r = ref[0];
         var g = ref[1];
         var b = ref[2];
@@ -606,7 +606,7 @@
 
     var rgb2oklch_1 = rgb2oklch$1;
 
-    var unpack$9 = utils.unpack;
+    var unpack$c = utils.unpack;
     var last$2 = utils.last;
     var hsl2css = hsl2css_1;
     var rgb2hsl$1 = rgb2hsl_1;
@@ -632,7 +632,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var rgba = unpack$9(args, 'rgba');
+        var rgba = unpack$c(args, 'rgba');
         var mode = last$2(args) || 'rgb';
         if (mode.substring(0,3) == 'hsl') {
             return hsl2css(rgb2hsl$1(rgba), mode);
@@ -657,7 +657,7 @@
 
     var rgb2css_1 = rgb2css$1;
 
-    var unpack$8 = utils.unpack;
+    var unpack$b = utils.unpack;
     var round$4 = Math.round;
 
     var hsl2rgb$1 = function () {
@@ -665,7 +665,7 @@
 
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
-        args = unpack$8(args, 'hsl');
+        args = unpack$b(args, 'hsl');
         var h = args[0];
         var s = args[1];
         var l = args[2];
@@ -704,7 +704,172 @@
 
     var hsl2rgb_1 = hsl2rgb$1;
 
+    var LAB_CONSTANTS$1 = labConstants;
+    var unpack$a = utils.unpack;
+    var pow$2 = Math.pow;
+
+    /*
+     * L* [0..100]
+     * a [-100..100]
+     * b [-100..100]
+     */
+    var lab2rgb$2 = function () {
+        var args = [], len = arguments.length;
+        while ( len-- ) args[ len ] = arguments[ len ];
+
+        args = unpack$a(args, 'lab');
+        var l = args[0];
+        var a = args[1];
+        var b = args[2];
+        var x,y,z, r,g,b_;
+
+        y = (l + 16) / 116;
+        x = isNaN(a) ? y : y + a / 500;
+        z = isNaN(b) ? y : y - b / 200;
+
+        y = LAB_CONSTANTS$1.Yn * lab_xyz(y);
+        x = LAB_CONSTANTS$1.Xn * lab_xyz(x);
+        z = LAB_CONSTANTS$1.Zn * lab_xyz(z);
+
+        r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
+        g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
+        b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
+
+        return [r,g,b_,args.length > 3 ? args[3] : 1];
+    };
+
+    var xyz_rgb = function (r) {
+        return 255 * (r <= 0.00304 ? 12.92 * r : 1.055 * pow$2(r, 1 / 2.4) - 0.055)
+    };
+
+    var lab_xyz = function (t) {
+        return t > LAB_CONSTANTS$1.t1 ? t * t * t : LAB_CONSTANTS$1.t2 * (t - LAB_CONSTANTS$1.t0)
+    };
+
+    var lab2rgb_1 = lab2rgb$2;
+
+    var unpack$9 = utils.unpack;
+    var DEG2RAD = utils.DEG2RAD;
+    var sin = Math.sin;
+    var cos = Math.cos;
+
+    var lch2lab$2 = function () {
+        var args = [], len = arguments.length;
+        while ( len-- ) args[ len ] = arguments[ len ];
+
+        /*
+        Convert from a qualitative parameter h and a quantitative parameter l to a 24-bit pixel.
+        These formulas were invented by David Dalrymple to obtain maximum contrast without going
+        out of gamut if the parameters are in the range 0-1.
+
+        A saturation multiplier was added by Gregor Aisch
+        */
+        var ref = unpack$9(args, 'lch');
+        var l = ref[0];
+        var c = ref[1];
+        var h = ref[2];
+        if (isNaN(h)) { h = 0; }
+        h = h * DEG2RAD;
+        return [l, cos(h) * c, sin(h) * c]
+    };
+
+    var lch2lab_1 = lch2lab$2;
+
+    var unpack$8 = utils.unpack;
+    var lch2lab$1 = lch2lab_1;
+    var lab2rgb$1 = lab2rgb_1;
+
+    var lch2rgb$1 = function () {
+        var args = [], len = arguments.length;
+        while ( len-- ) args[ len ] = arguments[ len ];
+
+        args = unpack$8(args, 'lch');
+        var l = args[0];
+        var c = args[1];
+        var h = args[2];
+        var ref = lch2lab$1 (l,c,h);
+        var L = ref[0];
+        var a = ref[1];
+        var b_ = ref[2];
+        var ref$1 = lab2rgb$1 (L,a,b_);
+        var r = ref$1[0];
+        var g = ref$1[1];
+        var b = ref$1[2];
+        return [r, g, b, args.length > 3 ? args[3] : 1];
+    };
+
+    var lch2rgb_1 = lch2rgb$1;
+
+    var unpack$7 = utils.unpack;
+    var pow$1 = Math.pow;
+    var sign = Math.sign;
+
+    /*
+     * L* [0..100]
+     * a [-100..100]
+     * b [-100..100]
+     */
+    var oklab2rgb$2 = function () {
+        var args = [], len = arguments.length;
+        while ( len-- ) args[ len ] = arguments[ len ];
+
+        args = unpack$7(args, 'lab');
+        var L = args[0];
+        var a = args[1];
+        var b = args[2];
+
+        var l = pow$1(L + 0.3963377774 * a + 0.2158037573 * b, 3);
+        var m = pow$1(L - 0.1055613458 * a - 0.0638541728 * b, 3);
+        var s = pow$1(L - 0.0894841775 * a - 1.291485548 * b, 3);
+
+        return [
+            255 * lrgb2rgb(+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+            255 * lrgb2rgb(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+            255 * lrgb2rgb(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s),
+            args.length > 3 ? args[3] : 1
+        ];
+    };
+
+    var oklab2rgb_1 = oklab2rgb$2;
+
+    function lrgb2rgb(c) {
+        var abs = Math.abs(c);
+        if (abs > 0.0031308) {
+            return (sign(c) || 1) * (1.055 * pow$1(abs, 1 / 2.4) - 0.055);
+        }
+        return c * 12.92;
+    }
+
+    var unpack$6 = utils.unpack;
+    var lch2lab = lch2lab_1;
+    var oklab2rgb$1 = oklab2rgb_1;
+
+    var oklch2rgb$1 = function () {
+        var args = [], len = arguments.length;
+        while ( len-- ) args[ len ] = arguments[ len ];
+
+        args = unpack$6(args, 'lch');
+        var l = args[0];
+        var c = args[1];
+        var h = args[2];
+        var ref = lch2lab(l, c, h);
+        var L = ref[0];
+        var a = ref[1];
+        var b_ = ref[2];
+        var ref$1 = oklab2rgb$1(L, a, b_);
+        var r = ref$1[0];
+        var g = ref$1[1];
+        var b = ref$1[2];
+        return [r, g, b, args.length > 3 ? args[3] : 1];
+    };
+
+    var oklch2rgb_1 = oklch2rgb$1;
+
     var hsl2rgb = hsl2rgb_1;
+    var lab2rgb = lab2rgb_1;
+    var lch2rgb = lch2rgb_1;
+    var oklab2rgb = oklab2rgb_1;
+    var oklch2rgb = oklch2rgb_1;
     var input$7 = input$8;
 
     var RE_RGB = /^rgb\(\s*(-?\d+),\s*(-?\d+)\s*,\s*(-?\d+)\s*\)$/;
@@ -713,6 +878,10 @@
     var RE_RGBA_PCT = /^rgba\(\s*(-?\d+(?:\.\d+)?)%,\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)$/;
     var RE_HSL = /^hsl\(\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*\)$/;
     var RE_HSLA = /^hsla\(\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)$/;
+    var RE_LABA = /^lab\(\s*(\d+(?:\.\d+)?)%?\s* (-?\d+(?:\.\d+)?)%?\s* \s*(-?\d+(?:\.\d+)?)%?\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
+    var RE_LCHA = /^lch\(\s*(\d+(?:\.\d+)?)%?\s* (\d+(?:\.\d+)?)%?\s* \s*(-?\d+(?:\.\d+)?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
+    var RE_OKLABA = /^oklab\(\s*(\d+(?:\.\d+)?%?)\s* (-?\d+(?:\.\d+)?%?)\s* \s*(-?\d+(?:\.\d+)?%?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
+    var RE_OKLCHA = /^oklch\(\s*(\d+(?:\.\d+)?%?)\s* (\d+(?:\.\d+)?%?)\s* \s*(-?\d+(?:\.\d+)?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
 
     var round$3 = Math.round;
 
@@ -732,7 +901,7 @@
         if ((m = css.match(RE_RGB))) {
             var rgb = m.slice(1,4);
             for (var i=0; i<3; i++) {
-                rgb[i] = +rgb[i];
+                rgb[i] = Number(rgb[i]);
             }
             rgb[3] = 1;  // default alpha
             return rgb;
@@ -742,7 +911,7 @@
         if ((m = css.match(RE_RGBA))) {
             var rgb$1 = m.slice(1,5);
             for (var i$1=0; i$1<4; i$1++) {
-                rgb$1[i$1] = +rgb$1[i$1];
+                rgb$1[i$1] = Number(rgb$1[i$1]);
             }
             return rgb$1;
         }
@@ -751,7 +920,7 @@
         if ((m = css.match(RE_RGB_PCT))) {
             var rgb$2 = m.slice(1,4);
             for (var i$2=0; i$2<3; i$2++) {
-                rgb$2[i$2] = round$3(rgb$2[i$2] * 2.55);
+                rgb$2[i$2] = round$3(Number(rgb$2[i$2]) * 2.55);
             }
             rgb$2[3] = 1;  // default alpha
             return rgb$2;
@@ -761,7 +930,7 @@
         if ((m = css.match(RE_RGBA_PCT))) {
             var rgb$3 = m.slice(1,5);
             for (var i$3=0; i$3<3; i$3++) {
-                rgb$3[i$3] = round$3(rgb$3[i$3] * 2.55);
+                rgb$3[i$3] = round$3(Number(rgb$3[i$3]) * 2.55);
             }
             rgb$3[3] = +rgb$3[3];
             return rgb$3;
@@ -770,6 +939,7 @@
         // hsl(0,100%,50%)
         if ((m = css.match(RE_HSL))) {
             var hsl = m.slice(1,4);
+            for (var i$4 = 0; i$4 <= 2; i$4++) {hsl[i$4] = Number(hsl[i$4]);}
             hsl[1] *= 0.01;
             hsl[2] *= 0.01;
             var rgb$4 = hsl2rgb(hsl);
@@ -780,11 +950,54 @@
         // hsla(0,100%,50%,0.5)
         if ((m = css.match(RE_HSLA))) {
             var hsl$1 = m.slice(1,4);
+            for (var i$5 = 0; i$5 <= 2; i$5++) {hsl$1[i$5] = Number(hsl$1[i$5]);}
             hsl$1[1] *= 0.01;
             hsl$1[2] *= 0.01;
             var rgb$5 = hsl2rgb(hsl$1);
             rgb$5[3] = +m[4];  // default alpha = 1
             return rgb$5;
+        }
+        
+        // lab(48.25% -28.85% -8.48% / 1)
+        if ((m = css.match(RE_LABA))) {
+            var lab$1 = m.slice(1,4);
+            for (var i$6 = 0; i$6 <= 2; i$6++) {lab$1[i$6] = Number(lab$1[i$6]);}
+            var rgb$6 = lab2rgb(lab$1);
+            rgb$6[3] = +m[4];  // default alpha = 1
+            return rgb$6;
+        }
+        
+        // lch(54.31% 9.27% 194.77 / 1)
+        if ((m = css.match(RE_LCHA))) {
+            var lch = m.slice(1,4);
+            for (var i$7 = 0; i$7 <= 2; i$7++) {lch[i$7] = Number(lch[i$7]);}
+            var rgb$7 = lch2rgb(lch);
+            rgb$7[3] = +m[4];  // default alpha = 1
+            return rgb$7;
+        }
+        
+        // oklab(54.31% -8.96% -2.36% / 1)
+        if ((m = css.match(RE_OKLABA))) {
+            var lab$2 = m.slice(1,4);
+            for (var i$8 = 0; i$8 <= 2; i$8++) {
+                if (lab$2[i$8].endsWith('%')) {lab$2[i$8] = Number(lab$2[i$8].replace('%', '')) * 0.01;}
+                else {lab$2[i$8] = Number(lab$2[i$8]);}
+            }
+            var rgb$8 = oklab2rgb(lab$2);
+            rgb$8[3] = +m[4];  // default alpha = 1
+            return rgb$8;
+        }
+        
+        // oklch(54.31% 9.27% 194.77 / 1)
+        if ((m = css.match(RE_OKLCHA))) {
+            var lch$1 = m.slice(1,4);
+            for (var i$9 = 0; i$9 <= 1; i$9++) {
+                if (lch$1[i$9].endsWith('%')) {lch$1[i$9] = Number(lch$1[i$9].replace('%', '')) * 0.01;}
+                else {lab[i$9] = Number(lab[i$9]);}
+            }
+            var rgb$9 = oklch2rgb(lch$1);
+            rgb$9[3] = +m[4];  // default alpha = 1
+            return rgb$9;
         }
     };
 
@@ -794,7 +1007,11 @@
             RE_RGB_PCT.test(s) ||
             RE_RGBA_PCT.test(s) ||
             RE_HSL.test(s) ||
-            RE_HSLA.test(s);
+            RE_HSLA.test(s) ||
+            RE_LABA.test(s) ||
+            RE_LCHA.test(s) ||
+            RE_OKLABA.test(s) ||
+            RE_OKLCHA.test(s);
     };
 
     var css2rgb_1 = css2rgb$1;
@@ -832,7 +1049,7 @@
         }
     });
 
-    var unpack$7 = utils.unpack;
+    var unpack$5 = utils.unpack;
     var last$1 = utils.last;
     var round$2 = Math.round;
 
@@ -840,7 +1057,7 @@
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
 
-        var ref = unpack$7(args, 'rgba');
+        var ref = unpack$5(args, 'rgba');
         var r = ref[0];
         var g = ref[1];
         var b = ref[2];
@@ -947,7 +1164,7 @@
         }
     });
 
-    var unpack$6 = utils.unpack;
+    var unpack$4 = utils.unpack;
     var type$8 = utils.type;
     var chroma$6 = chroma_1;
     var Color$d = Color_1;
@@ -974,58 +1191,14 @@
             var args = [], len = arguments.length;
             while ( len-- ) args[ len ] = arguments[ len ];
 
-            args = unpack$6(args, 'hsl');
+            args = unpack$4(args, 'hsl');
             if (type$8(args) === 'array' && args.length === 3) {
                 return 'hsl';
             }
         }
     });
 
-    var LAB_CONSTANTS$1 = labConstants;
-    var unpack$5 = utils.unpack;
-    var pow$2 = Math.pow;
-
-    /*
-     * L* [0..100]
-     * a [-100..100]
-     * b [-100..100]
-     */
-    var lab2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$5(args, 'lab');
-        var l = args[0];
-        var a = args[1];
-        var b = args[2];
-        var x,y,z, r,g,b_;
-
-        y = (l + 16) / 116;
-        x = isNaN(a) ? y : y + a / 500;
-        z = isNaN(b) ? y : y - b / 200;
-
-        y = LAB_CONSTANTS$1.Yn * lab_xyz(y);
-        x = LAB_CONSTANTS$1.Xn * lab_xyz(x);
-        z = LAB_CONSTANTS$1.Zn * lab_xyz(z);
-
-        r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
-        g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
-        b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
-
-        return [r,g,b_,args.length > 3 ? args[3] : 1];
-    };
-
-    var xyz_rgb = function (r) {
-        return 255 * (r <= 0.00304 ? 12.92 * r : 1.055 * pow$2(r, 1 / 2.4) - 0.055)
-    };
-
-    var lab_xyz = function (t) {
-        return t > LAB_CONSTANTS$1.t1 ? t * t * t : LAB_CONSTANTS$1.t2 * (t - LAB_CONSTANTS$1.t0)
-    };
-
-    var lab2rgb_1 = lab2rgb;
-
-    var unpack$4 = utils.unpack;
+    var unpack$3 = utils.unpack;
     var type$7 = utils.type;
     var chroma$5 = chroma_1;
     var Color$c = Color_1;
@@ -1052,52 +1225,12 @@
             var args = [], len = arguments.length;
             while ( len-- ) args[ len ] = arguments[ len ];
 
-            args = unpack$4(args, 'lab');
+            args = unpack$3(args, 'lab');
             if (type$7(args) === 'array' && args.length === 3) {
                 return 'lab';
             }
         }
     });
-
-    var unpack$3 = utils.unpack;
-    var pow$1 = Math.pow;
-    var sign = Math.sign;
-
-    /*
-     * L* [0..100]
-     * a [-100..100]
-     * b [-100..100]
-     */
-    var oklab2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$3(args, 'lab');
-        var L = args[0];
-        var a = args[1];
-        var b = args[2];
-
-        var l = pow$1(L + 0.3963377774 * a + 0.2158037573 * b, 3);
-        var m = pow$1(L - 0.1055613458 * a - 0.0638541728 * b, 3);
-        var s = pow$1(L - 0.0894841775 * a - 1.291485548 * b, 3);
-
-        return [
-            255 * lrgb2rgb(+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
-            255 * lrgb2rgb(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
-            255 * lrgb2rgb(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s),
-            args.length > 3 ? args[3] : 1
-        ];
-    };
-
-    var oklab2rgb_1 = oklab2rgb;
-
-    function lrgb2rgb(c) {
-        var abs = Math.abs(c);
-        if (abs > 0.0031308) {
-            return (sign(c) || 1) * (1.055 * pow$1(abs, 1 / 2.4) - 0.055);
-        }
-        return c * 12.92;
-    }
 
     var unpack$2 = utils.unpack;
     var type$6 = utils.type;
