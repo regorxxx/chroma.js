@@ -3544,7 +3544,7 @@
         var sum_sq = 0;
         var d;
         for (var i in l1) {
-            if (intMode.charAt[i] === 'h') {
+            if (intMode.charAt(i) === 'h') {
                 var hueDifference = (l1[i] || 0) - (l2[i] || 0);
                 d = Math.abs(hueDifference + 180) % 360 - 180;
             }
