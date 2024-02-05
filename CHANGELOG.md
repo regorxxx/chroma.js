@@ -2,6 +2,7 @@
 
 ### unreleased
 * added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using "chroma.noHueAsZero(true)" first at any time. See [Issue 322](https://github.com/gka/chroma.js/issues/322)
+* added LAB, LCH, OKLCH and OKLAB support in "chroma.css()" [Issue 325](https://github.com/gka/chroma.js/issues/325)
 * added weights for every component at chroma.distance() (@lulunac27a)
 * improved support for OKLCH colors using chroma.average() or chroma.distance() (@lulunac27a)
 * minor improvements to documentation
