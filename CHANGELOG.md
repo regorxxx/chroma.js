@@ -6,6 +6,7 @@
 * added LAB, LCH, OKLCH and OKLAB CSS support in "chroma()". i.e. CSS expressions are also interpreted as colors `chroma("lch(48.25% 30.07% 196.38)")`
 * added weights for every component at `chroma.distance()` (@lulunac27a)
 * improved support for OKLCH colors using `chroma.average()` or `chroma.distance()` (@lulunac27a)
+* added 'supported color spaces' to documentation
 * minor improvements to documentation
 
 ### 2.7.0
