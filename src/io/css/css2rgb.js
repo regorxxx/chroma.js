@@ -16,7 +16,7 @@ const RE_LCHA = /^lch\(\s*(\d+(?:\.\d+)?)%?\s* (\d+(?:\.\d+)?)%?\s* \s*(-?\d+(?:
 const RE_OKLABA = /^oklab\(\s*(\d+(?:\.\d+)?%?)\s* (-?\d+(?:\.\d+)?%?)\s* \s*(-?\d+(?:\.\d+)?%?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
 const RE_OKLCHA = /^oklch\(\s*(\d+(?:\.\d+)?%?)\s* (\d+(?:\.\d+)?%?)\s* \s*(-?\d+(?:\.\d+)?)\s*(?:\/\s*([01]|[01]?\.\d+))?\)$/;
 
-const {round} = Math;
+const {round, abs} = Math;
 
 const css2rgb = (css) => {
     css = css.toLowerCase().trim();
@@ -65,7 +65,7 @@ const css2rgb = (css) => {
         for (let i=0; i<3; i++) {
             rgb[i] = round(Number(rgb[i]) * 2.55);
         }
-        rgb[3] = +rgb[3];
+        rgb[3] = Number(rgb[3]);
         return rgb;
     }
 
@@ -87,7 +87,7 @@ const css2rgb = (css) => {
         hsl[1] *= 0.01;
         hsl[2] *= 0.01;
         const rgb = hsl2rgb(hsl);
-        rgb[3] = +m[4]  // default alpha = 1
+        rgb[3] = Number(m[4]);  // default alpha = 1
         return rgb;
     }
     
@@ -95,8 +95,9 @@ const css2rgb = (css) => {
     if ((m = css.match(RE_LABA))) {
         const lab = m.slice(1,4);
         for (let i = 0; i <= 2; i++) {lab[i] = Number(lab[i]);}
-        const rgb = lab2rgb(lab);
-        rgb[3] = +m[4]  // default alpha = 1
+        const rgb = lab2rgb(lab).map((i) => abs(round(i)));
+        rgb[3] = Number(m[4]); // default alpha = 1
+        if (!rgb[3] && rgb[3] !== 0) {rgb[3] = 1;}
         return rgb;
     }
     
@@ -104,8 +105,9 @@ const css2rgb = (css) => {
     if ((m = css.match(RE_LCHA))) {
         const lch = m.slice(1,4);
         for (let i = 0; i <= 2; i++) {lch[i] = Number(lch[i]);}
-        const rgb = lch2rgb(lch);
-        rgb[3] = +m[4]  // default alpha = 1
+        const rgb = lch2rgb(lch).map((i) => abs(round(i)));
+        rgb[3] = Number(m[4]); // default alpha = 1
+        if (!rgb[3] && rgb[3] !== 0) {rgb[3] = 1;}
         return rgb;
     }
     
@@ -116,8 +118,9 @@ const css2rgb = (css) => {
             if (lab[i].endsWith('%')) {lab[i] = Number(lab[i].replace('%', '')) * 0.01;}
             else {lab[i] = Number(lab[i]);}
         }
-        const rgb = oklab2rgb(lab);
-        rgb[3] = +m[4]  // default alpha = 1
+        const rgb = oklab2rgb(lab).map((i) => abs(round(i)));
+        rgb[3] = Number(m[4]); // default alpha = 1
+        if (!rgb[3] && rgb[3] !== 0) {rgb[3] = 1;}
         return rgb;
     }
     
@@ -128,8 +131,9 @@ const css2rgb = (css) => {
             if (lch[i].endsWith('%')) {lch[i] = Number(lch[i].replace('%', '')) * 0.01;}
             else {lab[i] = Number(lab[i]);}
         }
-        const rgb = oklch2rgb(lch);
-        rgb[3] = +m[4]  // default alpha = 1
+        const rgb = oklch2rgb(lch).map((i) => abs(round(i)));
+        rgb[3] = Number(m[4]); // default alpha = 1
+        if (!rgb[3] && rgb[3] !== 0) {rgb[3] = 1;}
         return rgb;
     }
 }
