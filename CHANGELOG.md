@@ -1,16 +1,17 @@
 ## Changelog
 
 ### unreleased
-* added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using "chroma.noHueAsZero(true)" first at any time. See [Issue 322](https://github.com/gka/chroma.js/issues/322)
-* added LAB, LCH, OKLCH and OKLAB support in "chroma.css()" [Issue 325](https://github.com/gka/chroma.js/issues/325)
-* added weights for every component at chroma.distance() (@lulunac27a)
-* improved support for OKLCH colors using chroma.average() or chroma.distance() (@lulunac27a)
+* added chroma.noHueAsZero() to change the global behavior for colors with no hue (like black, white or grays) in color spaces which work internally with hue values (like LCH, HSL, ...). By default these colors returned a NaN hue value, but this behavior can now be changed to output always zero by using `chroma.noHueAsZero(true)` first at any time. See [Issue 322](https://github.com/gka/chroma.js/issues/322)
+* added LAB, LCH, OKLCH and OKLAB support in `chroma.css()` [Issue 325](https://github.com/gka/chroma.js/issues/325)
+* added LAB, LCH, OKLCH and OKLAB CSS support in "chroma()". i.e. CSS expressions are also interpreted as colors `chroma("lch(48.25% 30.07% 196.38)")`
+* added weights for every component at `chroma.distance()` (@lulunac27a)
+* improved support for OKLCH colors using `chroma.average()` or `chroma.distance()` (@lulunac27a)
 * minor improvements to documentation
 
 ### 2.7.0
-* added chroma.brewer.getPalettes() to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
-* added chroma.brewer.getPalette(palette) to retrieve all schemes from an specific palette (for ex. 'Qualitative')
-* added 'Diverging','Qualitative', and 'Sequential' scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. chroma.scale('Sequential') -> chroma.scale('OrRd') 
+* added `chroma.brewer.getPalettes()` to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
+* added `chroma.brewer.getPalette(palette)` to retrieve all schemes from an specific palette (for ex. 'Qualitative')
+* added 'Diverging','Qualitative', and 'Sequential' scales to chroma.brewer and chroma.scale(), which will automatically retrieve a single random scale from the given palette. For ex. `chroma.scale('Sequential')` -> `chroma.scale('OrRd')` 
 * chroma.brewer object can no longer be modified in any way (or its scales). Make a copy of it if required
 * replace deprecated .substr usage
 * fixed 'npm run docs-preview' CMD command
