@@ -380,6 +380,38 @@ And the available scales within a palette:
 chroma.brewer.getPalette('Qualitative').slice(0, 2);
 ```
 
+### chroma.palette
+#### (colors, mode, n)
+
+A helper function that computes a n-palette, based on input colors. It supports the modes [_contrast_ (c)](#chromacontrast), [_distance_ (d)](#chromadistance) and [_deltaE_ (de)](#chromadeltaE). Let's take a few colors as sample.
+
+```js
+var colors = ['#D2691E', '#8B4513', '#A0522D'
+			,'#0000FF', '#668B8B', '#FFC0CB'];
+```
+
+**[Contrast](#chromacontrast)** retrieves the n colors with highest contrast between them from the input colors:
+
+```js
+chroma.palette(colors, 'c', 2);
+```
+
+It also supports Chroma color objects as input, without needing to convert back an forth between formats:
+
+```js
+colors = colors.map(function (c) {return chroma(c)});
+chroma.palette(colors, 'c', 2);
+```
+
+### chroma.stdDeviation
+#### (colors)
+
+A helper function that computes the standard deviation of input colors. Colors are internally parsed as [RGBA](#colorrgba) and output represents the mean RGBA component deviation. Divide it by 255 to get a percentage. Also supports Chroma color objects as input.
+
+```js
+chroma.stdDeviation(colors);
+```
+
 ### chroma.limits
 #### (data, mode, n)
 
