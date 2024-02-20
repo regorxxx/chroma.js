@@ -10,6 +10,8 @@ class Color {
             args[0].constructor === this.constructor) {
             // the argument is already a Color instance
             return args[0];
+        } else if (type(args[0]) === 'array' && args.length === 1) {
+            args = [...args[0]];
         }
 
         // last argument could be the mode
@@ -33,7 +35,7 @@ class Color {
             const rgb = _input.format[mode].apply(null, autodetect ? args : args.slice(0,-1));
             me._rgb = clip_rgb(rgb);
         } else {
-            throw new Error('unknown format: '+args);
+            throw new Error('unknown format: ' + args);
         }
 
         // add alpha channel
