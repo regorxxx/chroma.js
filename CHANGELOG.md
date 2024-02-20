@@ -5,9 +5,12 @@
 * added LAB, LCH, OKLCH and OKLAB support in `chroma.css()` [Issue 325](https://github.com/gka/chroma.js/issues/325)
 * added LAB, LCH, OKLCH and OKLAB CSS support in "chroma()". i.e. CSS expressions are also interpreted as colors `chroma("lch(48.25% 30.07% 196.38)")`
 * added weights for every component at `chroma.distance()` (@lulunac27a)
+* added chroma.stdDeviation() to retrieve the variance in an array of colors as an RGBA component. See [Issue 328] (https://github.com/gka/chroma.js/issues/328#issuecomment-1951628498)
+* added chroma.palette() to retrieve the n-most representative colors in an array of colors. See [Issue 328] (https://github.com/gka/chroma.js/issues/328#issuecomment-1951628498)
 * improved support for OKLCH colors using `chroma.average()` or `chroma.distance()` (@lulunac27a)
 * added 'supported color spaces' to documentation
 * minor improvements to documentation
+* fix wrong handling of RGB and RGBA arrays when constructing chroma color objects.
 
 ### 2.7.0
 * added `chroma.brewer.getPalettes()` to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
