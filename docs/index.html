@@ -253,6 +253,24 @@ chroma.deltaE(&#39;#000000&#39;, &#39;#ffffff&#39;);
 <p>And the available scales within a palette:</p>
 <pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2);
 </code></pre>
+<h3 id="chromapalette">chroma.palette</h3>
+<h4 id="colors-mode-n">(colors, mode, n)</h4>
+<p>A helper function that computes a n-palette, based on input colors. It supports the modes <a href="#chromacontrast"><em>contrast</em> (c)</a>, <a href="#chromadistance"><em>distance</em> (d)</a> and <a href="#chromadeltaE"><em>deltaE</em> (de)</a>. Let&#39;s take a few colors as sample.</p>
+<pre><code class="language-js">var colors = [&#39;#D2691E&#39;, &#39;#8B4513&#39;, &#39;#A0522D&#39;
+            ,&#39;#0000FF&#39;, &#39;#668B8B&#39;, &#39;#FFC0CB&#39;];
+</code></pre>
+<p><strong><a href="#chromacontrast">Contrast</a></strong> retrieves the n colors with highest contrast between them from the input colors:</p>
+<pre><code class="language-js">chroma.palette(colors, &#39;c&#39;, 2);
+</code></pre>
+<p>It also supports Chroma color objects as input, without needing to convert back an forth between formats:</p>
+<pre><code class="language-js">colors = colors.map(function (c) {return chroma(c)});
+chroma.palette(colors, &#39;c&#39;, 2);
+</code></pre>
+<h3 id="chromastddeviation">chroma.stdDeviation</h3>
+<h4 id="colors">(colors)</h4>
+<p>A helper function that computes the standard deviation of input colors. Colors are internally parsed as <a href="#colorrgba">RGBA</a> and output represents the mean RGBA component deviation. Divide it by 255 to get a percentage. Also supports Chroma color objects as input.</p>
+<pre><code class="language-js">chroma.stdDeviation(colors);
+</code></pre>
 <h3 id="chromalimits">chroma.limits</h3>
 <h4 id="data-mode-n">(data, mode, n)</h4>
 <p>A helper function that computes class breaks for you, based on data. It supports the modes <em>equidistant</em> (e), <em>quantile</em> (q), <em>logarithmic</em> (l), and <em>k-means</em> (k). Let&#39;s take a few numbers as sample data.</p>
@@ -584,7 +602,7 @@ chroma.scale(&#39;Sequential&#39;);
 <pre><code class="language-js">chroma.brewer.getPalette(&#39;Qualitative&#39;).slice(0, 2);
 </code></pre>
 <h3 id="chromabezier">chroma.bezier</h3>
-<h4 id="colors">(colors)</h4>
+<h4 id="colors-1">(colors)</h4>
 <p><code>chroma.bezier</code> returns a function that <a href="https://www.vis4.net/blog/posts/mastering-multi-hued-color-scales/">bezier-interpolates between colors</a> in <code>Lab</code> space. Also works with alpha channels. The input range of the function is <code>[0..1]</code>.</p>
 <pre><code class="language-js">// linear interpolation
 chroma.scale([&#39;yellow&#39;, &#39;red&#39;, &#39;black&#39;]);
@@ -758,6 +776,7 @@ chroma(-16777216);
 <li>improved support for OKLCH colors using <code>chroma.average()</code> or <code>chroma.distance()</code> (@lulunac27a)</li>
 <li>added &#39;supported color spaces&#39; to documentation</li>
 <li>minor improvements to documentation</li>
+<li>fix wrong handling of RGB and RGBA arrays when constructing chroma color objects.</li>
 </ul>
 <h3 id="270">2.7.0</h3>
 <ul>
