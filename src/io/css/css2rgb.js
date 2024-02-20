@@ -128,8 +128,10 @@ const css2rgb = (css) => {
     if ((m = css.match(RE_OKLCHA))) {
         const lch = m.slice(1,4);
         for (let i = 0; i <= 1; i++) {
-            if (lch[i].endsWith('%')) {lch[i] = Number(lch[i].replace('%', '')) * 0.01;}
-            else {lab[i] = Number(lab[i]);}
+            if (lch[i].endsWith('%')) {
+                lch[i] = Number(lch[i].replace('%', '')) * 0.01;
+                if (i === 1) {lch[i] *= 0.4;}
+            } else {lch[i] = Number(lch[i]);}
         }
         const rgb = oklch2rgb(lch).map((i) => abs(round(i)));
         rgb[3] = Number(m[4]); // default alpha = 1

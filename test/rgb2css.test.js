@@ -15,11 +15,12 @@ const tests = {
     lab: { rgb: [255,255,0], mode:'lab', css: 'lab(97.14% -21.55% 94.48%)' },
     lch: { rgb: [255,255,0], mode:'lch', css: 'lch(97.14% 96.91% 102.85)' },
     oklab: { rgb: [255,255,0], mode:'oklab', css: 'oklab(96.8% -7.14% 19.86%)' },
-    oklch: { rgb: [255,255,0], mode:'oklch', css: 'oklch(96.8% 21.1% 109.77)' },
+    oklch: { rgb: [255,255,0], mode:'oklch', css: 'oklch(96.8% 52.75% 109.77)' },
+    oklch2: { rgb: [207,66,0], mode:'oklch', css: 'oklch(57.61% 46.72% 38.41)' },
     laba: { rgb: [255,255,0,0.75], mode:'lab', css: 'lab(97.14% -21.55% 94.48% / 0.75)' },
     lcha: { rgb: [255,255,0,0.75], mode:'lch', css: 'lch(97.14% 96.91% 102.85)' },
     oklaba: { rgb: [255,255,0,0.75], mode:'oklab', css: 'oklab(96.8% -7.14% 19.86% / 0.75)' },
-    oklcha: { rgb: [255,255,0,0.75], mode:'oklch', css: 'oklch(96.8% 21.1% 109.77 / 0.75)' },
+    oklcha: { rgb: [255,255,0,0.75], mode:'oklch', css: 'oklch(96.8% 52.75% 109.77 / 0.75)' },
 };
 
 const batch = {};

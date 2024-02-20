@@ -559,6 +559,7 @@
     var unpack$e = utils.unpack;
     var last$3 = utils.last;
     var rnd = function (a) { return Math.round(a*100)/100; };
+    var min = Math.min;
 
     /*
      * supported arguments:
@@ -575,7 +576,7 @@
         var lcha = unpack$e(args, 'lch');
         var mode = last$3(args) || 'lch';
         lcha[0] = rnd(lcha[0]*100) + '%';
-        lcha[1] = rnd(lcha[1]*100) + '%';
+        lcha[1] = min(rnd(lcha[1] / 0.4 *100), 100) + '%';
         lcha[2] = rnd(lcha[2] || 0);
         if (mode === 'lcha' || (lcha.length > 3 && lcha[3]<1)) {
             lcha[3] = '/ ' + (lcha.length > 3 ? lcha[3] : 1);
@@ -963,9 +964,9 @@
         
         // lab(48.25% -28.85% -8.48% / 1)
         if ((m = css.match(RE_LABA))) {
-            var lab$1 = m.slice(1,4);
-            for (var i$6 = 0; i$6 <= 2; i$6++) {lab$1[i$6] = Number(lab$1[i$6]);}
-            var rgb$6 = lab2rgb(lab$1).map(function (i) { return abs(round$3(i)); });
+            var lab = m.slice(1,4);
+            for (var i$6 = 0; i$6 <= 2; i$6++) {lab[i$6] = Number(lab[i$6]);}
+            var rgb$6 = lab2rgb(lab).map(function (i) { return abs(round$3(i)); });
             rgb$6[3] = Number(m[4]); // default alpha = 1
             if (!rgb$6[3] && rgb$6[3] !== 0) {rgb$6[3] = 1;}
             return rgb$6;
@@ -983,12 +984,12 @@
         
         // oklab(54.31% -8.96% -2.36% / 1)
         if ((m = css.match(RE_OKLABA))) {
-            var lab$2 = m.slice(1,4);
+            var lab$1 = m.slice(1,4);
             for (var i$8 = 0; i$8 <= 2; i$8++) {
-                if (lab$2[i$8].endsWith('%')) {lab$2[i$8] = Number(lab$2[i$8].replace('%', '')) * 0.01;}
-                else {lab$2[i$8] = Number(lab$2[i$8]);}
+                if (lab$1[i$8].endsWith('%')) {lab$1[i$8] = Number(lab$1[i$8].replace('%', '')) * 0.01;}
+                else {lab$1[i$8] = Number(lab$1[i$8]);}
             }
-            var rgb$8 = oklab2rgb(lab$2).map(function (i) { return abs(round$3(i)); });
+            var rgb$8 = oklab2rgb(lab$1).map(function (i) { return abs(round$3(i)); });
             rgb$8[3] = Number(m[4]); // default alpha = 1
             if (!rgb$8[3] && rgb$8[3] !== 0) {rgb$8[3] = 1;}
             return rgb$8;
@@ -998,8 +999,10 @@
         if ((m = css.match(RE_OKLCHA))) {
             var lch$1 = m.slice(1,4);
             for (var i$9 = 0; i$9 <= 1; i$9++) {
-                if (lch$1[i$9].endsWith('%')) {lch$1[i$9] = Number(lch$1[i$9].replace('%', '')) * 0.01;}
-                else {lab[i$9] = Number(lab[i$9]);}
+                if (lch$1[i$9].endsWith('%')) {
+                    lch$1[i$9] = Number(lch$1[i$9].replace('%', '')) * 0.01;
+                    if (i$9 === 1) {lch$1[i$9] *= 0.4;}
+                } else {lch$1[i$9] = Number(lch$1[i$9]);}
             }
             var rgb$9 = oklch2rgb(lch$1).map(function (i) { return abs(round$3(i)); });
             rgb$9[3] = Number(m[4]); // default alpha = 1
