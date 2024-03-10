@@ -11,6 +11,7 @@
 * added 'supported color spaces' to documentation
 * minor improvements to documentation
 * fix wrong handling of RGB and RGBA arrays when constructing chroma color objects.
+* fix wrong handling of values outside scale domain due to internal Math.pow usage. See [Issue 331](https://github.com/gka/chroma.js/issues/331)
 
 ### 2.7.0
 * added `chroma.brewer.getPalettes()` to retrieve all available palettes (keys). [ColorBrewer](http://colorbrewer2.org/) schemes (scales) are divided into palettes according to their type
