@@ -109,7 +109,9 @@ module.exports = function(colors) {
             t = tMapLightness(t);  // lightness correction
         }
 
-        if (_gamma !== 1) { t = pow(t, _gamma); }
+        if (t > 1) { t = 1; } // pow fails with negative bases, but values are always clamped to the extremes
+        else if (t < 0) { t = 0 }
+        else if (_gamma !== 1) { t = pow(t, _gamma); }
 
         t = _padding[0] + (t * (1 - _padding[0] - _padding[1]));
 

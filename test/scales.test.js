@@ -275,5 +275,15 @@ vows
                 ) 
             }
         },
+        
+        'scale domain': {
+            topic: {
+                f: scale(['white','black']).domain([1, 3]).gamma(1.1)
+            },
+            'should return left color within domain'(topic) { assert.equal(topic.f(1).hex(), '#ffffff'); },
+            'should return right color within domain'(topic) { assert.equal(topic.f(3).hex(), '#000000'); },
+            'should return left color outside domain'(topic) { assert.equal(topic.f(0).hex(), '#ffffff'); },
+            'should return right color outside domain'(topic) { assert.equal(topic.f(4).hex(), '#000000'); }
+        },
 
     }).export(module);
