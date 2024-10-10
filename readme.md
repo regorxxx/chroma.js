@@ -106,8 +106,3 @@ Versions prior to 0.4 were released under [GPL](http://www.gnu.org/licenses/gpl-
 * [How To Avoid Equidistant HSV Colors](https://vis4.net/blog/posts/avoid-equidistant-hsv-colors/)
 * [Mastering Multi-hued Color Scales with Chroma.js](https://vis4.net/blog/posts/mastering-multi-hued-color-scales/)
 
-### FAQ
-
-**There have been no commits in X weeks. Is the original repo of chroma.js dead?**
-
-Yes! That's why it has been forked and now maintained here.
